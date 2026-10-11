@@ -134,7 +134,7 @@ function parseTable(rows) {
     w.replace(/\*\*|\[|\]\([^)]*\)/g, "").length * (w.includes("`") ? CHAR * 1.2 : bold ? CHAR * 1.15 : CHAR)));
   const textWidth = (cellText) => cellText.replace(/\*\*|`|\[|\]\([^)]*\)/g, "").length * CHAR;
   const columns = header.map((h, c) => [h, ...body.map((r) => r[c] || "")]);
-  const minW = columns.map((cells) => Math.max(...cells.map((cellText, r) => tokenWidth(cellText, r === 0))) + PAD);
+  const minW = columns.map((cells) => Math.max(560, Math.max(...cells.map((cellText, r) => tokenWidth(cellText, r === 0))) + PAD));
   const wantW = columns.map((cells, c) => Math.max(minW[c], Math.min(Math.max(...cells.map(textWidth)) + PAD, TABLE_W)));
   let widths;
   const minTotal = minW.reduce((a, b) => a + b, 0);

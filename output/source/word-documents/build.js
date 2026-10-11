@@ -24,6 +24,21 @@ const DOCUMENTS = [
     subtitle: TITLE,
     author: AUTHOR,
   },
+  {
+    // Data figures filled in by instructor/reference-code/run_all.py from templates/instructor_orientation.md.
+    source: "source/word-documents/instructor_orientation.md",
+    output: "instructor/Instructor Orientation.docx",
+    header: "Campus Comps case: Instructor Orientation",
+    subtitle: TITLE,
+    author: AUTHOR,
+  },
+  {
+    source: "source/word-documents/post_assignment_survey.md",
+    output: "instructor/Post-Assignment Survey.docx",
+    header: "Campus Comps case: Post-Assignment Survey",
+    subtitle: TITLE,
+    author: AUTHOR,
+  },
 ];
 
 async function main() {

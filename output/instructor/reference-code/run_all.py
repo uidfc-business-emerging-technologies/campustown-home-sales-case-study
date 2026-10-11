@@ -6,7 +6,8 @@
 2. Reproduces Appendix A and stops if any figure differs.
 3. Computes every Variation 2 figure and the common wrong answers.
 4. Writes the answer key workbook, its charts and the markdown source of the
-   Word answer key (build the .docx with output/source/word-documents/build.js).
+   Word answer key, and fills the data figures into the instructor orientation
+   (build the .docx files with output/source/word-documents/build.js).
 5. Writes the summary files the reference sites read, and stops if any site's own
    scripts/build_data.py would produce a different file.
 """
@@ -18,6 +19,7 @@ from pathlib import Path
 
 import answer_key
 import appendix_a
+import orientation
 import sites
 from definitions import DEFAULT_DATA, REPO_ROOT, add_derived, load
 
@@ -62,6 +64,9 @@ def main():
 
     _, answers = answer_key.write_all(df, site_paths=[SITES / "v2-six-questions" / "data" / "answers.json"])
     print(f"Wrote {answer_key.WORKBOOK.relative_to(REPO_ROOT)} and {answer_key.MARKDOWN.relative_to(REPO_ROOT)}.")
+    path, figures = orientation.write(df)
+    (RESULTS / "orientation_figures.json").write_text(json.dumps(figures, indent=1) + "\n")
+    print(f"Wrote {path.relative_to(REPO_ROOT)} with {len(figures)} computed figures.")
 
     summaries = {
         "v1-old-homes-close-in": ("age.json", sites.v1_summary(df), {"indent": 1}),
