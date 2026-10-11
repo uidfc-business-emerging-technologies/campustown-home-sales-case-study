@@ -1,0 +1,83 @@
+group,figure,expected,computed,match
+Whole dataset,rows,35529,35529,True
+Whole dataset,columns,34,34,True
+Whole dataset,listing_id unique,True,True,True
+Whole dataset,cities,18,18,True
+Whole dataset,states,11,11,True
+Whole dataset,counties,20,20,True
+Whole dataset,campus areas,11,11,True
+Whole dataset,median sale price,410000,410000,True
+Whole dataset,first sale date,2023-03-27,2023-03-27,True
+Whole dataset,last sale date,2026-03-25,2026-03-25,True
+Whole dataset,rows with list and contract date,28043,28043,True
+Whole dataset,rows with list and contract date (%),78.9,78.9,True
+Whole dataset,median days on market,11,11,True
+Whole dataset,rows sharing a street address,240,240,True
+Whole dataset,buildings with a shared address,103,103,True
+Whole dataset,living_area_sqft equal to 0,127,127,True
+Whole dataset,home_type SINGLE_FAMILY,35350,35350,True
+Whole dataset,home_type HOME_TYPE_UNKNOWN,177,177,True
+Whole dataset,home_type CONDO,2,2,True
+Whole dataset,"prices under $10,000",40,40,True
+Whole dataset,"prices under $1,000",4,4,True
+Whole dataset,prices of $0,1,1,True
+Whole dataset,"prices over $5,000,000",31,31,True
+Whole dataset,highest price,81510000,81510000,True
+Whole dataset,min miles_to_campus,0.2,0.2,True
+Whole dataset,max miles_to_campus,15.1,15.1,True
+Whole dataset,median miles_to_campus,3.4,3.4,True
+University of Wisconsin-Madison,rows,5707,5707,True
+University of Wisconsin-Madison,median price,434020,434020,True
+University of Wisconsin-Madison,median $/sq ft,249.16,249.16,True
+University of Wisconsin-Madison,median days on market,7,7,True
+University of Wisconsin-Madison,median miles to campus,4.8,4.8,True
+University of Florida,rows,5630,5630,True
+University of Florida,median price,355000,355000,True
+University of Florida,median $/sq ft,203.24,203.24,True
+University of Florida,median days on market,25,25,True
+University of Florida,median miles to campus,4.4,4.4,True
+Purdue University,rows,4616,4616,True
+Purdue University,median price,299900,299900,True
+Purdue University,median $/sq ft,168.24,168.24,True
+Purdue University,median days on market,10,10,True
+Purdue University,median miles to campus,3.8,3.8,True
+University of Illinois Urbana-Champaign,rows,3664,3664,True
+University of Illinois Urbana-Champaign,median price,245000,245000,True
+University of Illinois Urbana-Champaign,median $/sq ft,150.3,150.3,True
+University of Illinois Urbana-Champaign,median days on market,7,7,True
+University of Illinois Urbana-Champaign,median miles to campus,2.8,2.8,True
+University of Michigan,rows,3022,3022,True
+University of Michigan,median price,571000,571000,True
+University of Michigan,median $/sq ft,259.07,259.07,True
+University of Michigan,median days on market,7,7,True
+University of Michigan,median miles to campus,2.7,2.7,True
+The University of North Carolina at Chapel Hill,rows,3018,3018,True
+The University of North Carolina at Chapel Hill,median price,725000,725000,True
+The University of North Carolina at Chapel Hill,median $/sq ft,280.25,280.25,True
+The University of North Carolina at Chapel Hill,median days on market,10,10,True
+The University of North Carolina at Chapel Hill,median miles to campus,3.8,3.8,True
+University of Virginia,rows,2854,2854,True
+University of Virginia,median price,625000,625000,True
+University of Virginia,median $/sq ft,272.35,272.35,True
+University of Virginia,median days on market,7,7,True
+University of Virginia,median miles to campus,3.5,3.5,True
+University of Georgia,rows,2816,2816,True
+University of Georgia,median price,370000,370000,True
+University of Georgia,median $/sq ft,196.82,196.82,True
+University of Georgia,median days on market,27,27,True
+University of Georgia,median miles to campus,3.7,3.7,True
+The University of Iowa,rows,1909,1909,True
+The University of Iowa,median price,342000,342000,True
+The University of Iowa,median $/sq ft,175.91,175.91,True
+The University of Iowa,median days on market,24,24,True
+The University of Iowa,median miles to campus,2.2,2.2,True
+The Pennsylvania State University,rows,1351,1351,True
+The Pennsylvania State University,median price,430000,430000,True
+The Pennsylvania State University,median $/sq ft,207.42,207.42,True
+The Pennsylvania State University,median days on market,8,8,True
+The Pennsylvania State University,median miles to campus,2.1,2.1,True
+"University of California, Davis",rows,942,942,True
+"University of California, Davis",median price,888500,888500,True
+"University of California, Davis",median $/sq ft,492.58,492.58,True
+"University of California, Davis",median days on market,11,11,True
+"University of California, Davis",median miles to campus,2.0,2.0,True
