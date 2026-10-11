@@ -16,9 +16,23 @@ The handoff is self-contained. It says what already exists, what to build, the c
 |---|---|
 | `HANDOFF.md` | Instructions for the coding agent |
 | `inputs/college-town-dataset/` | The dataset package (version 1.0): data in five formats, the data description sheet, build notes, instructor reference figures and build scripts |
+| `inputs/college-town-dataset/build/export_raw.py` | Exports the two raw build inputs from the source database and checks that they rebuild the published data exactly (see below) |
 | `inputs/case-documents/` | The three student case documents, the GitHub Pages setup guide, and `source/` (the script that builds them) |
 | `inputs/sample-sites/` | Two finished sample sites: Variation 2 (`v2-six-questions`) and Variation 3 (`v3-close-to-campus`) |
 | `output/` | Where the agent writes the finished case package |
+
+## Raw build inputs
+
+The dataset is built from two raw extracts of the source database, `build/raw_extract.csv` and `build/raw_events.csv`. Export them once from your own machine, because the export needs your database login:
+
+```bash
+cd inputs/college-town-dataset
+pip install "psycopg[binary]" pandas openpyxl pyarrow duckdb
+export DATABASE_URL='postgresql://...'   # from the PlanetScale dashboard; never save it in a file here
+python build/export_raw.py --verify
+```
+
+The script writes both files into `build/`, checks their row counts (35,822 and 284,955), rebuilds the dataset in a temporary folder, and reports PASS if the rebuilt CSV is byte-identical to the published one. The files contain the listing site's property IDs.
 
 ## Public repository
 
