@@ -160,7 +160,7 @@ Between 15.6% (Purdue) and 34.6% (Iowa) of sales have no days on market. Those s
 
 ## Question 3. Distance
 
-> For each campus area, what is the median price per square foot in each distance band? In most areas, does price per square foot fall as the distance from campus grows? Name any area where it does not.
+> For each campus area, what is the median price per square foot in each distance band? In most areas, does price per square foot fall as the distance from campus grows? Say what you count as falling, and name any area where it does not.
 
 ### Figures
 
@@ -214,6 +214,16 @@ Between 15.6% (Purdue) and 34.6% (Iowa) of sales have no days on market. Those s
 
 A rise of 0.0% means price per square foot never rises from one band to the next.
 
+**Areas that fall under three common rules**
+
+| Rule for "falls" | Areas that fall | Areas that do not fall |
+|---|---:|---|
+| Each band with enough sales is lower than the one before | 5 | Florida, Georgia, Illinois, Iowa, Purdue and UW-Madison |
+| The farthest band with enough sales is lower than the nearest, and no step rises by more than 5% (the key's rule) | 8 | Florida, Illinois and Purdue |
+| The farthest band with enough sales is lower than the nearest | 10 | Illinois |
+
+Students must say what they count as falling. Mark the answer against the student's own rule.
+
 ### Chart
 
 ![Eleven small line charts of median price per square foot across the distance bands. The line falls in most areas; it does not fall in Florida, Illinois and Purdue, drawn in orange.](charts/q3.png)
@@ -250,13 +260,14 @@ Nine of the 55 cells have fewer than 20 sales, all in the outer bands, and show 
 
 - Each reportable cell: within $1.00.
 - Every cell with 1 to 19 sales shows "fewer than 20 sales". A cell with no sales may show that, a dash or "no sales".
-- The answer says yes for most areas and names Illinois. Naming Florida and Purdue as well is correct. Naming an area that falls at every step (Michigan, Penn State, UC Davis, UNC and Virginia) is wrong.
+- The answer states a rule for "falls" and applies it correctly; the table above gives the result under three common rules. Under each of them most areas fall, except under the strictest rule, where 5 of 11 fall.
+- Every rule names Illinois. Naming an area that falls at every step (Michigan, Penn State, UC Davis, UNC and Virginia) is wrong under any rule.
 
 <!-- pagebreak -->
 
 ## Question 4. Timing
 
-> Across all areas, what is the median days on market for each calendar month in which homes were listed? Use only homes listed from April 1, 2023 through March 31, 2025, so that each calendar month covers exactly two years. Group them by the month of `list_date`. Which months are fastest, and which are slowest?
+> Across all areas, pooled together, what is the median days on market for each calendar month in which homes were listed? Use only homes listed from April 1, 2023 through March 31, 2025, so that each calendar month covers exactly two years. Group them by the month of `list_date`. Which months are fastest, and which are slowest?
 
 ### Figures
 
@@ -315,7 +326,7 @@ Spring listings sell fastest and late-year listings slowest, the usual pattern o
 
 ## Question 5. Assessment
 
-> For each campus area, what is the median ratio of `tax_assessed_value` to `sale_price`, for valid sales with an assessed value above 0? Which areas are far from 1, and what could explain the gap?
+> For each campus area, what is the median ratio of `tax_assessed_value` to `sale_price`, for valid sales with an assessed value above 0? Which areas are far from 1 (say what you count as far), and what could explain the gap? Cite a source for any explanation.
 
 ### Figures
 
@@ -379,14 +390,14 @@ Sources, checked October 11, 2026:
 ### Tolerance
 
 - Each median ratio: within 0.01.
-- Names Penn State and Michigan as far from 1. Naming UC Davis as far from 1 is wrong.
-- The explanation must rest on how each state assesses property, with a source. A claim that homes there sell far above their value earns no credit.
+- Names Penn State and Michigan as far from 1, with a stated threshold. Naming other areas is correct only if they meet the student's own threshold; the next closest is Purdue at 0.78. Naming UC Davis as far from 1 is wrong under any threshold.
+- The explanation must rest on how each state assesses property, and the case asks for a source. A claim that homes there sell far above their value earns no credit.
 
 <!-- pagebreak -->
 
 ## Question 6. Buildings
 
-> Group sales by street address, city, state and ZIP code. In each campus area, how many addresses have more than one sale, and how many sales do they cover? How does the median `miles_to_campus` of those sales compare with that of all other sales?
+> Group sales by street address, city, state and ZIP code. In each campus area, how many addresses have more than one sale, and how many sales do they cover? How does the median `miles_to_campus` of those sales compare with that of all other sales, across all areas and within each area?
 
 ### Figures
 
@@ -432,6 +443,6 @@ Across all areas, those sales sit a median 4.1 miles from campus, against 3.4 fo
 
 ### Tolerance
 
-- Counts: exact. 103 addresses and 240 sales in total, and each area's counts as in the table. For areas with fewer than 20 such sales, showing the count or "fewer than 20 sales" are both correct.
+- Counts: exact. 103 addresses and 240 sales in total, and each area's counts as in the table. Counts are always shown, even for small areas.
 - Median miles: within 0.05 miles. In areas with fewer than 20 such sales, the median must show "fewer than 20 sales".
-- Full credit needs the overall comparison and the observation that it differs by area.
+- The question asks for the comparison across all areas and within each area, so full credit needs both, and the observation that the two areas with enough sales point in opposite directions.

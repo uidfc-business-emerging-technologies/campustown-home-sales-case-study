@@ -107,6 +107,8 @@ def q3_pattern(shown):
             pattern = "does not fall"
         rows.append({
             "university": university,
+            "every step lower": bool((steps < 0).all()),
+            "farthest band below nearest": bool(series.iloc[-1] < series.iloc[0]),
             "reportable bands": len(series),
             "nearest band": series.index[0],
             "nearest median": series.iloc[0],

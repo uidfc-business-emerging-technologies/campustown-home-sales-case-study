@@ -39,12 +39,23 @@ async function run() {
         if (overflow > 0) problems.push("scrolls sideways by " + overflow + " px");
         const name = `${site.folder}-${width}-${scheme}`;
         await page.screenshot({ path: path.join(shots, name + ".png"), fullPage: true });
-        const controls = await site.exercise(page).catch((e) => ["control check failed: " + e.message]);
+        const controls = await site.exercise(page, width === 1280 && scheme === "light" ? texts : null).catch((e) => ["control check failed: " + e.message]);
         problems.push(...controls.filter((c) => c.startsWith("FAIL") || c.startsWith("control check failed")));
         const after = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
         if (after > 0) problems.push("scrolls sideways by " + after + " px after using the controls");
         if (width === 1280 && scheme === "light") {
+          if (site.reset) await site.reset(page);
           fs.writeFileSync(path.join(texts, site.folder + ".txt"), await page.evaluate(() => document.body.innerText));
+          // Every filled-in figure and every table cell, for check_numbers.py.
+          const dump = await page.evaluate(() => ({
+            facts: [...document.querySelectorAll("[data-fact]")].map((e) => [e.getAttribute("data-fact"), e.textContent]),
+            stats: [...document.querySelectorAll(".stat .v, .fig .v")].map((e) => e.textContent),
+            tables: [...document.querySelectorAll("table")].map((t) => ({
+              section: (t.closest("section") || {}).id || "",
+              rows: [...t.rows].map((r) => [...r.cells].map((c) => (c.firstChild ? c.firstChild.textContent : "").trim())),
+            })),
+          }));
+          fs.writeFileSync(path.join(texts, site.folder + ".json"), JSON.stringify(dump, null, 1));
           if (site.afterShot) await page.screenshot({ path: path.join(shots, `${site.folder}-controls-used.png`), fullPage: true });
         }
         results.push({ site: site.folder, width, scheme, problems, controls: controls.length });

@@ -119,6 +119,7 @@
     f["q5.far"] = list(far.map(function (r) { return r.campus + " (" + r.median_ratio.toFixed(2) + ")"; }));
     f["q5.restCount"] = String(rest.length);
     f["q5.restMin"] = pct(rest[0].median_ratio); f["q5.restMax"] = pct(rest[rest.length - 1].median_ratio);
+    f["q5.restMinRatio"] = rest[0].median_ratio.toFixed(2);
     f["q5.far0"] = far[0].median_ratio.toFixed(2); f["q5.far0Name"] = far[0].campus;
     f["q5.far1"] = far[1].median_ratio.toFixed(2); f["q5.far1Name"] = far[1].campus;
     f["q5.davisName"] = "UC Davis"; f["q5.davis"] = find("UC Davis").median_ratio.toFixed(2);

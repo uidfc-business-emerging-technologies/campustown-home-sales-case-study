@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Old Homes, Close In</title>
+<meta name="description" content="Around 11 university campuses, the homes nearest campus are the oldest, and old homes cost more per square foot than mid-century ones. A look at when the homes that sold were built.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="page">
+
+  <header class="top">
+    <p class="kicker">College-town home sales, by the year each home was built</p>
+    <h1>Old Homes, Close In</h1>
+    <p class="dek">Walk out from almost any of these 11 campuses and the houses get younger with every mile. The oldest homes, near campus, also cost the most per square foot. Here is what <span data-fact="rows"></span> home sales say about the age of college-town housing.</p>
+  </header>
+
+  <section class="findings" aria-labelledby="find-h">
+    <h2 id="find-h">What we found</h2>
+    <ol>
+      <li><strong>The closer to campus, the older the home.</strong> Across all 11 campus areas, the median home sold within a mile of campus was built in <span data-fact="nearYear"></span>. Between 5 and 10 miles out, it was built in <span data-fact="farYear"></span>. In <span data-fact="nearOldest"></span> of the 11 campus areas, the homes within a mile of campus are the oldest of any distance band.</li>
+      <li><strong>Old homes cost more per square foot than mid-century ones.</strong> Homes built in the <span data-fact="peakDecade"></span> have the highest median price per square foot (<span data-fact="peakPps"></span>). Homes built in the <span data-fact="lowDecade"></span> have the lowest (<span data-fact="lowPps"></span>). New homes climb back to <span data-fact="newDecadePps"></span>.</li>
+      <li><strong>New homes are a small share of sales, and many never appear in a listing.</strong> <span data-fact="newShare"></span> of sales were new homes. <span data-fact="newNoList"></span> of those new homes sold without a listing on record, against <span data-fact="oldNoList"></span> of older homes, so a site built only on listed homes would miss many of them.</li>
+    </ol>
+  </section>
+
+  <form class="picker" id="picker" aria-label="Choose a campus area">
+    <label for="area">Show figures for</label>
+    <select id="area" name="area"></select>
+    <p class="hint">The three numbers and the first two charts below change with your choice. You can also pick an area from the last chart.</p>
+  </form>
+
+  <section class="stats" aria-live="polite" aria-label="Headline numbers for the chosen campus area">
+    <div class="stat">
+      <span class="k">Median year built, under 1 mile from campus</span>
+      <span class="v" id="s1-v">...</span>
+      <span class="d" id="s1-d">Loading the data.</span>
+    </div>
+    <div class="stat">
+      <span class="k">Highest price per square foot, by decade built</span>
+      <span class="v" id="s2-v">...</span>
+      <span class="d" id="s2-d"></span>
+    </div>
+    <div class="stat">
+      <span class="k">Sales that were new homes</span>
+      <span class="v" id="s3-v">...</span>
+      <span class="d" id="s3-d"></span>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="c1-h">
+    <h2 id="c1-h">When the homes were built, by distance from campus</h2>
+    <p class="sub" id="c1-sub">Median year built of the homes sold in each distance band.</p>
+    <div class="chart" id="c1"><p class="loading">Loading chart...</p></div>
+  </section>
+
+  <section class="card" aria-labelledby="c2-h">
+    <h2 id="c2-h">Price per square foot, by the decade a home was built</h2>
+    <p class="sub" id="c2-sub">Median price per square foot. The highest and lowest decades are in orange.</p>
+    <div class="chart" id="c2"><p class="loading">Loading chart...</p></div>
+    <p class="note">The 1900s bar includes <span data-fact="built1900"></span> homes recorded as built in exactly 1900; see the data notes.</p>
+  </section>
+
+  <section class="card" aria-labelledby="c3-h">
+    <h2 id="c3-h">New homes, by campus area</h2>
+    <p class="sub">Share of each area's sales that were new homes. Orange marks the area you chose; select a bar to choose that area.</p>
+    <div class="chart" id="c3"><p class="loading">Loading chart...</p></div>
+    <p class="note">Virginia's share counts many new homes twice. With one copy of each likely double record, it would be <span data-fact="vaOneCopy"></span>; see the data notes.</p>
+  </section>
+
+  <section class="card" aria-labelledby="t-h">
+    <h2 id="t-h">All campus areas</h2>
+    <div class="scroll" id="table"><p class="loading">Loading table...</p></div>
+  </section>
+
+  <section class="notes" aria-labelledby="notes-h">
+    <h2 id="notes-h">Data notes</h2>
+    <ul>
+      <li><b>Data:</b> all <span data-fact="rows"></span> sales in the College-town home sales dataset (version 1.0). Every figure is computed by <code>scripts/build_data.py</code>, which writes <code>data/age.json</code>; the page reads only that file.</li>
+      <li><b>Year built</b> is as reported. <span data-fact="yearMissing"></span> sale has no year built and is left out of the year figures. <span data-fact="built1900"></span> homes are recorded as built in exactly 1900 and <span data-fact="built1901"></span> in 1901, against about <span data-fact="perYear"></span> a year from 1902 to 1909. Many of these are probably a default for "very old, year unknown". We keep them, since they are old homes either way, but read the 1900s decade with care.</li>
+      <li><b>Distance</b> is <code>miles_to_campus</code>, the straight-line distance to a landmark on campus, in five bands: under 1 mile, 1 to under 2, 2 to under 5, 5 to under 10, and 10 or more.</li>
+      <li><b>Price per square foot</b> is sale price divided by living area, for each sale of $1,000 or more with at least 100 square feet of living area (<span data-fact="ppsSales"></span> sales). We take the median of those values. Sales under $1,000 and tiny or zero living areas are not real prices per square foot.</li>
+      <li><b>New home:</b> built in the year it sold or the year before, or sold before it was finished (<span data-fact="presale"></span> homes have a year built later than their sale). Shares use the <span data-fact="datedSales"></span> sales with both a year built and a sale date.</li>
+      <li><b>Sold without a listing</b> means the sale has no <code>list_date</code>. The data description sheet says these are off-market sales or new homes sold by the builder.</li>
+      <li><b>Repeated addresses:</b> we keep every sale, because condo units share street addresses. But around Virginia, <span data-fact="vaPairs"></span> pairs of new-home sales share an address and have prices within 1% and sale dates within 90 days, the test the dataset's builders used for one sale recorded twice. With one copy of each pair, Virginia's share of new homes would be <span data-fact="vaOneCopy"></span> instead of <span data-fact="vaShare"></span>.</li>
+      <li><b>Medians, not means,</b> because a few sales are far from typical.</li>
+      <li><b>Small groups:</b> a median based on fewer than 20 sales is not shown.</li>
+      <li><b>Not used:</b> the <code>home_type</code> column, which the description sheet says is unreliable.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Data: College-town home sales dataset, version 1.0 (2026). University of Illinois-Deloitte Foundation Center for Business Emerging Technologies. Data collected March 2026.</p>
+    <p>Reference site for the Campus Comps case, Variation 1, built with an AI coding agent. Plain HTML, CSS and JavaScript, published with GitHub Pages.</p>
+  </footer>
+</main>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

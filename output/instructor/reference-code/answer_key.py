@@ -207,6 +207,11 @@ def q3(df):
               [[u, r["pattern"], r["highest band"], max(r["largest rise between neighboring bands"], 0)]
                for u, r in pattern.loc[order].iterrows()],
               note="A rise of 0.0% means price per square foot never rises from one band to the next."),
+        Table("Areas that fall under three common rules", [("Rule for \"falls\"", "text"), ("Areas that fall", "int"),
+                                                            ("Areas that do not fall", "text")],
+              [[rule, int(mask.sum()), join(sorted(SHORT[u] for u in mask.index[~mask])) or "none"]
+               for rule, mask in rules(pattern).items()],
+              note="Students must say what they count as falling. Mark the answer against the student's own rule."),
     ]
     every = [SHORT[u] for u in pattern.index[pattern["pattern"] == "falls at every step"]]
     overall = [SHORT[u] for u in pattern.index[pattern["pattern"] == "falls overall"]]
@@ -242,9 +247,11 @@ def q3(df):
         "Each reportable cell: within $1.00.",
         "Every cell with 1 to 19 sales shows \"fewer than 20 sales\". A cell with no sales may show that, a dash or "
         "\"no sales\".",
-        f"The answer says yes for most areas and names {SHORT[worst]}. Naming "
-        f"{join(sorted(SHORT[u] for u in nofall.index if u != worst))} as well is correct. Naming an area that falls at "
-        f"every step ({join(sorted(every))}) is wrong.",
+        "The answer states a rule for \"falls\" and applies it correctly; the table above gives the result under "
+        "three common rules. Under each of them most areas fall, except under the strictest rule, where "
+        f"{rules(pattern)[RULE_NAMES[0]].sum()} of 11 fall.",
+        f"Every rule names {SHORT[worst]}. Naming an area that falls at every step ({join(sorted(every))}) is wrong "
+        "under any rule.",
     ]
     chart = chart_q3(shown, pattern, "Eleven small line charts of median price per square foot across the distance "
                      f"bands. The line falls in most areas; it does not fall in {join(sorted(SHORT[u] for u in nofall.index))}, "
@@ -254,6 +261,22 @@ def q3(df):
         {"n": int(counts.loc[u, b]), "median_pps": None if counts.loc[u, b] < v2.MIN_GROUP else half_up(medians.loc[u, b], 2)}
         for b in v2.BAND_LABELS]} for u in order]}
     return dict(figures=figures, chart=chart, answer=answer, wrong=wrong, tolerance=tolerance, site=site)
+
+
+RULE_NAMES = [
+    "Each band with enough sales is lower than the one before",
+    f"The farthest band with enough sales is lower than the nearest, and no step rises by more than "
+    f"{half_up(100 * v2.MAX_RISE)}% (the key's rule)",
+    "The farthest band with enough sales is lower than the nearest",
+]
+
+
+def rules(pattern):
+    return {
+        RULE_NAMES[0]: pattern["every step lower"],
+        RULE_NAMES[1]: pattern["pattern"] != "does not fall",
+        RULE_NAMES[2]: pattern["farthest band below nearest"],
+    }
 
 
 def q4(df):
@@ -334,9 +357,11 @@ def q5(df):
     ]
     tolerance = [
         "Each median ratio: within 0.01.",
-        f"Names {SHORT[psu]} and {SHORT[mich]} as far from 1. Naming {SHORT[davis]} as far from 1 is wrong.",
-        "The explanation must rest on how each state assesses property, with a source. A claim that homes there "
-        "sell far above their value earns no credit.",
+        f"Names {SHORT[psu]} and {SHORT[mich]} as far from 1, with a stated threshold. Naming other areas is correct "
+        f"only if they meet the student's own threshold; the next closest is {SHORT[rest.index[0]]} at "
+        f"{fmt(rest.iloc[0], 'ratio')}. Naming {SHORT[davis]} as far from 1 is wrong under any threshold.",
+        "The explanation must rest on how each state assesses property, and the case asks for a source. A claim "
+        "that homes there sell far above their value earns no credit.",
     ]
     chart = chart_q5(t, far.index, "Bar chart of the median assessment ratio by campus area. " + join(
         [f"{SHORT[u]} ({fmt(ratio[u], 'ratio')})" for u in far.index]) + f" are far below 1; the rest are between "
@@ -407,11 +432,11 @@ def q6(df):
     ]
     tolerance = [
         f"Counts: exact. {total['addresses with more than one sale']} addresses and {total['sales at those addresses']} "
-        "sales in total, and each area's counts as in the table. For areas with fewer than 20 such sales, showing the "
-        "count or \"fewer than 20 sales\" are both correct.",
+        "sales in total, and each area's counts as in the table. Counts are always shown, even for small areas.",
         "Median miles: within 0.05 miles. In areas with fewer than 20 such sales, the median must show "
         "\"fewer than 20 sales\".",
-        "Full credit needs the overall comparison and the observation that it differs by area.",
+        "The question asks for the comparison across all areas and within each area, so full credit needs both, "
+        "and the observation that the two areas with enough sales point in opposite directions.",
     ]
     shown_areas = by_area[by_area["sales at those addresses"] >= v2.MIN_GROUP]
     chart = chart_q6(by_area, "Bar chart of sales at repeated addresses by campus area. " + join(

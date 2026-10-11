@@ -13,7 +13,7 @@
   <header class="masthead">
     <p class="eyebrow">Campus Comps case, Variation 2</p>
     <h1>College Towns in Six Questions</h1>
-    <p class="dek">What <span data-fact="rows"></span> home sales around 11 university campuses say about prices, how fast homes sell, distance from campus, the time of year, tax assessments and buildings with several sales.</p>
+    <p class="dek">What <span data-fact="rows"></span> home sales around 11 university campuses say about prices, how fast homes sell, distance from campus, the time of year, tax assessments and buildings with several sales. Written for anyone thinking about moving to one of these towns.</p>
     <ol class="index" aria-label="Questions">
       <li><a href="#q1"><span class="n">1</span><span>Which campus areas cost the most, by price and by square foot?</span><span class="short">Price levels</span></a></li>
       <li><a href="#q2"><span class="n">2</span><span>Where do homes sell fastest?</span><span class="short">Speed</span></a></li>
@@ -171,7 +171,8 @@
       <div><dt>Days on market</dt><dd>Days from <code>list_date</code> to <code>contract_date</code>, for the <span data-fact="dom"></span> sales with both dates. A missing date is never treated as zero, and we don't use <code>sale_date</code>, which would add about a month of closing time.</dd></div>
       <div><dt>Distance bands</dt><dd>From <code>miles_to_campus</code>, the straight-line distance to a campus landmark: under 1 mile, 1 to under 2, 2 to under 5, 5 to under 10, and 10 or more.</dd></div>
       <div><dt>Falls with distance (Question 3)</dt><dd>"At every step" means each band with enough sales is cheaper than the one before. "Overall" means the farthest band is cheaper than the nearest and no step rises by more than <span data-fact="q3.maxRise"></span>.</dd></div>
-      <div><dt>Listing window (Question 4)</dt><dd>Only homes listed in the window the case sets, <span data-fact="q4.window"></span>.</dd></div>
+      <div><dt>Listing window (Question 4)</dt><dd>Only homes listed in the window the case sets, <span data-fact="q4.window"></span>, with all campus areas pooled together.</dd></div>
+      <div><dt>Far from 1 (Question 5)</dt><dd>A median ratio below 0.5, meaning the typical home is assessed at less than half its sale price. Every other area is at <span data-fact="q5.restMinRatio"></span> or above.</dd></div>
       <div><dt>Small groups</dt><dd>A group with fewer than 20 sales shows "fewer than 20 sales" instead of a figure.</dd></div>
       <div><dt>Medians</dt><dd>Every figure is a median, not a mean. Some prices in the data are implausible (up to <span data-fact="maxPrice"></span>), and means would be pulled far off by them.</dd></div>
       <div><dt>Assessment ratio</dt><dd>Assessed value divided by sale price, for the <span data-fact="assessed"></span> valid sales with an assessed value above 0.</dd></div>
