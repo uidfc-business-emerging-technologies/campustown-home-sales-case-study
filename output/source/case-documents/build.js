@@ -153,6 +153,7 @@ function makeDoc(headerText, subtitle, blocks) {
   const body = [...titleBlock(subtitle), ...render(blocks)];
   return new Document({
     creator: "",
+    lastModifiedBy: "",
     title: C.TITLE + " - " + subtitle,
     styles: {
       default: { document: { run: { font: FONT, size: 22 }, paragraph: { spacing: { after: 120, line: 276, lineRule: LineRuleType.AUTO } } } },
