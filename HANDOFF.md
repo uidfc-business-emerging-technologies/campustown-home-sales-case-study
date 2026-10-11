@@ -73,7 +73,9 @@ When you load the inputs, run these checks. **If any check fails, stop and repor
 
 1. `data/college_town_home_sales.csv` has 35,529 rows and 34 columns, and `listing_id` is unique.
 2. Your code reproduces every figure in Appendix A.
-3. Never copy a raw build input (`raw_extract.csv` or `raw_events.csv`) into any output. They are not in the package, and must stay out.
+3. The raw build inputs (`build/raw_extract.csv` and `build/raw_events.csv`) are exported from the source database by `build/export_raw.py`. Park runs that script, because it needs his database login. Park has decided to publish them in the public repository so anyone can rebuild the dataset.
+    - If they are present, `python build/export_raw.py --verify-only` must report PASS before you rely on them.
+    - They contain the source site's property IDs. Never copy them, or any property ID, into student files, instructor files or the reference sites.
 
 ## 5. The student documents (already written)
 
