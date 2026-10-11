@@ -78,8 +78,8 @@ university
 University of Virginia                                                          80                       160                                    6.70                            3.3
 The Pennsylvania State University                                               13                        60                                    0.50                            2.2
 The University of North Carolina at Chapel Hill                                  3                         6                                    2.85                            3.8
-University of Georgia                                                            2                         4                                    4.95                            3.7
 University of Florida                                                            2                         4                                    6.35                            4.4
+University of Georgia                                                            2                         4                                    4.95                            3.7
 University of California, Davis                                                  1                         2                                    2.60                            2.0
 University of Michigan                                                           1                         2                                    1.25                            2.7
 University of Wisconsin-Madison                                                  1                         2                                    3.30                            4.8

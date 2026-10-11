@@ -7,6 +7,7 @@ site's own script would produce anything different.
 
 import importlib.util
 import json
+import sys
 
 import numpy as np
 import pandas as pd
@@ -188,6 +189,7 @@ def run_site_script(site_dir):
     path = site_dir / "scripts" / "build_data.py"
     spec = importlib.util.spec_from_file_location(f"site_{site_dir.name.replace('-', '_')}", path)
     module = importlib.util.module_from_spec(spec)
+    sys.dont_write_bytecode = True  # leave no __pycache__ folder in the site
     spec.loader.exec_module(module)
     return json.loads(json.dumps(module.build()))
 

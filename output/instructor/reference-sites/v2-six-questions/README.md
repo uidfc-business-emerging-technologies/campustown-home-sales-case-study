@@ -75,6 +75,7 @@ Checked October 11, 2026.
 - [2025 Common Level Ratio Real Estate Valuation Factors](https://www.pa.gov/content/dam/copapwp-pagov/en/revenue/documents/taxtypes/rtt/documents/clr_factor_current.pdf) (Pennsylvania Department of Revenue, July 2026)
 - [Guide to Basic Assessing](https://www.michigan.gov/-/media/Project/Websites/treasury/Assessors/Guide_to_Basic_Assessing_116.pdf) (Michigan State Tax Commission)
 - [Assessors' Handbook Section 401, Change in Ownership](https://www.boe.ca.gov/proptaxes/pdf/ah401.pdf) (California State Board of Equalization)
+- [What role does property tax play?](https://tax.illinois.gov/content/dam/soi/en/web/tax/research/publications/documents/pios/pio-16.pdf) (Illinois Department of Revenue, PIO-16, revised October 2023)
 
 ## Who did what
 
