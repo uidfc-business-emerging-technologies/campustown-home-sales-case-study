@@ -1,0 +1,1234 @@
+{
+ "source": "College-town home sales dataset, version 1.0",
+ "rows": 35529,
+ "rules": {
+  "min_price": 1000,
+  "min_sqft": 100,
+  "min_group": 20
+ },
+ "bands": [
+  "Under 1 mile",
+  "1 to under 2 miles",
+  "2 to under 5 miles",
+  "5 to under 10 miles",
+  "10 miles or more"
+ ],
+ "campuses": [
+  {
+   "short": "UW-Madison",
+   "name": "University of Wisconsin-Madison"
+  },
+  {
+   "short": "Florida",
+   "name": "University of Florida"
+  },
+  {
+   "short": "Purdue",
+   "name": "Purdue University"
+  },
+  {
+   "short": "Illinois",
+   "name": "University of Illinois Urbana-Champaign"
+  },
+  {
+   "short": "Michigan",
+   "name": "University of Michigan"
+  },
+  {
+   "short": "UNC",
+   "name": "The University of North Carolina at Chapel Hill"
+  },
+  {
+   "short": "Virginia",
+   "name": "University of Virginia"
+  },
+  {
+   "short": "Georgia",
+   "name": "University of Georgia"
+  },
+  {
+   "short": "Iowa",
+   "name": "The University of Iowa"
+  },
+  {
+   "short": "Penn State",
+   "name": "The Pennsylvania State University"
+  },
+  {
+   "short": "UC Davis",
+   "name": "University of California, Davis"
+  }
+ ],
+ "counts": {
+  "year_built_missing": 1,
+  "sale_date_missing": 6,
+  "built_1900": 192,
+  "built_1901": 119,
+  "built_1902_1909_per_year": 25.1,
+  "sold_before_finished": 46,
+  "pps_sales": 35021,
+  "dated_sales": 35522
+ },
+ "areas": {
+  "All campus areas": {
+   "rows": 35529,
+   "median_year": 1983,
+   "by_band": [
+    {
+     "n": 1495,
+     "median_year": 1939
+    },
+    {
+     "n": 5351,
+     "median_year": 1956
+    },
+    {
+     "n": 18817,
+     "median_year": 1979
+    },
+    {
+     "n": 9617,
+     "median_year": 2002
+    },
+    {
+     "n": 248,
+     "median_year": 2001
+    }
+   ],
+   "by_decade": [
+    {
+     "decade": 1900,
+     "n": 506,
+     "median_pps": 209.53
+    },
+    {
+     "decade": 1910,
+     "n": 471,
+     "median_pps": 249.29
+    },
+    {
+     "decade": 1920,
+     "n": 1218,
+     "median_pps": 269.01
+    },
+    {
+     "decade": 1930,
+     "n": 912,
+     "median_pps": 272.3
+    },
+    {
+     "decade": 1940,
+     "n": 1601,
+     "median_pps": 239.13
+    },
+    {
+     "decade": 1950,
+     "n": 3950,
+     "median_pps": 220.32
+    },
+    {
+     "decade": 1960,
+     "n": 4288,
+     "median_pps": 198.77
+    },
+    {
+     "decade": 1970,
+     "n": 3735,
+     "median_pps": 194.63
+    },
+    {
+     "decade": 1980,
+     "n": 3008,
+     "median_pps": 207.9
+    },
+    {
+     "decade": 1990,
+     "n": 4353,
+     "median_pps": 209.53
+    },
+    {
+     "decade": 2000,
+     "n": 4391,
+     "median_pps": 201.4
+    },
+    {
+     "decade": 2010,
+     "n": 2785,
+     "median_pps": 221.07
+    },
+    {
+     "decade": 2020,
+     "n": 3802,
+     "median_pps": 229.21
+    }
+   ],
+   "new_homes": 2912,
+   "new_share": 0.082,
+   "new_no_list_share": 0.3664
+  },
+  "UW-Madison": {
+   "rows": 5707,
+   "median_year": 1968,
+   "by_band": [
+    {
+     "n": 85,
+     "median_year": 1918
+    },
+    {
+     "n": 286,
+     "median_year": 1927
+    },
+    {
+     "n": 2589,
+     "median_year": 1955
+    },
+    {
+     "n": 2744,
+     "median_year": 1996
+    },
+    {
+     "n": 2,
+     "median_year": null
+    }
+   ],
+   "by_decade": [
+    {
+     "decade": 1900,
+     "n": 102,
+     "median_pps": 333.85
+    },
+    {
+     "decade": 1910,
+     "n": 130,
+     "median_pps": 339.86
+    },
+    {
+     "decade": 1920,
+     "n": 372,
+     "median_pps": 346.62
+    },
+    {
+     "decade": 1930,
+     "n": 243,
+     "median_pps": 332.45
+    },
+    {
+     "decade": 1940,
+     "n": 389,
+     "median_pps": 315.46
+    },
+    {
+     "decade": 1950,
+     "n": 908,
+     "median_pps": 266.31
+    },
+    {
+     "decade": 1960,
+     "n": 784,
+     "median_pps": 227.96
+    },
+    {
+     "decade": 1970,
+     "n": 559,
+     "median_pps": 218.75
+    },
+    {
+     "decade": 1980,
+     "n": 366,
+     "median_pps": 231.75
+    },
+    {
+     "decade": 1990,
+     "n": 529,
+     "median_pps": 222.71
+    },
+    {
+     "decade": 2000,
+     "n": 629,
+     "median_pps": 229.3
+    },
+    {
+     "decade": 2010,
+     "n": 269,
+     "median_pps": 241.29
+    },
+    {
+     "decade": 2020,
+     "n": 425,
+     "median_pps": 265.93
+    }
+   ],
+   "new_homes": 351,
+   "new_share": 0.0615,
+   "new_no_list_share": 0.4473
+  },
+  "Florida": {
+   "rows": 5630,
+   "median_year": 1988,
+   "by_band": [
+    {
+     "n": 136,
+     "median_year": 1948
+    },
+    {
+     "n": 473,
+     "median_year": 1957
+    },
+    {
+     "n": 2714,
+     "median_year": 1978
+    },
+    {
+     "n": 2274,
+     "median_year": 2001
+    },
+    {
+     "n": 33,
+     "median_year": 1990
+    }
+   ],
+   "by_decade": [
+    {
+     "decade": 1900,
+     "n": 12,
+     "median_pps": null
+    },
+    {
+     "decade": 1910,
+     "n": 3,
+     "median_pps": null
+    },
+    {
+     "decade": 1920,
+     "n": 41,
+     "median_pps": 235.91
+    },
+    {
+     "decade": 1930,
+     "n": 80,
+     "median_pps": 230.03
+    },
+    {
+     "decade": 1940,
+     "n": 212,
+     "median_pps": 210.58
+    },
+    {
+     "decade": 1950,
+     "n": 465,
+     "median_pps": 184.15
+    },
+    {
+     "decade": 1960,
+     "n": 615,
+     "median_pps": 178.41
+    },
+    {
+     "decade": 1970,
+     "n": 768,
+     "median_pps": 186.75
+    },
+    {
+     "decade": 1980,
+     "n": 761,
+     "median_pps": 200.38
+    },
+    {
+     "decade": 1990,
+     "n": 748,
+     "median_pps": 208.04
+    },
+    {
+     "decade": 2000,
+     "n": 724,
+     "median_pps": 209.49
+    },
+    {
+     "decade": 2010,
+     "n": 433,
+     "median_pps": 225.21
+    },
+    {
+     "decade": 2020,
+     "n": 762,
+     "median_pps": 217.06
+    }
+   ],
+   "new_homes": 590,
+   "new_share": 0.1048,
+   "new_no_list_share": 0.2475
+  },
+  "Purdue": {
+   "rows": 4616,
+   "median_year": 1992,
+   "by_band": [
+    {
+     "n": 102,
+     "median_year": 1940
+    },
+    {
+     "n": 340,
+     "median_year": 1955
+    },
+    {
+     "n": 2715,
+     "median_year": 1978
+    },
+    {
+     "n": 1393,
+     "median_year": 2006
+    },
+    {
+     "n": 66,
+     "median_year": 1973
+    }
+   ],
+   "by_decade": [
+    {
+     "decade": 1900,
+     "n": 87,
+     "median_pps": 122.95
+    },
+    {
+     "decade": 1910,
+     "n": 71,
+     "median_pps": 140.0
+    },
+    {
+     "decade": 1920,
+     "n": 160,
+     "median_pps": 134.21
+    },
+    {
+     "decade": 1930,
+     "n": 135,
+     "median_pps": 150.0
+    },
+    {
+     "decade": 1940,
+     "n": 203,
+     "median_pps": 160.49
+    },
+    {
+     "decade": 1950,
+     "n": 515,
+     "median_pps": 165.66
+    },
+    {
+     "decade": 1960,
+     "n": 465,
+     "median_pps": 159.88
+    },
+    {
+     "decade": 1970,
+     "n": 366,
+     "median_pps": 164.08
+    },
+    {
+     "decade": 1980,
+     "n": 217,
+     "median_pps": 160.01
+    },
+    {
+     "decade": 1990,
+     "n": 581,
+     "median_pps": 168.8
+    },
+    {
+     "decade": 2000,
+     "n": 743,
+     "median_pps": 165.84
+    },
+    {
+     "decade": 2010,
+     "n": 503,
+     "median_pps": 174.69
+    },
+    {
+     "decade": 2020,
+     "n": 569,
+     "median_pps": 190.48
+    }
+   ],
+   "new_homes": 383,
+   "new_share": 0.083,
+   "new_no_list_share": 0.2768
+  },
+  "Illinois": {
+   "rows": 3664,
+   "median_year": 1971,
+   "by_band": [
+    {
+     "n": 134,
+     "median_year": 1924
+    },
+    {
+     "n": 756,
+     "median_year": 1950
+    },
+    {
+     "n": 2560,
+     "median_year": 1979
+    },
+    {
+     "n": 214,
+     "median_year": 2008
+    },
+    {
+     "n": 0,
+     "median_year": null
+    }
+   ],
+   "by_decade": [
+    {
+     "decade": 1900,
+     "n": 93,
+     "median_pps": 116.38
+    },
+    {
+     "decade": 1910,
+     "n": 119,
+     "median_pps": 129.8
+    },
+    {
+     "decade": 1920,
+     "n": 159,
+     "median_pps": 155.74
+    },
+    {
+     "decade": 1930,
+     "n": 92,
+     "median_pps": 161.46
+    },
+    {
+     "decade": 1940,
+     "n": 220,
+     "median_pps": 143.66
+    },
+    {
+     "decade": 1950,
+     "n": 553,
+     "median_pps": 139.06
+    },
+    {
+     "decade": 1960,
+     "n": 552,
+     "median_pps": 128.57
+    },
+    {
+     "decade": 1970,
+     "n": 345,
+     "median_pps": 138.06
+    },
+    {
+     "decade": 1980,
+     "n": 264,
+     "median_pps": 144.79
+    },
+    {
+     "decade": 1990,
+     "n": 279,
+     "median_pps": 152.84
+    },
+    {
+     "decade": 2000,
+     "n": 503,
+     "median_pps": 166.83
+    },
+    {
+     "decade": 2010,
+     "n": 231,
+     "median_pps": 197.79
+    },
+    {
+     "decade": 2020,
+     "n": 240,
+     "median_pps": 208.92
+    }
+   ],
+   "new_homes": 163,
+   "new_share": 0.0445,
+   "new_no_list_share": 0.2699
+  },
+  "Michigan": {
+   "rows": 3022,
+   "median_year": 1966,
+   "by_band": [
+    {
+     "n": 181,
+     "median_year": 1917
+    },
+    {
+     "n": 796,
+     "median_year": 1950
+    },
+    {
+     "n": 1628,
+     "median_year": 1974
+    },
+    {
+     "n": 414,
+     "median_year": 1998
+    },
+    {
+     "n": 3,
+     "median_year": null
+    }
+   ],
+   "by_decade": [
+    {
+     "decade": 1900,
+     "n": 85,
+     "median_pps": 398.84
+    },
+    {
+     "decade": 1910,
+     "n": 74,
+     "median_pps": 417.64
+    },
+    {
+     "decade": 1920,
+     "n": 209,
+     "median_pps": 370.26
+    },
+    {
+     "decade": 1930,
+     "n": 117,
+     "median_pps": 337.02
+    },
+    {
+     "decade": 1940,
+     "n": 193,
+     "median_pps": 320.68
+    },
+    {
+     "decade": 1950,
+     "n": 498,
+     "median_pps": 284.17
+    },
+    {
+     "decade": 1960,
+     "n": 468,
+     "median_pps": 253.52
+    },
+    {
+     "decade": 1970,
+     "n": 241,
+     "median_pps": 244.63
+    },
+    {
+     "decade": 1980,
+     "n": 177,
+     "median_pps": 236.37
+    },
+    {
+     "decade": 1990,
+     "n": 419,
+     "median_pps": 211.96
+    },
+    {
+     "decade": 2000,
+     "n": 248,
+     "median_pps": 208.47
+    },
+    {
+     "decade": 2010,
+     "n": 108,
+     "median_pps": 243.19
+    },
+    {
+     "decade": 2020,
+     "n": 174,
+     "median_pps": 245.97
+    }
+   ],
+   "new_homes": 102,
+   "new_share": 0.0338,
+   "new_no_list_share": 0.3824
+  },
+  "UNC": {
+   "rows": 3018,
+   "median_year": 1997,
+   "by_band": [
+    {
+     "n": 129,
+     "median_year": 1952
+    },
+    {
+     "n": 421,
+     "median_year": 1976
+    },
+    {
+     "n": 1416,
+     "median_year": 1994
+    },
+    {
+     "n": 965,
+     "median_year": 2012
+    },
+    {
+     "n": 87,
+     "median_year": 2019
+    }
+   ],
+   "by_decade": [
+    {
+     "decade": 1900,
+     "n": 3,
+     "median_pps": null
+    },
+    {
+     "decade": 1910,
+     "n": 6,
+     "median_pps": null
+    },
+    {
+     "decade": 1920,
+     "n": 33,
+     "median_pps": 441.01
+    },
+    {
+     "decade": 1930,
+     "n": 32,
+     "median_pps": 409.16
+    },
+    {
+     "decade": 1940,
+     "n": 57,
+     "median_pps": 384.96
+    },
+    {
+     "decade": 1950,
+     "n": 152,
+     "median_pps": 325.28
+    },
+    {
+     "decade": 1960,
+     "n": 226,
+     "median_pps": 288.04
+    },
+    {
+     "decade": 1970,
+     "n": 295,
+     "median_pps": 288.06
+    },
+    {
+     "decade": 1980,
+     "n": 322,
+     "median_pps": 294.59
+    },
+    {
+     "decade": 1990,
+     "n": 555,
+     "median_pps": 274.01
+    },
+    {
+     "decade": 2000,
+     "n": 431,
+     "median_pps": 273.17
+    },
+    {
+     "decade": 2010,
+     "n": 515,
+     "median_pps": 261.24
+    },
+    {
+     "decade": 2020,
+     "n": 380,
+     "median_pps": 285.64
+    }
+   ],
+   "new_homes": 234,
+   "new_share": 0.0775,
+   "new_no_list_share": 0.4188
+  },
+  "Virginia": {
+   "rows": 2854,
+   "median_year": 1990,
+   "by_band": [
+    {
+     "n": 154,
+     "median_year": 1948
+    },
+    {
+     "n": 467,
+     "median_year": 1957
+    },
+    {
+     "n": 1264,
+     "median_year": 1995
+    },
+    {
+     "n": 912,
+     "median_year": 2002
+    },
+    {
+     "n": 57,
+     "median_year": 1991
+    }
+   ],
+   "by_decade": [
+    {
+     "decade": 1900,
+     "n": 24,
+     "median_pps": 366.78
+    },
+    {
+     "decade": 1910,
+     "n": 22,
+     "median_pps": 352.08
+    },
+    {
+     "decade": 1920,
+     "n": 99,
+     "median_pps": 332.51
+    },
+    {
+     "decade": 1930,
+     "n": 60,
+     "median_pps": 386.48
+    },
+    {
+     "decade": 1940,
+     "n": 107,
+     "median_pps": 368.61
+    },
+    {
+     "decade": 1950,
+     "n": 249,
+     "median_pps": 331.95
+    },
+    {
+     "decade": 1960,
+     "n": 289,
+     "median_pps": 250.23
+    },
+    {
+     "decade": 1970,
+     "n": 268,
+     "median_pps": 242.87
+    },
+    {
+     "decade": 1980,
+     "n": 261,
+     "median_pps": 263.25
+    },
+    {
+     "decade": 1990,
+     "n": 334,
+     "median_pps": 255.37
+    },
+    {
+     "decade": 2000,
+     "n": 247,
+     "median_pps": 251.46
+    },
+    {
+     "decade": 2010,
+     "n": 204,
+     "median_pps": 267.62
+    },
+    {
+     "decade": 2020,
+     "n": 687,
+     "median_pps": 282.98
+    }
+   ],
+   "new_homes": 619,
+   "new_share": 0.217,
+   "new_no_list_share": 0.6607
+  },
+  "Georgia": {
+   "rows": 2816,
+   "median_year": 1992,
+   "by_band": [
+    {
+     "n": 108,
+     "median_year": 1955
+    },
+    {
+     "n": 454,
+     "median_year": 1958
+    },
+    {
+     "n": 1591,
+     "median_year": 1988
+    },
+    {
+     "n": 663,
+     "median_year": 2003
+    },
+    {
+     "n": 0,
+     "median_year": null
+    }
+   ],
+   "by_decade": [
+    {
+     "decade": 1900,
+     "n": 6,
+     "median_pps": null
+    },
+    {
+     "decade": 1910,
+     "n": 14,
+     "median_pps": null
+    },
+    {
+     "decade": 1920,
+     "n": 22,
+     "median_pps": 292.99
+    },
+    {
+     "decade": 1930,
+     "n": 54,
+     "median_pps": 313.59
+    },
+    {
+     "decade": 1940,
+     "n": 82,
+     "median_pps": 303.62
+    },
+    {
+     "decade": 1950,
+     "n": 164,
+     "median_pps": 268.73
+    },
+    {
+     "decade": 1960,
+     "n": 294,
+     "median_pps": 185.57
+    },
+    {
+     "decade": 1970,
+     "n": 253,
+     "median_pps": 175.55
+    },
+    {
+     "decade": 1980,
+     "n": 227,
+     "median_pps": 189.53
+    },
+    {
+     "decade": 1990,
+     "n": 317,
+     "median_pps": 194.59
+    },
+    {
+     "decade": 2000,
+     "n": 450,
+     "median_pps": 191.43
+    },
+    {
+     "decade": 2010,
+     "n": 174,
+     "median_pps": 198.31
+    },
+    {
+     "decade": 2020,
+     "n": 306,
+     "median_pps": 203.0
+    }
+   ],
+   "new_homes": 282,
+   "new_share": 0.1002,
+   "new_no_list_share": 0.0709
+  },
+  "Iowa": {
+   "rows": 1909,
+   "median_year": 1976,
+   "by_band": [
+    {
+     "n": 171,
+     "median_year": 1926
+    },
+    {
+     "n": 635,
+     "median_year": 1963
+    },
+    {
+     "n": 1073,
+     "median_year": 1994
+    },
+    {
+     "n": 30,
+     "median_year": 1974
+    },
+    {
+     "n": 0,
+     "median_year": null
+    }
+   ],
+   "by_decade": [
+    {
+     "decade": 1900,
+     "n": 89,
+     "median_pps": 194.03
+    },
+    {
+     "decade": 1910,
+     "n": 25,
+     "median_pps": 215.03
+    },
+    {
+     "decade": 1920,
+     "n": 85,
+     "median_pps": 216.22
+    },
+    {
+     "decade": 1930,
+     "n": 50,
+     "median_pps": 213.74
+    },
+    {
+     "decade": 1940,
+     "n": 58,
+     "median_pps": 206.74
+    },
+    {
+     "decade": 1950,
+     "n": 193,
+     "median_pps": 186.0
+    },
+    {
+     "decade": 1960,
+     "n": 241,
+     "median_pps": 167.48
+    },
+    {
+     "decade": 1970,
+     "n": 289,
+     "median_pps": 157.73
+    },
+    {
+     "decade": 1980,
+     "n": 130,
+     "median_pps": 153.14
+    },
+    {
+     "decade": 1990,
+     "n": 209,
+     "median_pps": 157.59
+    },
+    {
+     "decade": 2000,
+     "n": 151,
+     "median_pps": 164.83
+    },
+    {
+     "decade": 2010,
+     "n": 205,
+     "median_pps": 186.05
+    },
+    {
+     "decade": 2020,
+     "n": 182,
+     "median_pps": 201.06
+    }
+   ],
+   "new_homes": 130,
+   "new_share": 0.0681,
+   "new_no_list_share": 0.0769
+  },
+  "Penn State": {
+   "rows": 1351,
+   "median_year": 1982,
+   "by_band": [
+    {
+     "n": 219,
+     "median_year": 1952
+    },
+    {
+     "n": 365,
+     "median_year": 1976
+    },
+    {
+     "n": 767,
+     "median_year": 1990
+    },
+    {
+     "n": 0,
+     "median_year": null
+    },
+    {
+     "n": 0,
+     "median_year": null
+    }
+   ],
+   "by_decade": [
+    {
+     "decade": 1900,
+     "n": 4,
+     "median_pps": null
+    },
+    {
+     "decade": 1910,
+     "n": 2,
+     "median_pps": null
+    },
+    {
+     "decade": 1920,
+     "n": 33,
+     "median_pps": 237.14
+    },
+    {
+     "decade": 1930,
+     "n": 41,
+     "median_pps": 239.65
+    },
+    {
+     "decade": 1940,
+     "n": 68,
+     "median_pps": 228.05
+    },
+    {
+     "decade": 1950,
+     "n": 171,
+     "median_pps": 214.56
+    },
+    {
+     "decade": 1960,
+     "n": 195,
+     "median_pps": 210.49
+    },
+    {
+     "decade": 1970,
+     "n": 122,
+     "median_pps": 182.9
+    },
+    {
+     "decade": 1980,
+     "n": 201,
+     "median_pps": 198.73
+    },
+    {
+     "decade": 1990,
+     "n": 155,
+     "median_pps": 204.52
+    },
+    {
+     "decade": 2000,
+     "n": 194,
+     "median_pps": 200.81
+    },
+    {
+     "decade": 2010,
+     "n": 87,
+     "median_pps": 221.67
+    },
+    {
+     "decade": 2020,
+     "n": 72,
+     "median_pps": 246.83
+    }
+   ],
+   "new_homes": 58,
+   "new_share": 0.0429,
+   "new_no_list_share": 0.6552
+  },
+  "UC Davis": {
+   "rows": 942,
+   "median_year": 1978,
+   "by_band": [
+    {
+     "n": 76,
+     "median_year": 1952
+    },
+    {
+     "n": 358,
+     "median_year": 1973
+    },
+    {
+     "n": 500,
+     "median_year": 1991
+    },
+    {
+     "n": 8,
+     "median_year": null
+    },
+    {
+     "n": 0,
+     "median_year": null
+    }
+   ],
+   "by_decade": [
+    {
+     "decade": 1900,
+     "n": 1,
+     "median_pps": null
+    },
+    {
+     "decade": 1910,
+     "n": 5,
+     "median_pps": null
+    },
+    {
+     "decade": 1920,
+     "n": 5,
+     "median_pps": null
+    },
+    {
+     "decade": 1930,
+     "n": 8,
+     "median_pps": null
+    },
+    {
+     "decade": 1940,
+     "n": 12,
+     "median_pps": null
+    },
+    {
+     "decade": 1950,
+     "n": 82,
+     "median_pps": 527.23
+    },
+    {
+     "decade": 1960,
+     "n": 159,
+     "median_pps": 510.0
+    },
+    {
+     "decade": 1970,
+     "n": 229,
+     "median_pps": 504.1
+    },
+    {
+     "decade": 1980,
+     "n": 82,
+     "median_pps": 515.77
+    },
+    {
+     "decade": 1990,
+     "n": 227,
+     "median_pps": 476.67
+    },
+    {
+     "decade": 2000,
+     "n": 71,
+     "median_pps": 476.19
+    },
+    {
+     "decade": 2010,
+     "n": 56,
+     "median_pps": 460.16
+    },
+    {
+     "decade": 2020,
+     "n": 5,
+     "median_pps": null
+    }
+   ],
+   "new_homes": 0,
+   "new_share": 0.0,
+   "new_no_list_share": null
+  }
+ },
+ "listing": {
+  "new_no_list_share": 0.3664,
+  "older_no_list_share": 0.1592
+ },
+ "virginia_double_records": {
+  "new_pairs": 78,
+  "new_share_one_copy": 0.195
+ }
+}

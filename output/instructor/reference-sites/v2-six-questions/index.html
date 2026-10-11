@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>College Towns in Six Questions</title>
+<meta name="description" content="Six questions about home sales around 11 university campuses, answered with charts and the figures behind them.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="page">
+
+  <header class="masthead">
+    <p class="eyebrow">Campus Comps case, Variation 2</p>
+    <h1>College Towns in Six Questions</h1>
+    <p class="dek">What <span data-fact="rows"></span> home sales around 11 university campuses say about prices, how fast homes sell, distance from campus, the time of year, tax assessments and buildings with several sales.</p>
+    <ol class="index" aria-label="Questions">
+      <li><a href="#q1"><span class="n">1</span><span>Which campus areas cost the most, by price and by square foot?</span><span class="short">Price levels</span></a></li>
+      <li><a href="#q2"><span class="n">2</span><span>Where do homes sell fastest?</span><span class="short">Speed</span></a></li>
+      <li><a href="#q3"><span class="n">3</span><span>Does price per square foot fall with distance from campus?</span><span class="short">Distance</span></a></li>
+      <li><a href="#q4"><span class="n">4</span><span>Which listing months sell fastest?</span><span class="short">Timing</span></a></li>
+      <li><a href="#q5"><span class="n">5</span><span>How close is the assessed value to the sale price?</span><span class="short">Assessment</span></a></li>
+      <li><a href="#q6"><span class="n">6</span><span>Where are the addresses with several sales?</span><span class="short">Buildings</span></a></li>
+    </ol>
+  </header>
+
+  <section class="q" id="q1" aria-labelledby="q1-h">
+    <div class="q-head">
+      <p class="eyebrow">Question 1. Price levels</p>
+      <h2 id="q1-h">For each campus area, what are the median sale price and the median price per square foot?</h2>
+    </div>
+    <p class="answer"><strong><span data-fact="q1.top"></span> is the most expensive campus area on both measures, and <span data-fact="q1.bottom"></span> is the least expensive on both.</strong> The ranking barely changes between the two: only <span data-fact="q1.swap"></span> swap places. <span data-fact="q1.hiName"></span>'s median sale price is higher than <span data-fact="q1.loName"></span>'s (<span data-fact="q1.hiPrice"></span> against <span data-fact="q1.loPrice"></span>), but its homes are larger (a median of <span data-fact="q1.hiSqft"></span> square feet, against <span data-fact="q1.loSqft"></span>), so it ranks lower on price per square foot.</p>
+    <div class="figs">
+      <div class="fig"><span class="v" data-fact="q1.topPrice"></span><span class="l"><span data-fact="q1.top"></span> median sale price, and <span data-fact="q1.topPps"></span> per sq ft (highest on both)</span></div>
+      <div class="fig"><span class="v" data-fact="q1.bottomPrice"></span><span class="l"><span data-fact="q1.bottom"></span> median sale price, and <span data-fact="q1.bottomPps"></span> per sq ft (lowest on both)</span></div>
+      <div class="fig"><span class="v" data-fact="q1.swapCount"></span><span class="l"><span data-fact="q1.swap"></span> trade places in the ranking</span></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Rank by median sale price compared with rank by median price per square foot</div>
+      <div class="chart-sub">Each line is a campus area. A flat line means the same rank on both measures.</div>
+      <div class="chart" id="q1-chart"><p class="loading">Loading chart...</p></div>
+    </div>
+    <details class="table" open>
+      <summary>Figures for all 11 campus areas</summary>
+      <div class="scroll" id="q1-table"></div>
+    </details>
+  </section>
+
+  <section class="q" id="q2" aria-labelledby="q2-h">
+    <div class="q-head">
+      <p class="eyebrow">Question 2. Speed</p>
+      <h2 id="q2-h">Where do homes sell fastest, and how much is missing?</h2>
+    </div>
+    <p class="answer"><strong>Homes near <span data-fact="q2.fastestNames"></span> go under contract fastest, at a median of <span data-fact="q2.fastest"></span>.</strong> <span data-fact="q2.slowest"></span> are slowest. Days on market can't be computed for <span data-fact="q2.missMin"></span> to <span data-fact="q2.missMax"></span> of sales, depending on the area, because a list or contract date is missing. The data description sheet shows those sales are disproportionately new construction and off-market sales, so each figure describes only the homes that were listed. <span data-fact="q2.missMaxName"></span> (<span data-fact="q2.missMax"></span> missing) and <span data-fact="q2.miss2Name"></span> (<span data-fact="q2.miss2"></span>) deserve the most caution.</p>
+    <div class="figs">
+      <div class="fig"><span class="v" data-fact="q2.fastest"></span><span class="l">Fastest median: <span data-fact="q2.fastestNames"></span></span></div>
+      <div class="fig"><span class="v" data-fact="q2.slowestValue"></span><span class="l">Slowest median: <span data-fact="q2.slowestName"></span></span></div>
+      <div class="fig"><span class="v" data-fact="q2.missMax"></span><span class="l"><span data-fact="q2.missMaxName"></span> sales with no days on market (the most of any area)</span></div>
+    </div>
+    <div class="pair">
+      <div class="chart-card">
+        <div class="chart-title">Median days on market</div>
+        <div class="chart-sub">Listing date to contract date, fastest first</div>
+        <div class="chart" id="q2-chart-a"><p class="loading">Loading chart...</p></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Share of sales with no days on market</div>
+        <div class="chart-sub">Same order as the chart beside it</div>
+        <div class="chart" id="q2-chart-b"><p class="loading">Loading chart...</p></div>
+      </div>
+    </div>
+    <details class="table" open>
+      <summary>Figures for all 11 campus areas</summary>
+      <div class="scroll" id="q2-table"></div>
+    </details>
+  </section>
+
+  <section class="q" id="q3" aria-labelledby="q3-h">
+    <div class="q-head">
+      <p class="eyebrow">Question 3. Distance</p>
+      <h2 id="q3-h">Does price per square foot fall as the distance from campus grows?</h2>
+    </div>
+    <p class="answer"><strong>Yes, in most areas: price per square foot falls with distance in <span data-fact="q3.fallCount"></span> of 11.</strong> It falls at every step in <span data-fact="q3.every"></span>. In <span data-fact="q3.overall"></span> it falls overall, with no rise between neighboring bands of more than <span data-fact="q3.maxRise"></span>. <strong>It does not fall in <span data-fact="q3.nofall"></span>.</strong> <span data-fact="q3.worst"></span> is the clearest exception: its most expensive band is <span data-fact="q3.worstBand"></span> from campus (<span data-fact="q3.worstValue"></span> per sq ft, against <span data-fact="q3.worstNear"></span> under 1 mile).</p>
+    <div class="figs">
+      <div class="fig"><span class="v"><span data-fact="q3.fallCount"></span> of 11</span><span class="l">Areas where price per sq ft falls with distance</span></div>
+      <div class="fig"><span class="v"><span data-fact="q3.nearCount"></span> of 11</span><span class="l">Areas where homes under 1 mile from campus cost the most per sq ft</span></div>
+      <div class="fig"><span class="v" data-fact="q3.worstValue"></span><span class="l"><span data-fact="q3.worst"></span>, <span data-fact="q3.worstBand"></span> out: its highest band (under 1 mile: <span data-fact="q3.worstNear"></span>)</span></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Median price per square foot by distance from campus</div>
+      <div class="chart-sub">Darker cells cost more per square foot. Each cell shows the median and, below it, the number of sales. The last column says how each area's figures change with distance.</div>
+      <div class="scale" id="q3-scale" aria-hidden="true"></div>
+      <div class="scroll" id="q3-table"><p class="loading">Loading table...</p></div>
+    </div>
+  </section>
+
+  <section class="q" id="q4" aria-labelledby="q4-h">
+    <div class="q-head">
+      <p class="eyebrow">Question 4. Timing</p>
+      <h2 id="q4-h">Which listing months sell fastest, and which are slowest?</h2>
+    </div>
+    <p class="answer"><strong>Homes listed in <span data-fact="q4.fastestNames"></span> sell fastest, going under contract in a median of <span data-fact="q4.fastest"></span>.</strong> The pace slows through summer and fall. <span data-fact="q4.slowestName"></span> listings are slowest, at a median of <span data-fact="q4.slowest"></span>, followed by <span data-fact="q4.secondName"></span> (<span data-fact="q4.second"></span>). As the case asks, this covers <span data-fact="q4.window"></span>, so every calendar month comes from exactly two years of listings.</p>
+    <div class="figs">
+      <div class="fig"><span class="v" data-fact="q4.fastest"></span><span class="l">Median for homes listed in <span data-fact="q4.fastestNames"></span></span></div>
+      <div class="fig"><span class="v" data-fact="q4.slowest"></span><span class="l">Median for homes listed in <span data-fact="q4.slowestName"></span>, the slowest month</span></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Median days on market by month the home was listed</div>
+      <div class="chart-sub">All 11 campus areas, <span data-fact="q4.window"></span></div>
+      <div class="chart" id="q4-chart"><p class="loading">Loading chart...</p></div>
+    </div>
+    <details class="table" open>
+      <summary>Figures by month</summary>
+      <div class="scroll" id="q4-table"></div>
+    </details>
+  </section>
+
+  <section class="q" id="q5" aria-labelledby="q5-h">
+    <div class="q-head">
+      <p class="eyebrow">Question 5. Assessment</p>
+      <h2 id="q5-h">How close is the assessed value to the sale price?</h2>
+    </div>
+    <p class="answer"><strong>In <span data-fact="q5.restCount"></span> of 11 areas the median assessed value is <span data-fact="q5.restMin"></span> to <span data-fact="q5.restMax"></span> of the sale price, but <span data-fact="q5.far"></span> are far below.</strong> Both fit how those states assess property. Pennsylvania counties assess from <a href="https://www.babstcalland.com/news-article/pennsylvania-tax-assessment-appeals-and-common-level-ratios-four-observations/">irregularly updated "base year" values</a>, and the state's own <a href="https://www.pa.gov/content/dam/copapwp-pagov/en/revenue/documents/taxtypes/rtt/documents/clr_factor_current.pdf">common level ratio factors</a> put Centre County, home to Penn State, at about one sixth of market value. In Michigan, assessed value is set at half of market value, and taxable value can rise by no more than inflation or 5% a year until the home sells (<a href="https://www.michigan.gov/-/media/Project/Websites/treasury/Assessors/Guide_to_Basic_Assessing_116.pdf">Michigan State Tax Commission</a>), so a ratio below 0.5 fits a capped value. <span data-fact="q5.davisName"></span> sits at <span data-fact="q5.davis"></span> because California sets a new assessed value at the purchase price when a home changes hands (<a href="https://www.boe.ca.gov/proptaxes/pdf/ah401.pdf">California State Board of Equalization</a>), and every row here is a sale. We don't assume a state's legal assessment level shows up in this column: Illinois assesses most homes at one third of market value, yet its ratio here is <span data-fact="q5.illinois"></span>.</p>
+    <div class="figs">
+      <div class="fig"><span class="v" data-fact="q5.far0"></span><span class="l"><span data-fact="q5.far0Name"></span> median ratio of assessed value to sale price</span></div>
+      <div class="fig"><span class="v" data-fact="q5.far1"></span><span class="l"><span data-fact="q5.far1Name"></span> median ratio</span></div>
+      <div class="fig"><span class="v" data-fact="q5.davis"></span><span class="l"><span data-fact="q5.davisName"></span> median ratio</span></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Median ratio of assessed value to sale price</div>
+      <div class="chart-sub">Valid sales with an assessed value above 0. Orange marks the areas far below 1.</div>
+      <div class="chart" id="q5-chart"><p class="loading">Loading chart...</p></div>
+    </div>
+    <details class="table" open>
+      <summary>Figures for all 11 campus areas</summary>
+      <div class="scroll" id="q5-table"></div>
+    </details>
+  </section>
+
+  <section class="q" id="q6" aria-labelledby="q6-h">
+    <div class="q-head">
+      <p class="eyebrow">Question 6. Buildings</p>
+      <h2 id="q6-h">How many addresses have more than one sale, and how far are they from campus?</h2>
+    </div>
+    <p class="answer"><strong><span data-fact="q6.addresses"></span> addresses had more than one sale, covering <span data-fact="q6.sales"></span> sales, and two areas hold most of them: <span data-fact="q6.big0"></span> and <span data-fact="q6.big1"></span>.</strong> Overall, these sales sit a little farther from campus than other sales (a median of <span data-fact="q6.multi"></span> miles, against <span data-fact="q6.other"></span>), but the two big areas point in opposite directions. Around <span data-fact="q6.nearName"></span>, the repeated addresses are a median <span data-fact="q6.nearMulti"></span> miles from campus, against <span data-fact="q6.nearOther"></span> for other sales: condo and apartment buildings close to campus. Around <span data-fact="q6.farName"></span>, they are farther out (<span data-fact="q6.farMulti"></span> miles, against <span data-fact="q6.farOther"></span>). The other areas have fewer than 20 such sales, and <span data-fact="q6.none"></span> have none.</p>
+    <p class="answer">One caution about what these addresses are. In <span data-fact="q6.doubleAddresses"></span> of the <span data-fact="q6.addresses"></span> addresses, the two sales have prices within 1% and sale dates within 90 days, the test the dataset's builders used for one sale recorded twice. <span data-fact="q6.doubleTop"></span> of them are around <span data-fact="q6.doubleTopName"></span>. So many repeated addresses there look like one sale entered twice, not two homes. We still count every sale, as the question's definition says.</p>
+    <div class="figs">
+      <div class="fig"><span class="v" data-fact="q6.addresses"></span><span class="l">Addresses with more than one sale, covering <span data-fact="q6.sales"></span> sales</span></div>
+      <div class="fig"><span class="v"><span data-fact="q6.big0Sales"></span> of <span data-fact="q6.sales"></span></span><span class="l">Of those sales are in the <span data-fact="q6.big0Name"></span> area</span></div>
+      <div class="fig"><span class="v"><span data-fact="q6.nearMulti"></span> mi</span><span class="l"><span data-fact="q6.nearName"></span> repeated addresses, median distance (other sales: <span data-fact="q6.nearOther"></span> mi)</span></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Median distance from campus: repeated addresses compared with other sales</div>
+      <div class="legend"><span><i class="key s2"></i>Addresses with more than one sale</span><span><i class="key s1"></i>All other sales</span></div>
+      <div class="chart" id="q6-chart"><p class="loading">Loading chart...</p></div>
+      <p class="note">Only areas with at least 20 sales at repeated addresses are shown, plus all areas together.</p>
+    </div>
+    <details class="table" open>
+      <summary>Figures for all 11 campus areas</summary>
+      <div class="scroll" id="q6-table"></div>
+    </details>
+  </section>
+
+  <section class="notes" id="data-notes" aria-labelledby="notes-h">
+    <h2 id="notes-h">Data notes</h2>
+    <p>Every figure comes from the College-town home sales dataset (version 1.0): <span data-fact="rows"></span> completed home sales around 11 university campuses, sold between <span data-fact="firstSale"></span> and <span data-fact="lastSale"></span>. The script <code>scripts/build_data.py</code> computes them, and the site reads its output, <code>data/answers.json</code>.</p>
+    <dl>
+      <div><dt>Campus area</dt><dd>The <code>university</code> column: the nearest of 11 campuses, assigned from each home's coordinates.</dd></div>
+      <div><dt>Valid sale</dt><dd>A sale price of $1,000 or more. This leaves out <span data-fact="invalid"></span> sales, including <span data-fact="zero"></span> at $0, so <span data-fact="valid"></span> sales are valid.</dd></div>
+      <div><dt>Price per square foot</dt><dd>Sale price divided by living area, computed for each valid sale with at least 100 square feet of living area (<span data-fact="pps"></span> sales), then the median of those values. We never divide a median price by a median area.</dd></div>
+      <div><dt>Days on market</dt><dd>Days from <code>list_date</code> to <code>contract_date</code>, for the <span data-fact="dom"></span> sales with both dates. A missing date is never treated as zero, and we don't use <code>sale_date</code>, which would add about a month of closing time.</dd></div>
+      <div><dt>Distance bands</dt><dd>From <code>miles_to_campus</code>, the straight-line distance to a campus landmark: under 1 mile, 1 to under 2, 2 to under 5, 5 to under 10, and 10 or more.</dd></div>
+      <div><dt>Falls with distance (Question 3)</dt><dd>"At every step" means each band with enough sales is cheaper than the one before. "Overall" means the farthest band is cheaper than the nearest and no step rises by more than <span data-fact="q3.maxRise"></span>.</dd></div>
+      <div><dt>Listing window (Question 4)</dt><dd>Only homes listed in the window the case sets, <span data-fact="q4.window"></span>.</dd></div>
+      <div><dt>Small groups</dt><dd>A group with fewer than 20 sales shows "fewer than 20 sales" instead of a figure.</dd></div>
+      <div><dt>Medians</dt><dd>Every figure is a median, not a mean. Some prices in the data are implausible (up to <span data-fact="maxPrice"></span>), and means would be pulled far off by them.</dd></div>
+      <div><dt>Assessment ratio</dt><dd>Assessed value divided by sale price, for the <span data-fact="assessed"></span> valid sales with an assessed value above 0.</dd></div>
+      <div><dt>Repeated addresses</dt><dd>Sales grouped by street address, city, state and ZIP code. We never remove a sale because its address repeats: in State College these are separate condo units, each with its own parcel number. Question 6 explains why many of the repeats around Virginia look like one sale recorded twice.</dd></div>
+    </dl>
+    <p>We don't use the <code>home_type</code> column, because the data description sheet shows it is unreliable.</p>
+  </section>
+
+  <footer>
+    <p>Data: College-town home sales dataset, version 1.0 (2026). University of Illinois-Deloitte Foundation Center for Business Emerging Technologies. Data collected March 2026.</p>
+    <p>Reference site for the Campus Comps case, built with an AI coding agent. Plain HTML, CSS and JavaScript, published with GitHub Pages.</p>
+  </footer>
+</main>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

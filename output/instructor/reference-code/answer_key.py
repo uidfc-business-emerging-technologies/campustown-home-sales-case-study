@@ -249,7 +249,8 @@ def q3(df):
     chart = chart_q3(shown, pattern, "Eleven small line charts of median price per square foot across the distance "
                      f"bands. The line falls in most areas; it does not fall in {join(sorted(SHORT[u] for u in nofall.index))}, "
                      "drawn in orange.")
-    site = {"bands": v2.BAND_LABELS, "rows": [{"campus": SHORT[u], "pattern": pattern.loc[u, "pattern"], "cells": [
+    site = {"bands": v2.BAND_LABELS, "max_rise": v2.MAX_RISE, "rows": [{"campus": SHORT[u], "pattern": pattern.loc[u, "pattern"],
+             "highest_band": pattern.loc[u, "highest band"], "cells": [
         {"n": int(counts.loc[u, b]), "median_pps": None if counts.loc[u, b] < v2.MIN_GROUP else half_up(medians.loc[u, b], 2)}
         for b in v2.BAND_LABELS]} for u in order]}
     return dict(figures=figures, chart=chart, answer=answer, wrong=wrong, tolerance=tolerance, site=site)
@@ -420,7 +421,10 @@ def q6(df):
                       "median_miles_multi": None if r["sales at those addresses"] < v2.MIN_GROUP else half_up(r[miles[0]], 2),
                       "median_miles_other": half_up(r[miles[1]], 2)} for u, r in by_area.iterrows()],
             "total": {"addresses": int(total["addresses with more than one sale"]), "sales": int(total["sales at those addresses"]),
-                      "median_miles_multi": half_up(total[miles[0]], 2), "median_miles_other": half_up(total[miles[1]], 2)}}
+                      "median_miles_multi": half_up(total[miles[0]], 2), "median_miles_other": half_up(total[miles[1]], 2)},
+            "likely_double_records": {"addresses": int(len(doubles)), "rows": int(doubles["sales"].sum()),
+                                      "same_price": int((doubles["distinct prices"] == 1).sum()),
+                                      "by_campus": {SHORT[u]: int(n) for u, n in doubles["university"].value_counts().sort_index().items()}}}
     return dict(figures=[figures], chart=chart, answer=answer, note=instructor_note, wrong=wrong, tolerance=tolerance, site=site)
 
 
@@ -750,8 +754,12 @@ def site_answers(key, df):
         "source": "College-town home sales dataset, version 1.0",
         "rows": len(df),
         "rules": {"min_price": 1000, "min_sqft": 100, "min_group": v2.MIN_GROUP},
+        "campuses": campuses(df),
         "counts": {
             "valid_sales": int(df["valid_price"].sum()),
+            "invalid_sales": int((~df["valid_price"]).sum()),
+            "zero_price_sales": int((df["sale_price"] == 0).sum()),
+            "max_price": int(df["sale_price"].max()),
             "pps_sales": int(df["price_per_sqft"].notna().sum()),
             "dom_sales": int(df["days_on_market"].notna().sum()),
             "assessed_sales": int((df["valid_price"] & (df["tax_assessed_value"] > 0)).sum()),
@@ -759,6 +767,16 @@ def site_answers(key, df):
         "sale_dates": [df["sale_date"].min().strftime("%Y-%m-%d"), df["sale_date"].max().strftime("%Y-%m-%d")],
         "q1": by[1], "q2": by[2], "q3": by[3], "q4": by[4], "q5": by[5], "q6": by[6],
     }
+
+
+def campuses(df):
+    out = []
+    for u in SHORT:
+        rows = df[df["university"] == u]
+        cities = rows["city"].value_counts()
+        out.append({"name": u, "short": SHORT[u], "towns": join(list(cities.index)), "state": rows["state"].iloc[0],
+                    "rows": int(len(rows))})
+    return out
 
 
 def write_all(df, site_paths=()):

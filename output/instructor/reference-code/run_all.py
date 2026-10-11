@@ -7,15 +7,18 @@
 3. Computes every Variation 2 figure and the common wrong answers.
 4. Writes the answer key workbook, its charts and the markdown source of the
    Word answer key (build the .docx with output/source/word-documents/build.js).
-5. Writes the summary files the reference sites read.
+5. Writes the summary files the reference sites read, and stops if any site's own
+   scripts/build_data.py would produce a different file.
 """
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
 import answer_key
 import appendix_a
+import sites
 from definitions import DEFAULT_DATA, REPO_ROOT, add_derived, load
 
 HERE = Path(__file__).resolve().parent
@@ -57,9 +60,21 @@ def main():
         sys.exit(f"{len(failures)} Appendix A figure(s) differ. Stop and report to Park.")
     print(f"Appendix A reproduced: {len(results)} of {len(results)} figures match.")
 
-    answer_key.write_all(df, site_paths=[SITES / "v2-six-questions" / "data" / "answers.json"])
-    print(f"Wrote {answer_key.WORKBOOK.relative_to(REPO_ROOT)}, {answer_key.MARKDOWN.relative_to(REPO_ROOT)} "
-          f"and the Variation 2 site's answers.json.")
+    _, answers = answer_key.write_all(df, site_paths=[SITES / "v2-six-questions" / "data" / "answers.json"])
+    print(f"Wrote {answer_key.WORKBOOK.relative_to(REPO_ROOT)} and {answer_key.MARKDOWN.relative_to(REPO_ROOT)}.")
+
+    summaries = {
+        "v1-old-homes-close-in": ("age.json", sites.v1_summary(df), {"indent": 1}),
+        "v2-six-questions": ("answers.json", answers, {"indent": 1}),
+        "v3-close-to-campus": ("sales.json", sites.v3_sales(df), {"separators": (",", ":")}),
+    }
+    for folder, (name, data, style) in summaries.items():
+        text = json.dumps(data, **style) + ("\n" if "indent" in style else "")
+        (SITES / folder / "data" / name).write_text(text)
+        diff = sites.first_difference(sites.run_site_script(SITES / folder), json.loads(text))
+        if diff:
+            sys.exit(f"{folder}: the site's own build script disagrees with the reference code at {diff}")
+        print(f"Wrote {folder}/data/{name}; the site's own build script produces the same file.")
 
 
 if __name__ == "__main__":

@@ -60,7 +60,7 @@ def q1_price_levels(df):
     })
     by_area["rank by price"] = by_area["median sale price"].rank(ascending=False, method="min").astype(int)
     by_area["rank by price per sq ft"] = by_area["median price per sq ft"].rank(ascending=False, method="min").astype(int)
-    return by_area.sort_values("median sale price", ascending=False)
+    return by_area.sort_values("median sale price", ascending=False, kind="stable")
 
 
 def q2_speed(df):
@@ -71,7 +71,7 @@ def q2_speed(df):
         "median days on market": grouped["days_on_market"].median(),
     })
     by_area["share missing days on market"] = 1 - by_area["sales with days on market"] / by_area["sales"]
-    return by_area.sort_values(["median days on market", "share missing days on market"])
+    return by_area.sort_values(["median days on market", "share missing days on market"], kind="stable")
 
 
 def q3_distance(df):
@@ -138,7 +138,7 @@ def q5_assessment(df):
         "median assessed / sale price": ratio.groupby(rows["university"]).median(),
         "state": rows.groupby("university")["state"].first(),
     })
-    return by_area.sort_values("median assessed / sale price")
+    return by_area.sort_values("median assessed / sale price", kind="stable")
 
 
 def q6_buildings(df):
@@ -159,7 +159,7 @@ def q6_buildings(df):
         "median miles, sales at those addresses": float(shared["miles_to_campus"].median()),
         "median miles, all other sales": float(other["miles_to_campus"].median()),
     }
-    return by_area.sort_values("sales at those addresses", ascending=False), total
+    return by_area.sort_values("sales at those addresses", ascending=False, kind="stable"), total
 
 
 def shared_address_groups(df):

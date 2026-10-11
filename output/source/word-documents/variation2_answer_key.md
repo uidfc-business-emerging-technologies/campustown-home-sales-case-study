@@ -397,8 +397,8 @@ Sources, checked October 11, 2026:
 | University of Virginia | 80 | 160 | 6.7 | 3.3 |
 | The Pennsylvania State University | 13 | 60 | 0.5 | 2.2 |
 | The University of North Carolina at Chapel Hill | 3 | 6 | fewer than 20 sales | 3.8 |
-| University of Georgia | 2 | 4 | fewer than 20 sales | 3.7 |
 | University of Florida | 2 | 4 | fewer than 20 sales | 4.4 |
+| University of Georgia | 2 | 4 | fewer than 20 sales | 3.7 |
 | University of California, Davis | 1 | 2 | fewer than 20 sales | 2 |
 | University of Michigan | 1 | 2 | fewer than 20 sales | 2.7 |
 | University of Wisconsin-Madison | 1 | 2 | fewer than 20 sales | 4.8 |
