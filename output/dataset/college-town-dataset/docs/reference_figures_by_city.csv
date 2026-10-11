@@ -1,0 +1,19 @@
+state,city,university,rows,rows_priced,median_sale_price,mean_sale_price,median_price_per_sqft,median_living_area_sqft,median_year_built,median_beds,median_tax_annual,rows_with_list_date,rows_with_contract_date,median_days_on_market,median_contract_to_close,earliest_sale,latest_sale,rows_sharing_address
+FL,Gainesville,University of Florida,5477,5477,350000.0,403359.0,203.44,1734.0,1987.0,3.0,4106.0,4445,4534,25.0,34.0,2023-03-28,2026-03-25,2
+WI,Madison,University of Wisconsin-Madison,5061,5061,421000.0,477144.0,248.07,1737.0,1965.0,3.0,6419.0,4082,4172,7.0,31.0,2023-03-27,2026-03-23,0
+IN,Lafayette,Purdue University,3057,3057,260000.0,282797.0,163.01,1649.0,1979.0,3.0,1566.0,2904,2669,9.0,30.0,2023-03-27,2026-03-24,0
+MI,Ann Arbor,University of Michigan,3021,3020,571000.0,657210.0,259.11,2222.0,1966.0,4.0,8649.0,2505,2511,7.0,28.0,2023-03-28,2026-03-23,0
+GA,Athens,University of Georgia,2814,2813,370000.0,491552.0,196.82,1862.0,1992.0,3.0,3297.0,2360,2344,27.0,26.0,2023-03-27,2026-03-24,0
+VA,Charlottesville,University of Virginia,2775,2774,615000.0,795448.0,270.03,2388.0,1990.0,4.0,4908.0,2071,2236,7.0,38.0,2023-03-28,2026-03-24,2
+NC,Chapel Hill,The University of North Carolina at Chapel Hill,2716,2716,735000.0,837117.0,276.87,2679.0,1997.0,4.0,5350.0,2220,2264,10.0,32.0,2023-03-27,2026-03-25,2
+IL,Champaign,University of Illinois Urbana-Champaign,2286,2286,240000.0,277276.0,149.68,1644.0,1968.5,3.0,4465.0,1802,1831,7.0,36.0,2023-03-27,2026-03-23,0
+IA,Iowa City,The University of Iowa,1909,1909,342000.0,389734.0,175.91,2034.0,1976.0,4.0,4873.0,1729,1262,23.5,35.0,2023-03-28,2026-03-25,0
+IN,West Lafayette,Purdue University,1559,1559,379900.0,416652.0,178.28,2194.0,2002.0,3.0,2394.0,1426,1337,11.0,30.0,2023-03-27,2026-03-23,0
+PA,State College,The Pennsylvania State University,1351,1350,430000.0,473855.0,207.42,2123.0,1982.0,3.0,4604.0,921,915,8.0,37.0,2023-03-27,2026-03-25,60
+IL,Urbana,University of Illinois Urbana-Champaign,1131,1131,229900.0,246549.0,144.35,1550.5,1966.0,3.0,4255.0,882,891,8.0,36.0,2023-03-30,2026-03-23,0
+CA,Davis,"University of California, Davis",941,941,889000.0,976896.0,492.71,1842.0,1978.0,3.0,10312.0,797,808,11.0,22.0,2023-03-28,2026-03-25,0
+WI,Middleton,University of Wisconsin-Madison,645,645,611000.0,709295.0,256.26,2497.0,2000.0,4.0,8128.0,561,574,8.0,36.0,2023-03-27,2026-03-23,0
+IL,Savoy,University of Illinois Urbana-Champaign,247,247,402700.0,420053.0,186.74,2151.0,2010.0,4.0,6545.0,214,217,10.5,37.0,2023-03-29,2026-03-12,0
+NC,Carrboro,The University of North Carolina at Chapel Hill,208,208,601250.0,612495.0,315.38,1780.0,1984.0,3.0,6334.0,150,151,7.0,31.0,2023-04-14,2026-03-16,0
+FL,Newberry,University of Florida,152,152,439995.0,497060.0,184.7,2662.0,2023.0,4.0,5998.0,136,137,87.0,39.0,2023-03-29,2026-03-20,0
+NC,Pittsboro,The University of North Carolina at Chapel Hill,92,92,876985.5,954457.0,301.87,2970.0,2015.0,3.0,4106.0,57,61,38.0,42.0,2023-03-31,2026-03-19,0

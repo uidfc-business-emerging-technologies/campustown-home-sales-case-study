@@ -1,0 +1,20 @@
+Every .docx opens cleanly: funding line, no comments, tracked changes, hidden text or protection, blank author
+  pass  instructor/Instructor Orientation.docx
+  pass  instructor/Post-Assignment Survey.docx
+  pass  instructor/Variation 2 Answer Key.docx
+  pass  students/Case Document - Variation 1 (Open Brief).docx
+  pass  students/Case Document - Variation 2 (Specific Questions).docx
+  pass  students/Case Document - Variation 3 (General Instructions).docx
+  pass  students/Data Description Sheet.docx
+  pass  students/Setup Guide - GitHub Pages.docx
+The case documents differ only in the variation label and "Your task" (diff: results/case_document_diff.txt)
+  pass  outside "Your task" and the label, the three case documents are identical (108 paragraphs)
+No student file contains answers
+  pass  searched 6 student files for 203 answer-key values
+        Case documents and setup guide: 0 matches.
+        Description sheet (both copies, as in the dataset package): 19 matches: $342,000, $370,000, $430,000, $571,000, $615,000, $889,000, 1,351, 1,909, 127, 2,775, 2,814, 3,016, 3,021, 3,664, 3.4, 4,616, 5,629, 5,706, 941
+        Each of these is a figure the dataset's own description sheet already prints (rows per campus area, city medians that equal single-city campus areas, the median distance and the zero-area count).
+Words and characters that must not appear
+  pass  no peer review or auditing in 79 documents and text files
+  pass  no agent product or agent-specific file name in 79 documents and text files
+  pass  no em or en dash in 79 documents and text files

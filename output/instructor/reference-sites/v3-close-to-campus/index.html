@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Close to Campus</title>
+<meta name="description" content="For new faculty: how much of the housing near each of 11 university campuses fits your budget, based on a year of home sales.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="page">
+
+  <header class="intro">
+    <p class="eyebrow">Campus Comps case, Variation 3</p>
+    <h1>On a new faculty budget, where can you buy a home close to campus?</h1>
+    <p class="user"><b>Who it's for:</b> newly hired faculty deciding where to buy, and how close to campus they can afford to live.</p>
+    <p class="lede">Pick a campus, a budget and a distance. Every figure below updates from <span data-fact="count"></span> home sales in the most recent 12 months of the data (<span data-fact="window"></span>).</p>
+  </header>
+
+  <form class="controls" id="controls" aria-label="Choose a campus, budget and distance">
+    <div class="control">
+      <label for="campus">Campus area</label>
+      <select id="campus" name="campus"></select>
+    </div>
+    <div class="control budget">
+      <label for="budget">Budget (sale price)</label>
+      <div class="budget-row">
+        <input type="range" id="budget" name="budget" min="150000" max="1000000" step="25000" value="400000">
+        <output id="budget-out" for="budget">$400,000</output>
+      </div>
+    </div>
+    <fieldset class="control">
+      <legend>Distance from campus</legend>
+      <div class="seg" id="dist">
+        <input type="radio" id="d1" name="dist" value="1"><label for="d1">1 mi</label>
+        <input type="radio" id="d2" name="dist" value="2"><label for="d2">2 mi</label>
+        <input type="radio" id="d3" name="dist" value="3" checked><label for="d3">3 mi</label>
+        <input type="radio" id="d5" name="dist" value="5"><label for="d5">5 mi</label>
+        <input type="radio" id="d10" name="dist" value="10"><label for="d10">10 mi</label>
+      </div>
+    </fieldset>
+  </form>
+
+  <section class="stats" aria-live="polite" aria-label="Headline numbers for the selected campus area">
+    <div class="stat">
+      <span class="k" id="s1-k">Homes in budget</span>
+      <span class="v" id="s1-v">...</span>
+      <span class="d" id="s1-d">Loading the sales data.</span>
+    </div>
+    <div class="stat">
+      <span class="k" id="s2-k">What the budget buys</span>
+      <span class="v" id="s2-v">...</span>
+      <span class="d" id="s2-d"></span>
+    </div>
+    <div class="stat">
+      <span class="k" id="s3-k">How fast they sell</span>
+      <span class="v" id="s3-v">...</span>
+      <span class="d" id="s3-d"></span>
+    </div>
+  </section>
+
+  <div class="panels">
+    <section class="panel" aria-labelledby="map-h">
+      <h2 id="map-h">Where the sales were</h2>
+      <p class="sub" id="map-sub">Each dot is one sale in the past 12 months, placed by its latitude and longitude.</p>
+      <div class="legend">
+        <span><i class="key in"></i>At or under budget</span>
+        <span><i class="key over"></i>Over budget</span>
+        <span><i class="key ring"></i>Distance you picked</span>
+        <span><i class="key mark"></i>Campus landmark</span>
+      </div>
+      <div class="map" id="map"><p class="loading">Loading map...</p></div>
+      <p class="note" id="map-note"></p>
+    </section>
+    <section class="panel" aria-labelledby="bars-h">
+      <h2 id="bars-h">How the 11 campus areas compare</h2>
+      <p class="sub" id="bars-sub">Share of homes sold near campus that were at or under your budget. Orange marks the campus area you picked; select another bar to switch.</p>
+      <div class="chart" id="bars"><p class="loading">Loading chart...</p></div>
+    </section>
+  </div>
+
+  <section class="table-wrap" aria-labelledby="table-h">
+    <h2 id="table-h">All campus areas at your settings</h2>
+    <p class="sub" id="table-sub"></p>
+    <div class="scroll" id="table"></div>
+  </section>
+
+  <section class="notes" aria-labelledby="notes-h">
+    <h2 id="notes-h">Data notes</h2>
+    <ul>
+      <li><b>Which sales:</b> the <span data-fact="count"></span> sales from <span data-fact="window"></span>, the most recent 12 months in the College-town home sales dataset (version 1.0). A buyer cares about current prices, so older sales are left out. Prices were fairly steady across the full three years of data: the median sale price in each of the <span data-fact="quarters"></span> full calendar quarters was between <span data-fact="qLow"></span> and <span data-fact="qHigh"></span>.</li>
+      <li><b>Left out:</b> <span data-fact="excluded"></span> sales under <span data-fact="minPrice"></span> in those 12 months, which are not ordinary market sales (the lowest was <span data-fact="lowest"></span>).</li>
+      <li><b>Budget</b> is compared with the sale price only. It doesn't include closing costs, property taxes or financing.</li>
+      <li><b>Distance</b> is the straight-line distance (<code>miles_to_campus</code>) to one landmark on each campus, such as Foellinger Auditorium at Illinois. It is not travel time.</li>
+      <li><b>Size</b> is the median finished living area of the homes within budget. Living areas under 100 square feet are treated as missing.</li>
+      <li><b>Days on market</b> runs from the listing date to the contract date. Sales missing either date are left out of that figure, never counted as zero, and the share missing is shown.</li>
+      <li><b>All home types are included,</b> because the data's <code>home_type</code> column is unreliable.</li>
+      <li><b>Repeated addresses are kept.</b> Condo units can share a street address, so no sale is removed because its address repeats.</li>
+      <li><b>Small groups:</b> a size or speed figure based on fewer than 20 sales is not shown.</li>
+      <li>The site computes every figure in your browser from <code>data/sales.json</code>, which <code>scripts/build_data.py</code> makes from the full dataset.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Data: College-town home sales dataset, version 1.0 (2026). University of Illinois-Deloitte Foundation Center for Business Emerging Technologies. Data collected March 2026.</p>
+    <p>Reference site for the Campus Comps case, built with an AI coding agent. Plain HTML, CSS and JavaScript, published with GitHub Pages.</p>
+  </footer>
+</main>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
