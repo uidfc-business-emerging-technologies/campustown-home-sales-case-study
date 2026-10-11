@@ -1,6 +1,6 @@
 # Agent log
 
-This log records how this sample site was actually built with an AI coding agent, as a model of the log the case asks students to keep.
+This log records how this site was actually built with an AI coding agent, as a model of the log the case asks students to keep.
 
 ## 2026-10-09: Load and check the data
 
@@ -40,3 +40,43 @@ This log records how this sample site was actually built with an AI coding agent
 
 - **Asked:** "Recompute three headline numbers with SQL in DuckDB, directly from the Parquet file, without using `build_data.py`."
 - **Result:** all three match. See "How we checked our numbers" in the README.
+
+## 2026-10-11: Follow the setup guide's layout, and check the script against a second one
+
+- **Asked:** "Keep the data the way the setup guide says: the CSV in `data/` and the description sheet in `docs/`. Make `scripts/build_data.py` read the CSV, with ZIP, FIPS and parcel numbers as text."
+- **Agent produced:** the updated script, with every rule as a named constant at the top.
+- **Checked:** its `data/answers.json` is identical, value for value, to a second calculation written separately.
+
+## 2026-10-11: Question 4 now uses a listing window
+
+- **Asked:** "The case now limits Question 4 to homes listed from April 1, 2023 through March 31, 2025. Update the answer."
+- **Agent produced:** the new figures. April and May are now the fastest months (6 days) and December the slowest (21), where the all-years version had a three-way tie at 7 days and December at 25.
+- **Checked:** why the window matters. Homes listed in 2021 and 2022 appear in the data only if they sold after March 2023, so their median days on market runs from about 90 to 473 days, and they pulled the late-year months up.
+
+## 2026-10-11: Numbers typed into the page (we broke our own rule)
+
+- **Caught:** our first instruction said "Don't type any numbers into the page by hand", but the answer paragraphs, key figures and data notes all had numbers typed into `index.html`. Several were now wrong after the Question 4 change.
+- **Asked:** "Fill in every number in the text from `data/answers.json`, and work out the names (fastest areas, the exception in Question 3) from the data too."
+- **Result:** no number in `index.html` is typed by hand. If a figure changes, the sentence changes with it.
+
+## 2026-10-11: Small groups in Question 6 (the agent missed the rule)
+
+- **Caught:** the Question 6 chart and table showed a median distance for areas with only 2 to 6 sales at repeated addresses. The case says a median from fewer than 20 sales must show "fewer than 20 sales".
+- **Fixed:** those cells now say "fewer than 20 sales", the chart shows only Penn State, Virginia and all areas together, and the counts are still shown, as the case asks.
+
+## 2026-10-11: What the repeated addresses are
+
+- **Asked:** "The description sheet says the 240 sales at repeated addresses are separate condo units. Check whether that holds in every area."
+- **Found:** it holds in State College, where each unit has its own parcel number and price. But in 87 of the 103 addresses, the two sales have prices within 1% and sale dates within 90 days, the build notes' own test for one sale recorded twice. 79 of those are around Virginia, mostly new homes, with one row from the listing and one from the county record.
+- **Decided:** count every sale, because the question defines the groups that way, but say what we found in the Question 6 answer and the data notes. This also explains why Virginia's repeated addresses look far from campus.
+
+## 2026-10-11: Rules for "falls" and "far from 1", and the sources
+
+- **Asked:** "The case now asks us to say what we count as falling (Question 3) and as far from 1 (Question 5). Put both rules in the data notes. Then check each Question 5 source."
+- **Checked:** the Michigan brochure and the California question-and-answer sheet we cited were secondary. We replaced them with the Michigan State Tax Commission's assessing guide, the California Board of Equalization's handbook, and the Pennsylvania Department of Revenue's list of common level ratio factors (Centre County 6.10, about one sixth of market value).
+
+## 2026-10-11: Final test
+
+- **Asked:** "Test again at 375 and 1280 pixels, light and dark, served from a subfolder, using only the keyboard for the charts. Then compare every table cell with the answer key."
+- **Found and fixed:** on a phone, a chart tooltip closed as soon as it opened, because moving keyboard focus to a mark scrolled the page and the scroll closed the tooltip. A tooltip opened by the keyboard now follows its mark instead.
+- **Result:** no console errors or sideways scrolling, and every table cell and every number in the text matches the answer key.

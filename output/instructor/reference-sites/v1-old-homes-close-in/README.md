@@ -14,7 +14,7 @@ A site for the Campus Comps case, Variation 1 (Open Brief).
 | `css/style.css` | Styles, with light and dark themes. The page uses the reader's system fonts. |
 | `js/charts.js` | Small SVG chart helpers written for this site (no libraries) |
 | `js/app.js` | Reads the data file and draws the findings, numbers, charts and table |
-| `data/age.json` | Every figure on the site, made by the script below (about 30 KB) |
+| `data/age.json` | Every figure on the site, made by the script below (about 18 KB) |
 | `data/college_town_home_sales.csv` | The full dataset (version 1.0), which the script reads |
 | `docs/data_description_sheet.md` | The dataset's description sheet |
 | `scripts/build_data.py` | Computes `data/age.json` from the full dataset |

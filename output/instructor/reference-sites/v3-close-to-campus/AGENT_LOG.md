@@ -1,6 +1,6 @@
 # Agent log
 
-This log records how this sample site was actually built with an AI coding agent, as a model of the log the case asks students to keep.
+This log records how this site was actually built with an AI coding agent, as a model of the log the case asks students to keep.
 
 ## 2026-10-09: Choose the question and the user
 
@@ -40,3 +40,27 @@ This log records how this sample site was actually built with an AI coding agent
 
 - **Asked:** "Recompute the three default headline numbers with SQL in DuckDB, without using the site's JavaScript."
 - **Result:** 636 of 685 (93%), 1,400 sq ft and 7 days all match. See the README.
+
+## 2026-10-11: Follow the setup guide's layout
+
+- **Asked:** "Keep the data the way the setup guide says: the CSV in `data/` and the description sheet in `docs/`. Make `scripts/build_data.py` read the CSV, with ZIP, FIPS and parcel numbers as text."
+- **Agent produced:** the updated script. It also sorts the sales by campus, distance and `listing_id`, so the file comes out the same every time.
+- **Checked:** the rebuilt `data/sales.json` has the same 12,254 sales, and the three default headline numbers are unchanged.
+
+## 2026-10-11: Numbers typed into the page
+
+- **Caught:** the introduction and the data notes had numbers typed in by hand: 12,254 sales, 19 left out, a lowest price of $100, and quarterly medians of "about $380,000 and $435,000". They would go stale the moment the data changed.
+- **Asked:** "Compute every number the notes quote in the script, and fill them in from `data/sales.json`."
+- **Result:** no number in `index.html` is typed by hand now. The quarterly range is exact: $379,900 to $435,000 across the 11 full calendar quarters.
+
+## 2026-10-11: Repeated addresses that look like one sale recorded twice
+
+- **Asked:** "Our notes say condo units that share an address are separate homes. Check that in our 12 months."
+- **Agent produced:** a count of pairs at one address with prices within 1% and sale dates within 90 days, the test the dataset's build notes use for one sale recorded twice. There are 24 such pairs, and 22 are new homes around Virginia. In 22 of the 24, one row has the listing dates and the other has the county's parcel number and assessed value.
+- **Decided:** they are under 0.4% of the sales we use and barely move any figure, so we keep them. But we no longer claim every repeated address is a separate home; the data notes now say what we found.
+
+## 2026-10-11: Fonts, and a final test
+
+- **Found:** the page loaded its two fonts from a font service, so it depended on another site staying up. We saved the fonts, with their licenses, in `fonts/`.
+- **Asked:** "Test again at 375 and 1280 pixels, light and dark, served from a subfolder. Try five combinations of campus, budget and distance, and compare the three headline numbers with a separate calculation from the full dataset."
+- **Result:** no console errors, no sideways scrolling, every control works, and all five settings match.
