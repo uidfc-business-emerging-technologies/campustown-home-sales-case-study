@@ -22,6 +22,8 @@ MONTHS = ["January", "February", "March", "April", "May", "June", "July",
           "August", "September", "October", "November", "December"]
 # Question 4 uses homes listed in this window, inclusive (see the report).
 LISTING_WINDOW = ("2023-04-01", "2025-03-31")
+# Question 3: the largest rise between neighboring bands that still counts as "falls overall".
+MAX_RISE = 0.05
 
 SHORT_NAMES = {
     "University of Wisconsin-Madison": "UW-Madison",
@@ -88,9 +90,9 @@ def q3_pattern(shown):
 
     - falls at every step: each reportable band is below the one before it
     - falls overall: the farthest reportable band is below the nearest, with a rise
-      of at most 5% between neighboring bands
+      of at most MAX_RISE between neighboring bands
     - does not fall: the farthest band is not below the nearest, or a step rises by
-      more than 5%
+      more than MAX_RISE
     """
     rows = []
     for university, values in shown.iterrows():
@@ -99,7 +101,7 @@ def q3_pattern(shown):
         max_rise = steps.max()
         if (steps < 0).all():
             pattern = "falls at every step"
-        elif series.iloc[-1] < series.iloc[0] and max_rise <= 0.05:
+        elif series.iloc[-1] < series.iloc[0] and max_rise <= MAX_RISE:
             pattern = "falls overall"
         else:
             pattern = "does not fall"
@@ -187,6 +189,7 @@ def shared_address_groups(df):
             "days between first and last sale": (dates.max() - dates.min()).days,
             "rows with a list or contract date": int((rows["list_date"].notna() | rows["contract_date"].notna()).sum()),
             "rows with an assessed value": int(rows["tax_assessed_value"].notna().sum()),
+            "newest year built": rows["year_built"].max(),
             "likely one sale recorded twice": likely_double,
         })
     return pd.DataFrame(groups)

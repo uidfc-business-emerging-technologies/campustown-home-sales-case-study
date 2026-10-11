@@ -4,19 +4,24 @@
 
 1. Checks the inputs (handoff section 4) and stops if any check fails.
 2. Reproduces Appendix A and stops if any figure differs.
-3. Writes the results to results/.
+3. Computes every Variation 2 figure and the common wrong answers.
+4. Writes the answer key workbook, its charts and the markdown source of the
+   Word answer key (build the .docx with output/source/word-documents/build.js).
+5. Writes the summary files the reference sites read.
 """
 
 import argparse
 import sys
 from pathlib import Path
 
+import answer_key
 import appendix_a
 from definitions import DEFAULT_DATA, REPO_ROOT, add_derived, load
 
 HERE = Path(__file__).resolve().parent
 RESULTS = HERE / "results"
 FORBIDDEN_FILES = {"raw_extract.csv", "raw_events.csv"}
+SITES = REPO_ROOT / "output" / "instructor" / "reference-sites"
 
 
 def input_checks(raw):
@@ -51,6 +56,10 @@ def main():
         print(failures.to_string(index=False))
         sys.exit(f"{len(failures)} Appendix A figure(s) differ. Stop and report to Park.")
     print(f"Appendix A reproduced: {len(results)} of {len(results)} figures match.")
+
+    answer_key.write_all(df, site_paths=[SITES / "v2-six-questions" / "data" / "answers.json"])
+    print(f"Wrote {answer_key.WORKBOOK.relative_to(REPO_ROOT)}, {answer_key.MARKDOWN.relative_to(REPO_ROOT)} "
+          f"and the Variation 2 site's answers.json.")
 
 
 if __name__ == "__main__":

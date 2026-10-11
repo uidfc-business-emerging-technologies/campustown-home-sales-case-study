@@ -130,11 +130,11 @@ function parseTable(rows) {
   // rest of the width goes to columns in proportion to the text they still need.
   const CHAR = 105; // twips per character at 10 pt, a little wider for code
   const PAD = 240;
-  const tokenWidth = (cellText) => Math.max(0, ...cellText.split(/\s+/).map((w) =>
-    w.replace(/\*\*|\[|\]\([^)]*\)/g, "").length * (w.includes("`") ? CHAR * 1.2 : CHAR)));
+  const tokenWidth = (cellText, bold) => Math.max(0, ...cellText.split(/\s+/).map((w) =>
+    w.replace(/\*\*|\[|\]\([^)]*\)/g, "").length * (w.includes("`") ? CHAR * 1.2 : bold ? CHAR * 1.15 : CHAR)));
   const textWidth = (cellText) => cellText.replace(/\*\*|`|\[|\]\([^)]*\)/g, "").length * CHAR;
   const columns = header.map((h, c) => [h, ...body.map((r) => r[c] || "")]);
-  const minW = columns.map((cells) => Math.max(...cells.map(tokenWidth)) + PAD);
+  const minW = columns.map((cells) => Math.max(...cells.map((cellText, r) => tokenWidth(cellText, r === 0))) + PAD);
   const wantW = columns.map((cells, c) => Math.max(minW[c], Math.min(Math.max(...cells.map(textWidth)) + PAD, TABLE_W)));
   let widths;
   const minTotal = minW.reduce((a, b) => a + b, 0);
