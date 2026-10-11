@@ -1,0 +1,4 @@
+# For the instructor notebook, in addition to requirements.txt
+-r requirements.txt
+notebook==7.6.3
+ipykernel==7.4.0

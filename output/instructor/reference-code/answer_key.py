@@ -11,6 +11,7 @@ Every number in these files comes from the functions below. None is typed by han
 
 import json
 import re
+import zipfile
 from datetime import datetime
 from pathlib import Path
 
@@ -766,6 +767,20 @@ def write_workbook(key):
     wb.properties.modified = FIXED_TIME
     WORKBOOK.parent.mkdir(parents=True, exist_ok=True)
     wb.save(WORKBOOK)
+    fix_zip_times(WORKBOOK)
+
+
+def fix_zip_times(path):
+    """Give every part of the .xlsx the same timestamp, so the file is identical on every run."""
+    with zipfile.ZipFile(path) as z:
+        parts = [(info.filename, z.read(info.filename)) for info in z.infolist()]
+    with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
+        for name, data in parts:
+            if name == "docProps/core.xml":  # openpyxl stamps the save time as "modified"
+                data = re.sub(rb"(<dcterms:modified[^>]*>)[^<]*", rb"\g<1>" + FIXED_TIME.strftime("%Y-%m-%dT%H:%M:%SZ").encode(), data)
+            info = zipfile.ZipInfo(name, date_time=FIXED_TIME.timetuple()[:6])
+            info.compress_type = zipfile.ZIP_DEFLATED
+            z.writestr(info, data)
 
 
 def plain(text):
