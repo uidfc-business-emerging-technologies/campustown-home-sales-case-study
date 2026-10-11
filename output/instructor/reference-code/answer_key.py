@@ -26,7 +26,7 @@ from openpyxl.utils import get_column_letter  # noqa: E402
 
 import variation2 as v2  # noqa: E402
 import wrong_answers  # noqa: E402
-from definitions import REPO_ROOT, half_up  # noqa: E402
+from definitions import ADDRESS_KEY, REPO_ROOT, half_up  # noqa: E402
 
 OUTPUT = REPO_ROOT / "output"
 WORKBOOK = OUTPUT / "instructor" / "Variation 2 Answer Key.xlsx"
@@ -389,35 +389,31 @@ def q6(df):
           total[miles[0]], total[miles[1]]]])
     big = by_area[by_area["sales at those addresses"] >= v2.MIN_GROUP]
     none = [SHORT[u] for u in by_area.index[by_area["sales at those addresses"] == 0]]
-    va, psu = "University of Virginia", "The Pennsylvania State University"
-    groups = v2.shared_address_groups(df)
-    doubles = groups[groups["likely one sale recorded twice"]]
-    va_doubles = doubles[doubles["university"] == va]
-    recent = int(df["sale_date"].min().year)
-    split = int(((doubles["rows with a list or contract date"] == 1) & (doubles["rows with an assessed value"] == 1)).sum())
+    psu = "The Pennsylvania State University"
+    few = by_area.drop(psu)
+    few = few[few["sales at those addresses"] > 0]
+    most = few["addresses with more than one sale"].max()
+    each = "one such address each" if most == 1 else f"{most} or fewer such addresses each"
     answer = [
         f"In all, {total['addresses with more than one sale']} addresses have more than one sale, covering "
-        f"{total['sales at those addresses']} sales. They are concentrated in two areas: {SHORT[va]} "
-        f"({by_area.loc[va, 'addresses with more than one sale']} addresses, {by_area.loc[va, 'sales at those addresses']} sales) "
-        f"and {SHORT[psu]} ({by_area.loc[psu, 'addresses with more than one sale']} addresses, "
-        f"{by_area.loc[psu, 'sales at those addresses']} sales). {join(none)} have none, and every other area has "
-        f"{by_area.drop([va, psu])['addresses with more than one sale'].max()} or fewer such addresses.",
+        f"{total['sales at those addresses']} sales. Almost all are around {SHORT[psu]} "
+        f"({by_area.loc[psu, 'addresses with more than one sale']} addresses, {by_area.loc[psu, 'sales at those addresses']} "
+        f"sales). {join(SHORT[u] for u in few.index)} have {each}, and {join(none)} have none.",
         f"Across all areas, those sales sit a median {fmt(total[miles[0]], 'miles')} miles from campus, against "
-        f"{fmt(total[miles[1]], 'miles')} for all other sales. That overall figure mixes two opposite patterns. Around "
-        f"{SHORT[psu]}, the repeated addresses are close to campus ({fmt(big.loc[psu, miles[0]], 'miles')} miles against "
-        f"{fmt(big.loc[psu, miles[1]], 'miles')}). Around {SHORT[va]}, they are farther out ({fmt(big.loc[va, miles[0]], 'miles')} "
-        f"against {fmt(big.loc[va, miles[1]], 'miles')}). The other areas have fewer than 20 such sales.",
+        f"{fmt(total[miles[1]], 'miles')} for all other sales. Within an area, only {join(SHORT[u] for u in big.index)} "
+        f"has 20 or more such sales. There they sit much closer to campus than other sales, "
+        f"{fmt(big.loc[psu, miles[0]], 'miles')} miles against {fmt(big.loc[psu, miles[1]], 'miles')}, which fits condo and "
+        f"apartment buildings near campus. The other areas have fewer than 20 such sales.",
     ]
+    shared = df[df["shared_address"]]
+    other = shared[shared["university"] != psu]
     instructor_note = (
-        f"**Instructor note: what the repeated addresses are.** The description sheet calls all {total['sales at those addresses']} "
-        f"rows separate condo or apartment units. That holds in State College. But {len(doubles)} of the "
-        f"{total['addresses with more than one sale']} addresses ({doubles['sales'].sum()} rows) meet the build notes' own test "
-        f"for one sale recorded twice: two rows, prices within 1% and sale dates within 90 days. Of these, {len(va_doubles)} "
-        f"are in {SHORT[va]}, and {int((va_doubles['newest year built'] >= recent).sum())} of those are homes built in "
-        f"{recent} or later. In {split} of the {len(doubles)} pairs, one row carries the listing dates and the other "
-        f"carries the county's parcel number and assessed value, so the build's parcel check missed them. Their coordinates "
-        f"differ too, which is why {SHORT[va]}'s repeated-address sales look far from campus. Do not mark down a student who "
-        f"spots this and explains it. The figures above follow the question's definition, which counts every row."
+        f"**Instructor note: what the repeated addresses are.** The {by_area.loc[psu, 'sales at those addresses']} sales "
+        f"around {SHORT[psu]} are condo and apartment units in {by_area.loc[psu, 'addresses with more than one sale']} "
+        f"buildings, each unit with its own parcel number. The other {len(other)} sales are pairs: two different sales, at "
+        f"different prices and about a year or more apart, at each of {other[ADDRESS_KEY].drop_duplicates().shape[0]} "
+        f"homes built in {join(sorted({str(int(y)) for y in other['year_built']})).replace(' and ', ' or ')}. The description sheet "
+        f"explains both. A student who says the repeated addresses are mostly condo buildings close to campus is right."
     )
     wa = wrong_answers.q6(df)
     totals = wa["Totals under each method"]
@@ -436,21 +432,20 @@ def q6(df):
         "sales in total, and each area's counts as in the table. Counts are always shown, even for small areas.",
         "Median miles: within 0.05 miles. In areas with fewer than 20 such sales, the median must show "
         "\"fewer than 20 sales\".",
-        "The question asks for the comparison across all areas and within each area, so full credit needs both, "
-        "and the observation that the two areas with enough sales point in opposite directions.",
+        "The question asks for the comparison across all areas and within each area, so full credit needs both: "
+        f"the overall comparison, {SHORT[psu]}'s comparison, and \"fewer than 20 sales\" for each other area that has "
+        "such sales.",
     ]
     shown_areas = by_area[by_area["sales at those addresses"] >= v2.MIN_GROUP]
     chart = chart_q6(by_area, "Bar chart of sales at repeated addresses by campus area. " + join(
-        [f"{SHORT[u]} ({r['sales at those addresses']})" for u, r in shown_areas.iterrows()]) + " hold almost all of them.")
+        [f"{SHORT[u]} ({int(r['sales at those addresses'])})" for u, r in shown_areas.iterrows()])
+        + (" holds" if len(shown_areas) == 1 else " hold") + " almost all of them.")
     site = {"rows": [{"campus": SHORT[u], "addresses": int(r["addresses with more than one sale"]),
                       "sales": int(r["sales at those addresses"]),
                       "median_miles_multi": None if r["sales at those addresses"] < v2.MIN_GROUP else half_up(r[miles[0]], 2),
                       "median_miles_other": half_up(r[miles[1]], 2)} for u, r in by_area.iterrows()],
             "total": {"addresses": int(total["addresses with more than one sale"]), "sales": int(total["sales at those addresses"]),
-                      "median_miles_multi": half_up(total[miles[0]], 2), "median_miles_other": half_up(total[miles[1]], 2)},
-            "likely_double_records": {"addresses": int(len(doubles)), "rows": int(doubles["sales"].sum()),
-                                      "same_price": int((doubles["distinct prices"] == 1).sum()),
-                                      "by_campus": {SHORT[u]: int(n) for u, n in doubles["university"].value_counts().sort_index().items()}}}
+                      "median_miles_multi": half_up(total[miles[0]], 2), "median_miles_other": half_up(total[miles[1]], 2)}}
     return dict(figures=[figures], chart=chart, answer=answer, note=instructor_note, wrong=wrong, tolerance=tolerance, site=site)
 
 

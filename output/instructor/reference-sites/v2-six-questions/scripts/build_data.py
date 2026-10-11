@@ -62,7 +62,7 @@ def load():
         df[c] = pd.to_numeric(df[c])
     for c in ["list_date", "contract_date", "sale_date"]:
         df[c] = pd.to_datetime(df[c], format="%Y-%m-%d")
-    assert len(df) == 35_529 and df["listing_id"].is_unique
+    assert len(df) == 35_442 and df["listing_id"].is_unique
     df["valid"] = df["sale_price"] >= MIN_PRICE
     df["pps"] = (df["sale_price"] / df["living_area_sqft"]).where(df["valid"] & (df["living_area_sqft"] >= MIN_SQFT))
     df["dom"] = (df["contract_date"] - df["list_date"]).dt.days
@@ -157,17 +157,6 @@ def build():
     q6["total"] = {"addresses": int(multi.groupby(ADDRESS).ngroups), "sales": len(multi),
                    "median_miles_multi": rnd(multi["miles_to_campus"].median(), 2),
                    "median_miles_other": rnd(other["miles_to_campus"].median(), 2)}
-    # Pairs at one address with prices within 1% and sale dates within 90 days: the build notes'
-    # own test for one sale recorded twice (see "Repeated addresses" in the data notes).
-    doubles = []
-    for _, g in multi.groupby(ADDRESS):
-        p, t = g["sale_price"], g["sale_date"]
-        if len(g) == 2 and p.max() - p.min() <= 0.01 * p.max() and (t.max() - t.min()).days <= 90:
-            doubles.append((g["university"].iloc[0], p.nunique() == 1))
-    q6["likely_double_records"] = {
-        "addresses": len(doubles), "rows": 2 * len(doubles), "same_price": sum(bool(same) for _, same in doubles),
-        "by_campus": {SHORT[u]: n for u in areas if (n := sum(x == u for x, _ in doubles))},
-    }
 
     return {
         "source": "College-town home sales dataset, version 1.0",

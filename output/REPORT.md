@@ -6,25 +6,27 @@ Date: October 11, 2026. This report covers the work in `HANDOFF.md`, sections 1 
 
 **What was built:**
 
-- **Student materials, revised after a pilot of each variation.** The three case documents and the setup guide are rebuilt from an updated `content.js`. Section 4 lists every change and its reason. The students' copy of the data description sheet drops only "Suggested starting questions", in markdown and Word. The dataset is copied unchanged.
-- **Reference code.** One command (`python run_all.py`) checks the inputs, reproduces all 82 Appendix A figures, and computes every Variation 2 figure and the common wrong answers. It also writes the answer key workbook and charts, fills in the orientation's figures, and writes each reference site's data file. It runs offline, and a clean environment produces byte-identical output. A notebook recomputes a student's number under the student's own definitions, with three worked examples.
+- **A corrected dataset, still version 1.0.** At your request, the 87 sales the source recorded twice under two parcel numbers are now one row each, in all five formats, with the description sheet, build notes, README and reference figures corrected to match (section 6). The package is in `output/dataset/college-town-dataset/` and replaces the one in `inputs/`.
+- **Student materials, revised after a pilot of each variation.** The three case documents and the setup guide are rebuilt from an updated `content.js`. Section 4 lists every change and its reason. The students' copy of the data description sheet drops only "Suggested starting questions", in markdown and Word. The students' data is the corrected dataset.
+- **Reference code.** One command (`python run_all.py`) checks the inputs, reproduces all 82 Appendix A figures as the corrected documents give them, and computes every Variation 2 figure and the common wrong answers. It also writes the answer key workbook and charts, fills in the orientation's figures, and writes each reference site's data file. It runs offline, and a clean environment produces byte-identical output. A notebook recomputes a student's number under the student's own definitions, with three worked examples.
 - **Variation 2 answer key,** in Word and a matching Excel workbook. It covers the figures, a chart, a model answer, the common wrong answers with the figures they produce, and a tolerance for each question.
 - **Instructor orientation** (section 9.1) and the **post-assignment survey** (Appendix B).
 - **Three reference sites,** one per variation, each with a model README and agent log. Each was tested at 375 and 1280 pixels, in light and dark, served from a subfolder. Every number they show was checked against the reference code.
 
 **Two findings you should know about first:**
 
-1. **Many repeated addresses are one sale recorded twice, not separate condo units.** The description sheet says the 240 sales at 103 repeated addresses are condo or apartment units. That holds in State College. But 87 of the 103 addresses (174 rows) meet the build notes' own test for a duplicate: two rows, prices within 1% and sale dates within 90 days. 79 of them are around Virginia, mostly new homes. In most pairs, one row came from the listing and the other from the county record, with a different parcel number, so the build's parcel check missed them. The Variation 2 pilot found this on its own. I did not change the data. Section 6 sets out the options.
+1. **Most repeated addresses were one sale recorded twice, not separate condo units. The data is now fixed.** The description sheet said the 240 sales at 103 repeated addresses were condo or apartment units. That held in State College. But 87 of the 103 addresses (174 rows) met the build notes' own test for a duplicate: two rows, prices within 1% and sale dates within 90 days. 79 of them were in Charlottesville. In most pairs, one row came from the listing and the other from the county record, with a different parcel number, so the build's parcel check missed them. The Variation 2 pilot found this on its own. As you asked, I removed one row of each pair and kept version 1.0: the dataset now has 35,442 rows, and 66 rows at 16 addresses share an address. 20 of the 82 Appendix A figures change (section 6). The pilots ran on the original 35,529-row file.
 2. **Question 4 needed a listing window.** Listings from 2021 and 2022 appear only if they sold after March 2023, so their median days on market runs from about 90 to 473 days. Listings from late 2025 are cut off before slow sales close. Question 4 now covers homes listed from April 1, 2023 through March 31, 2025. That window covers each calendar month exactly twice.
 
 **What you need to do next:**
 
-1. Decide the open decisions in section 6, starting with the repeated addresses.
-2. Replace "[Author name]" in `source/case-documents/content.js` and `source/word-documents/build.js`, then rebuild (`output/README.md` gives the commands).
-3. Confirm the license (CC BY-NC-SA 4.0).
-4. Review the student document changes in section 4.
-5. Merge the pull request, then publish with GitHub Pages ("Deploy from a branch", main, root). Each site will be at `https://OWNER.github.io/REPOSITORY/output/instructor/reference-sites/FOLDER/`. No file in the repository uses Liquid template syntax, so the default GitHub Pages build will not fail on it.
-6. Open one reference site in a real browser on a phone. The tests used a headless browser at phone width, not a phone.
+1. Rebuild the dataset from the raw files with the updated `build/build_dataset.py` and confirm it writes the same 35,442 rows (section 6). The raw files are not in the package, so I applied the same rule to the published CSV instead. The rebuild also prints the reasons behind each blank date, which the corrected documents can then give exactly.
+2. Publish `output/dataset/college-town-dataset/` in place of the original package, and decide the open decisions in section 7.
+3. Replace "[Author name]" in `source/case-documents/content.js` and `source/word-documents/build.js`, then rebuild (`output/README.md` gives the commands).
+4. Confirm the license (CC BY-NC-SA 4.0).
+5. Review the student document changes in section 4.
+6. Merge the pull request, then publish with GitHub Pages ("Deploy from a branch", main, root). Each site will be at `https://OWNER.github.io/REPOSITORY/output/instructor/reference-sites/FOLDER/`. No file in the repository uses Liquid template syntax, so the default GitHub Pages build will not fail on it.
+7. Open one reference site in a real browser on a phone. The tests used a headless browser at phone width, not a phone.
 
 ## 2. Contents
 
@@ -32,6 +34,24 @@ Date: October 11, 2026. This report covers the work in `HANDOFF.md`, sections 1 
 
 - `README.md`: What is in the package, and how to rebuild every generated file
 - `REPORT.md`: This report
+- `dataset/college-town-dataset/README.md`: The dataset package's README, with the corrected figures
+- `dataset/college-town-dataset/build/build_dataset.py`: The dataset build, with the new two-parcel step (section 6)
+- `dataset/college-town-dataset/build/drop_double_records.py`: Applies the two-parcel step to the published CSV and rewrites the five files (section 6)
+- `dataset/college-town-dataset/build/extract_query.sql`: The two source queries, unchanged
+- `dataset/college-town-dataset/build/make_parquet.py`: CSV to Parquet and DuckDB, checked value by value, unchanged
+- `dataset/college-town-dataset/build/reference_figures.py`: Writes the reference figures and the campus map, unchanged
+- `dataset/college-town-dataset/build/removed_double_records.csv`: The 87 removed rows, each beside the row kept for the same sale
+- `dataset/college-town-dataset/data/college_town_home_sales.csv`: The corrected dataset, version 1.0
+- `dataset/college-town-dataset/data/college_town_home_sales.duckdb`: The corrected dataset, version 1.0
+- `dataset/college-town-dataset/data/college_town_home_sales.parquet`: The corrected dataset, version 1.0
+- `dataset/college-town-dataset/data/college_town_home_sales.sqlite`: The corrected dataset, version 1.0
+- `dataset/college-town-dataset/data/college_town_home_sales.xlsx`: The corrected dataset, version 1.0
+- `dataset/college-town-dataset/docs/city_campus_map.csv`: Which cities fall under which campus, regenerated from the corrected data
+- `dataset/college-town-dataset/docs/city_campus_map.md`: Which cities fall under which campus, regenerated from the corrected data
+- `dataset/college-town-dataset/docs/data_description_sheet.md`: The description sheet, corrected
+- `dataset/college-town-dataset/docs/dataset_build_notes.md`: The build notes, with the new step and the corrected counts
+- `dataset/college-town-dataset/docs/reference_figures.md`: Instructor reference figures, regenerated from the corrected data
+- `dataset/college-town-dataset/docs/reference_figures_by_city.csv`: Instructor reference figures, regenerated from the corrected data
 - `instructor/Instructor Orientation.docx`: Instructor orientation (section 9.1)
 - `instructor/Post-Assignment Survey.docx`: Post-assignment survey (Appendix B), the same for every variation
 - `instructor/Variation 2 Answer Key.docx`: Variation 2 answer key: figures, charts, model answers, common wrong answers, tolerances
@@ -41,7 +61,7 @@ Date: October 11, 2026. This report covers the work in `HANDOFF.md`, sections 1 
 - `instructor/reference-code/answer_key.py`: Writes the answer key workbook, charts, key markdown and the V2 site's answers.json
 - `instructor/reference-code/appendix_a.py`: The Appendix A figures and the check
 - `instructor/reference-code/definitions.py`: Loads the data with consistent types; shared rules and rounding
-- `instructor/reference-code/orientation.py`: Computes the 43 data figures in the orientation and fills them in
+- `instructor/reference-code/orientation.py`: Computes the data figures in the orientation and fills them in
 - `instructor/reference-code/recompute_student_number.ipynb`: Notebook: recompute a student's number under the student's own definitions (three worked examples)
 - `instructor/reference-code/requirements-notebook.txt`: Pinned packages for the notebook
 - `instructor/reference-code/requirements.txt`: Pinned packages for run_all.py
@@ -128,27 +148,27 @@ Date: October 11, 2026. This report covers the work in `HANDOFF.md`, sections 1 
 - `students/Case Document - Variation 3 (General Instructions).docx`: Case document, Variation 3: General Instructions
 - `students/Data Description Sheet.docx`: Students' copy of the description sheet, Word
 - `students/Setup Guide - GitHub Pages.docx`: Setup guide, shared by all variations
-- `students/data/college_town_home_sales.csv`: Dataset version 1.0, unchanged
-- `students/data/college_town_home_sales.duckdb`: Dataset version 1.0, unchanged
-- `students/data/college_town_home_sales.parquet`: Dataset version 1.0, unchanged
-- `students/data/college_town_home_sales.sqlite`: Dataset version 1.0, unchanged
-- `students/data/college_town_home_sales.xlsx`: Dataset version 1.0, unchanged
+- `students/data/college_town_home_sales.csv`: The corrected dataset, version 1.0, the same files as in `dataset/`
+- `students/data/college_town_home_sales.duckdb`: The corrected dataset, version 1.0, the same files as in `dataset/`
+- `students/data/college_town_home_sales.parquet`: The corrected dataset, version 1.0, the same files as in `dataset/`
+- `students/data/college_town_home_sales.sqlite`: The corrected dataset, version 1.0, the same files as in `dataset/`
+- `students/data/college_town_home_sales.xlsx`: The corrected dataset, version 1.0, the same files as in `dataset/`
 - `students/data_description_sheet.md`: Students' copy of the description sheet, markdown ("Suggested starting questions" removed)
 
 ## 3. Verification
 
 | # | Acceptance check (section 13) | Result | Evidence |
 |---|---|---|---|
-| 1 | The code reproduces every figure in Appendix A exactly | Pass | 82 of 82 figures match (`instructor/reference-code/results/appendix_a_check.csv`). Two medians fall on a half (Iowa days on market 23.5, UNC miles 3.75), and the code rounds half up, as the published tables do. |
+| 1 | The code reproduces every figure in Appendix A exactly | Pass | 82 of 82 figures match (`instructor/reference-code/results/appendix_a_check.csv`), taken from the corrected description sheet and `reference_figures.md`. 20 of them differ from the handoff's Appendix A, which predates the correction (section 6). One median falls on a half (Iowa days on market, 23.5), and the code rounds half up, as the published tables do. |
 | 2 | The three case documents differ only in the variation label and "Your task" | Pass | Outside "Your task" and the label, the three documents' 108 paragraphs are identical. The diff is below. |
-| 3 | No student file contains answers | Pass | All 206 distinctive answer-key values were searched for in the 6 student text files. There are no matches in the case documents or the setup guide. The description sheet, which is unchanged apart from the removed section, already prints 20 of them (details below). |
+| 3 | No student file contains answers | Pass | All 203 distinctive answer-key values were searched for in the 6 student text files. There are no matches in the case documents or the setup guide. The description sheet, which matches the dataset package's apart from the removed section, already prints 19 of them (details below). |
 | 4 | No document mentions peer review or auditing other students' work | Pass | A search of every document and text file in `output/` for "peer", "audit" and "review each other" found nothing (file counts in the evidence below). |
 | 5 | No document names a specific AI coding agent product or an agent-specific file name | Pass | The same files were searched for 21 product and file names. |
 | 6 | Every .docx opens, is editable, has the funding line, and has no comments, tracked changes or hidden text | Pass | All 8 Word files: funding line in the footer; no comments, tracked changes, hidden text or editing protection; blank author. All 8 open in LibreOffice (page counts below). |
 | 7 | No document contains an em dash or an en dash | Pass | None in any Word file or text file in `output/`. |
 | 8 | Every number in an instructor document traces to the code's output | Pass | Listed below. |
-| 9 | The reference code runs from a clean environment with one command | Pass | In a new virtual environment, `pip install -r requirements.txt` then `python run_all.py` ran in about 28 seconds. Its output was byte-identical to the working copy: the workbook, the charts, the key, the orientation figures and all three site data files. |
-| 10 | Each reference site works from a subfolder, with no console errors at 375 and 1280 px, working controls, and numbers that match | Pass | 12 of 12 browser runs pass (3 sites, 2 widths, light and dark). 492 displayed values match the reference code, with none differing. Screenshots: `output/report-screenshots/`. |
+| 9 | The reference code runs from a clean environment with one command | Pass | In a new virtual environment, `pip install -r requirements.txt` then `python run_all.py` ran in under 30 seconds. Its output was byte-identical to the working copy: the workbook, the charts, the key, the orientation figures and all three site data files. |
+| 10 | Each reference site works from a subfolder, with no console errors at 375 and 1280 px, working controls, and numbers that match | Pass | 12 of 12 browser runs pass (3 sites, 2 widths, light and dark). 483 displayed values match the reference code, with none differing. Screenshots: `output/report-screenshots/`. |
 
 The check scripts are `instructor/reference-code/acceptance_checks.py` (checks 2 to 7), `run_all.py` (1 and 9), and `site_tests/check_sites.js` with `site_tests/check_numbers.py` (10).
 
@@ -167,14 +187,14 @@ Every .docx opens cleanly: funding line, no comments, tracked changes, hidden te
 The case documents differ only in the variation label and "Your task" (diff: results/case_document_diff.txt)
   pass  outside "Your task" and the label, the three case documents are identical (108 paragraphs)
 No student file contains answers
-  pass  searched 6 student files for 206 answer-key values
+  pass  searched 6 student files for 203 answer-key values
         Case documents and setup guide: 0 matches.
-        Description sheet (both copies, unchanged from the dataset package): 20 matches: $342,000, $370,000, $430,000, $571,000, $625,000, $888,500, 1,351, 1,909, 103, 2,816, 2,854, 240, 3,018, 3,022, 3,664, 3.4, 4,616, 5,630, 5,707, 942
-        Each of these is a figure the dataset's own description sheet already prints (city medians that equal single-city campus areas, and the 240 sales at 103 addresses).
+        Description sheet (both copies, as in the dataset package): 19 matches: $342,000, $370,000, $430,000, $571,000, $615,000, $889,000, 1,351, 1,909, 127, 2,775, 2,814, 3,016, 3,021, 3,664, 3.4, 4,616, 5,629, 5,706, 941
+        Each of these is a figure the dataset's own description sheet already prints (rows per campus area, city medians that equal single-city campus areas, the median distance and the zero-area count).
 Words and characters that must not appear
-  pass  no peer review or auditing in 68 documents and text files
-  pass  no agent product or agent-specific file name in 68 documents and text files
-  pass  no em or en dash in 68 documents and text files
+  pass  no peer review or auditing in 78 documents and text files
+  pass  no agent product or agent-specific file name in 78 documents and text files
+  pass  no em or en dash in 78 documents and text files
 ```
 
 **The Word files open** (LibreOffice, converted to PDF): Case Document - Variation 1 (Open Brief) (5 pages); Case Document - Variation 2 (Specific Questions) (6 pages); Case Document - Variation 3 (General Instructions) (5 pages); Data Description Sheet (8 pages); Instructor Orientation (9 pages); Post-Assignment Survey (2 pages); Setup Guide - GitHub Pages (5 pages); Variation 2 Answer Key (20 pages).
@@ -275,8 +295,8 @@ pass  v3-close-to-campus  375px  light  (9 control checks)
 pass  v3-close-to-campus  375px  dark  (9 control checks)
 pass  v3-close-to-campus  1280px  light  (9 control checks)
 pass  v3-close-to-campus  1280px  dark  (9 control checks)
-pass  v1-old-homes-close-in table and figures against the reference summary: 83 values checked, 0 differ
-pass  v2-six-questions tables and text against the answer key: 384 values checked, 0 differ
+pass  v1-old-homes-close-in table and figures against the reference summary: 81 values checked, 0 differ
+pass  v2-six-questions tables and text against the answer key: 377 values checked, 0 differ
 pass  v3-close-to-campus headline numbers at five settings, recomputed from the dataset: 25 values checked, 0 differ
 ```
 
@@ -285,14 +305,14 @@ The V3 test saves the three headline numbers at five settings of campus, budget 
 **Where each number in the instructor documents comes from:**
 
 - **Variation 2 answer key (Word and Excel):** every figure is written by `answer_key.py`, from the functions in `variation2.py` and `wrong_answers.py`. That includes the figures in the model answers and the chart descriptions. The only numbers not from the data are the four web facts in Question 5 (section 7 below) and the tolerances, which are marking rules.
-- **Instructor orientation:** the text is a template, and `orientation.py` fills in each data figure. All 43 figures, as filled in (`results/orientation_figures.json`):
+- **Instructor orientation:** the text is a template, and `orientation.py` fills in each data figure. All 39 figures, as filled in (`results/orientation_figures.json`):
 
-  - `rows`: 35,529
+  - `rows`: 35,442
   - `campuses`: 11
   - `cities`: 18
   - `states`: 11
-  - `dom_rows`: 28,043
-  - `dom_share`: 78.9%
+  - `dom_rows`: 28,042
+  - `dom_share`: 79.1%
   - `dom_missing_share`: 21%
   - `dom`: 11
   - `dom_mean`: 33.9
@@ -302,27 +322,23 @@ The V3 test saves the three headline numbers at five settings of campus, budget 
   - `dom_area_max`: 27
   - `mich_dom`: 7
   - `mich_dom_to_close`: 39
-  - `shared_rows`: 240
-  - `shared_addresses`: 103
-  - `dedup_loss`: 137
+  - `shared_rows`: 66
+  - `shared_addresses`: 16
+  - `dedup_loss`: 50
   - `after_dedup`: 35,392
-  - `street_rows`: 312
-  - `double_addresses`: 87
-  - `double_rows`: 174
-  - `double_va`: 79
-  - `real_addresses`: 16
-  - `real_rows`: 66
+  - `street_rows`: 138
+  - `psu_rows`: 60
   - `psu_addresses`: 13
-  - `va_price`: $625,000
-  - `va_price_one_copy`: $615,000
+  - `other_shared_rows`: 6
+  - `other_shared_addresses`: 3
   - `price_under_1000`: 4
   - `price_zero`: 1
   - `price_under_10000`: 40
   - `price_over_5m`: 31
   - `max_price`: $81,510,000
   - `median_price`: $410,000
-  - `mean_price`: $510,289
-  - `single_family`: 35,350
+  - `mean_price`: $509,438
+  - `single_family`: 35,263
   - `zero_sqft`: 127
   - `ga_pps`: $196.82
   - `ga_pps_blank_zero`: $209.30
@@ -333,9 +349,9 @@ The V3 test saves the three headline numbers at five settings of campus, budget 
 
   The orientation's other numbers are not data figures: class time (20 minutes), team size (2 to 3), the schedule days, the rubric points, and a suggested Accuracy scale.
 - **Post-assignment survey:** no data figures.
-- **Reference code README:** 35,529 rows, 34 columns and 82 figures, as `run_all.py` prints them.
+- **Reference code README:** 35,442 rows, 34 columns and 82 figures, as `run_all.py` prints them.
 - **Reference site READMEs:** each number is the site's own figure, confirmed by the DuckDB query beside it. All ten queries were re-run against the CSV and returned the values shown.
-- **Notebook:** its outputs are computed when it runs. The three worked examples reproduce the pilots' numbers: $248.42 against $207.88 (19.5%), 11 days from 28,029 sales, and 39 against 7 days.
+- **Notebook:** its outputs are computed when it runs. The three worked examples are the pilots' numbers recomputed on the corrected data: $248.39 against $207.64 (19.6%; the pilot had 19.5%), 11 days from 28,028 sales (28,029), and 39 against 7 days (unchanged).
 
 ## 4. Changes to the student documents
 
@@ -345,9 +361,9 @@ All changes are in `source/case-documents/content.js`, rebuilt with `build.js`. 
 
 | # | Where | Change | Reason |
 |---|---|---|---|
-| 1 | The data | "the CSV file (8.6 MB)" became "(about 9 MB)" | The file is 9,056,275 bytes: 8.6 MiB but 9.1 MB. All three pilots flagged the mixed units, since the setup guide puts the figure beside a limit given in MiB. |
+| 1 | The data | "the CSV file (8.6 MB)" became "(about 9 MB)" | The corrected file is 9,036,239 bytes: 8.6 MiB but 9.0 MB. All three pilots flagged the mixed units, since the setup guide puts the figure beside a limit given in MiB. |
 | 2 | The data | Names the sheet's section: five problems "under \"Five things that will bite you\"" | V3 pilot. The setup guide sends students to that heading, but the case document never used it. |
-| 3 | The data, problem 2 | "Street addresses repeat because condo and apartment units share an address. Never remove duplicates by address." became "Street addresses repeat. Condo and apartment units can share an address, so never remove a sale just because its address repeats." | The old sentence is wrong for most repeated addresses (finding 1). The instruction itself is unchanged. |
+| 3 | The data; Getting started | "35,529 completed home sales" and "the number of rows (35,529)" became 35,442 | The corrected dataset (section 6) |
 | 4 | Build and publish requirements | The summary-file rule now says to commit "the data file it reads" too, and that "A script that prepares data files is fine; the site itself must run without a build step." | V1 and V3 asked whether the full CSV must stay once the site reads a summary file. V2 asked how "no build step" fits with a summary script. |
 | 5 | What to submit, README | Each checked number needs "a calculation that confirms it and is separate from the site's own code" | V1 was unsure whether "separate" meant a different tool. |
 | 6 | What to submit, reflection | Adds "Submit it to your instructor; it does not go in your repository." | All three pilots were unsure, and the repository is public. |
@@ -358,24 +374,29 @@ All changes are in `source/case-documents/content.js`, rebuilt with `build.js`. 
 |---|---|---|---|
 | 7 | Step 7 and the "Speed" tip | "8.6 MB" became "about 9 MB" | As change 1 |
 | 8 | Step 5, the project instructions box | One rule per line | V2 pilot: the box broke sentences mid-line, so pasting it gave broken sentences |
+| 9 | Step 6 and the "Maps" tip | "35,529 rows" and "all 35,529 points" became 35,442 | As change 3 |
 
 **Variation 2, "Your task":**
 
 | # | Where | Change | Reason |
 |---|---|---|---|
-| 9 | Question 4 | Adds "Use only homes listed from April 1, 2023 through March 31, 2025, so that each calendar month covers exactly two years. Group them by the month of `list_date`." | Section 7 check (finding 2). December's median is 25 days with all years and 21 in the window. The fastest months become a clean tie (April and May, 6 days) instead of a three-way tie at 7. |
-| 10 | Introduction | Adds "Write the answers for a general reader, such as someone thinking about moving to one of these towns." | V2 pilot: the rubric scores fit to an audience, but Variation 2 named none |
-| 11 | Definitions | Adds "They take the place of the rules that \"The data\" section asks you to choose." | V2 pilot saw a conflict with "choose a rule for which sales to include" |
-| 12 | Valid sale | Adds "Use only valid sales for figures that involve `sale_price` (Questions 1, 3 and 5). The other questions use every sale." | V2 pilot applied the rule to every question, which changed its Question 2 denominators |
-| 13 | Small groups | Now "if a median or a share is based on fewer than 20 sales, show \"fewer than 20 sales\" in place of it. Always show counts of sales and addresses." | V2 pilot was unsure whether the rule applied to counts in Question 6 |
-| 14 | Question 3 | Adds "Say what you count as falling," | Undefined: common rules give 5, 8 or 10 of 11 areas. The key now gives all three and marks against the student's stated rule. |
-| 15 | Question 4 | "Across all areas, pooled together," | V2 pilot was unsure whether to pool areas or take a median of area medians |
-| 16 | Question 5 | Adds "(say what you count as far)" and "Cite a source for any explanation." | The threshold was undefined. The pilot explained the gap from general knowledge, without sources. |
-| 17 | Question 6 | Adds "across all areas and within each area" | V2 pilot was unsure. The overall figure hides opposite patterns in the two areas with enough such sales. |
+| 10 | Question 4 | Adds "Use only homes listed from April 1, 2023 through March 31, 2025, so that each calendar month covers exactly two years. Group them by the month of `list_date`." | Section 7 check (finding 2). December's median is 25 days with all years and 21 in the window. The fastest months become a clean tie (April and May, 6 days) instead of a three-way tie at 7. |
+| 11 | Introduction | Adds "Write the answers for a general reader, such as someone thinking about moving to one of these towns." | V2 pilot: the rubric scores fit to an audience, but Variation 2 named none |
+| 12 | Definitions | Adds "They take the place of the rules that \"The data\" section asks you to choose." | V2 pilot saw a conflict with "choose a rule for which sales to include" |
+| 13 | Valid sale | Adds "Use only valid sales for figures that involve `sale_price` (Questions 1, 3 and 5). The other questions use every sale." | V2 pilot applied the rule to every question, which changed its Question 2 denominators |
+| 14 | Small groups | Now "if a median or a share is based on fewer than 20 sales, show \"fewer than 20 sales\" in place of it. Always show counts of sales and addresses." | V2 pilot was unsure whether the rule applied to counts in Question 6 |
+| 15 | Question 3 | Adds "Say what you count as falling," | Undefined: common rules give 5, 8 or 10 of 11 areas. The key now gives all three and marks against the student's stated rule. |
+| 16 | Question 4 | "Across all areas, pooled together," | V2 pilot was unsure whether to pool areas or take a median of area medians |
+| 17 | Question 5 | Adds "(say what you count as far)" and "Cite a source for any explanation." | The threshold was undefined. The pilot explained the gap from general knowledge, without sources. |
+| 18 | Question 6 | Adds "across all areas and within each area" | V2 pilot was unsure which comparison was wanted. On the original file, the overall figure hid opposite patterns in Penn State and Virginia. On the corrected file, only Penn State has 20 or more such sales, so most areas must show "fewer than 20 sales". |
+
+The first version of this package also changed problem 2 under "The data" ("Street addresses repeat. Condo and apartment units can share an address..."), because the original sentence was wrong for most repeated addresses. With the data corrected, the original sentence is right again, so it is restored: "Street addresses repeat because condo and apartment units share an address. Never remove duplicates by address."
 
 Student documents cite only figures already in the data description sheet. The added items are definitions (the Question 4 window dates) or a file size ("about 9 MB", which replaced the old "8.6 MB").
 
 ## 5. Pilot findings
+
+The pilots ran before the dataset correction, on the original 35,529-row file. Their numbers below are as they computed them.
 
 Each pilot was a fresh agent session given only that variation's student files (the case document, the setup guide, the students' copy of the description sheet and the data) and the instruction "You are a student. Complete this assignment." Each worked in a local git repository, previewed its site with a local web server, and kept notes on every guess and misreading. None had access to the handoff, the reference code or the other pilots.
 
@@ -396,19 +417,61 @@ Each pilot was a fresh agent session given only that variation's student files (
 - **Variation 2:** which questions use valid sales; whether the small-group rule covers counts; what "falls" and "far from 1" mean; pooling in Question 4; across or within areas in Question 6; the missing audience; the box's line breaks.
 - **Left open on purpose:** which prices to keep (both open-ended pilots chose $10,000 to $5,000,000), the smallest believable living area (300 and 200 sq ft), what "near campus" means, the time window, and whether headline numbers should change with the controls. The orientation tells instructors to expect these questions.
 
-**What they misread:** The Variation 2 pilot applied the valid-sale rule to every question, so its Question 2 counts used 35,525 sales instead of 35,529. Its figures still fell within the key's tolerance, and change 12 removes the ambiguity. No other misreading of the case documents was found.
+**What they misread:** The Variation 2 pilot applied the valid-sale rule to every question, so its Question 2 counts used 35,525 sales instead of 35,529 (on the original file). Its figures still fell within the key's tolerance, and change 13 removes the ambiguity. No other misreading of the case documents was found.
 
-**What they found wrong in the description sheet** (left unchanged, as instructed; see section 6):
+**What they found wrong in the description sheet:**
 
-- Its SQL examples compute means (`AVG(julianday(contract_date) - julianday(list_date))`, `AVG(sale_price)`), while its warnings, and Variation 2, call for medians.
-- It says "Full details are in the build notes", but students do not get the build notes.
-- The Variation 2 pilot independently found the repeated-address double records.
+- Its SQL examples compute means (`AVG(julianday(contract_date) - julianday(list_date))`, `AVG(sale_price)`), while its warnings, and Variation 2, call for medians. Left unchanged, as the handoff instructs (section 7).
+- It says "Full details are in the build notes", but students do not get the build notes. Left unchanged (section 7).
+- The Variation 2 pilot independently found the repeated-address double records. Corrected at your request (section 6).
 
 **What could not be tested in the pilots:** none of the pilot sessions had a browser, so they checked their pages with scripted tests and chart images. That is a limit of the pilot environment, not of the case: students will have browsers. The reference sites were tested in a headless browser.
 
 **Agent logs:** every pilot logged real mistakes its agent made and caught, as the case asks. The Variation 2 pilot noted that the requirement could tempt a student to invent one. The orientation suggests checking logs against the commit history.
 
-## 6. Open decisions
+## 6. The dataset correction
+
+**What was wrong.** The build removes a second record of the same sale only when the two rows share a parcel number. At 87 addresses, the source held one sale under two parcel numbers: two rows with prices within 1% (identical in 85) and sale dates within 5 days. Typically one row came from the listing, with the list and contract dates, and the other from the county, with the full parcel number and the assessed value. In 66 pairs the listing's row had a placeholder for the parcel number: `0` (17), a lot or homesite number such as `109` (37), or `062000000016D1`, a parcel number that 14 new homes share (12). 79 of the 87 were in Charlottesville. The description sheet called all of them condo units.
+
+**What I changed, keeping version 1.0** (in `output/dataset/college-town-dataset/`):
+
+- **The build** (`build/build_dataset.py`). A new step, `drop_double_records()`, runs right after the same-parcel step. An address with exactly two rows that pass the build's own same-sale test (prices within 1%, sale dates within 90 days) keeps one row, chosen by the existing rule: the most complete record, then the later date, then the lower source id. Only two-row addresses qualify, because three pairs of units in larger State College buildings pass the price and date test but are separate units with their own parcel numbers and living areas.
+- **The data.** The raw files are not in the package, so `build/drop_double_records.py` applies the same function to the published CSV, rewrites all five formats with the build's own writers, and checks the Parquet and DuckDB files against the new CSV value by value. It removed 87 rows. Run again, it removes nothing. `build/removed_double_records.csv` lists each removed row beside the row kept for the same sale. Writing the corrected CSV again with the build's writers reproduces the CSV, SQLite and Excel files byte for byte.
+- **The documents.** The description sheet, the build notes and the README now give the corrected figures; the build notes add the step to section 6, the count chain (35,822 - 38 - 87 - 255 = 35,442) and the known issues. `reference_figures.md`, `reference_figures_by_city.csv` and the city to campus map were regenerated with `build/reference_figures.py`, after checking that the script reproduces the original documents exactly from the original CSV.
+
+**The result.** 35,442 rows. 66 rows at 16 addresses share an address: 60 are condo and apartment units in 13 State College buildings, and the other 6 are pairs of two different sales, about a year or more apart, at three homes built in 2023 or 2024. The description sheet explains both.
+
+**What I could not confirm without the raw files:**
+
+- **That a full rebuild writes the same rows.** It should. No pair ties on completeness and date, so the tiebreak (source id in a rebuild, `listing_id` in the script) is never reached. All 103 two-parcel addresses are in the 18 cities that remain, so the city floor still removes the same 255 rows.
+- **The reasons behind the blank dates.** 86 of the 87 removed rows had neither a list date nor a contract date, and why each was blank is recorded only in the raw event history. The published file has 6,180 blank list dates and 6,528 blank contract dates (each 86 fewer), but the split by reason can be off by up to 86 in any one reason. The description sheet now gives exact totals and bounds ("over 5,000 sold with no listing on record"), and the build notes give the original counts and say why. Likewise, the count of homes whose clock kept running after a failed contract is 2,020 or 2,021; the sheet says "about 2,000".
+
+**Appendix A.** These 20 of the 82 figures changed; the other 62 are the same:
+
+| Figure | Before | After |
+|---|---:|---:|
+| Rows | 35,529 | 35,442 |
+| Rows with a list and a contract date | 28,043 (78.9%) | 28,042 (79.1%) |
+| Rows sharing a street address | 240 | 66 |
+| Addresses shared by more than one row (was "buildings") | 103 | 16 |
+| `home_type` SINGLE_FAMILY | 35,350 | 35,263 |
+| UW-Madison: rows; median price | 5,707; $434,020 | 5,706; $434,010 |
+| Florida: rows | 5,630 | 5,629 |
+| Michigan: rows; median $/sq ft | 3,022; $259.07 | 3,021; $259.11 |
+| UNC: rows | 3,018 | 3,016 |
+| Virginia: rows; median price; median $/sq ft; median miles | 2,854; $625,000; $272.35; 3.5 | 2,775; $615,000; $270.03; 3.4 |
+| Georgia: rows | 2,816 | 2,814 |
+| UC Davis: rows; median price; median $/sq ft | 942; $888,500; $492.58 | 941; $889,000; $492.71 |
+
+**What changed in the case package as a result:**
+
+- **Student documents:** the row count (changes 3 and 9), and the original problem 2 sentence restored (section 4).
+- **Variation 2, Question 6:** 16 addresses and 66 sales, against 103 and 240. Penn State is now the only area with 20 or more such sales (0.5 miles from campus against 2.2 for other sales), so the answer no longer contrasts Penn State with Virginia. The key's model answer, note and tolerances are rewritten to match. The other five answers keep every ranking and named area; Virginia's figures move the most.
+- **Orientation:** the "sixth problem" section on double records is gone, problem 2 now says what the 66 rows are, and one debrief question no longer assumes the sheet is wrong.
+- **Reference sites:** the double-record notes are gone from all three, and the V2 site's Question 6 answer is rewritten. Each site's README numbers were rechecked with DuckDB, and each agent log has a new last entry recording the correction and what it changed. Earlier entries are left as they happened.
+- **Reference code:** the double-record figures are gone from `orientation.py`, `answer_key.py` and `sites.py`. `v2_data_checks.py` still counts two-row addresses that look like one sale recorded twice, as a check on the data: it finds none.
+
+## 7. Open decisions
 
 | Decision | Default used | Notes |
 |---|---|---|
@@ -417,13 +480,13 @@ Each pilot was a fresh agent session given only that variation's student files (
 | License | CC BY-NC-SA 4.0, stated in each case document | Unchanged |
 | "Suggested starting questions" | Removed from the students' copy only | The dataset's own copy keeps it |
 | Variation label visible to students | Shown in each case document's subtitle and header | Replace with a neutral code if students should not know the other variations exist |
-| **Repeated addresses that are one sale recorded twice** (new) | Dataset 1.0 unchanged. The case document's sentence now says units *can* share an address. The orientation and answer key explain the double records, and the key says not to mark down a student who keeps every row. | Options: (a) keep as is; (b) issue dataset 1.1, removing one row of each pair and correcting the description sheet; (c) keep the rows but add the finding to the description sheet as a sixth problem. Option (b) or (c) would change Appendix A figures, so I stopped short of either. |
-| **Description sheet SQL examples compute means** (new) | Unchanged, as section 5 instructs | Fix in a 1.1 description sheet if you issue one |
+| **Parcel number of the 87 kept rows** (new) | Each kept row is the more complete record, unchanged, as the build already does for same-parcel duplicates. In 66 of them the parcel number is the listing's placeholder (`0`, a lot or homesite number, or a parcel number several new homes share). | Alternatively, take the parcel number and assessed value from the county's record, which `build/removed_double_records.csv` holds. That would be the dataset's first merged row, so I left it to you. |
+| **Description sheet SQL examples compute means** (new) | Unchanged, as section 5 of the handoff instructs | The sheet is open for the correction anyway, so this could be fixed in 1.0 too. I changed only the repeated-address material. |
 | **Question 4 listing window** (new) | Applied in `content.js`, the key and the V2 site | Confirm the wording |
 | **Public repository** (new) | Kept public, as you accepted | Students can find the answer key and the reference sites. The orientation tells instructors so. |
 | **Fonts in two reference sites** (new) | Copied into each site's `fonts/` folder with their licenses, so no font service is needed | All four fonts are under the SIL Open Font License |
 
-## 7. Web facts
+## 8. Web facts
 
 Each fact below was checked on the web on October 11, 2026.
 

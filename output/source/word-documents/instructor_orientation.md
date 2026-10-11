@@ -6,7 +6,7 @@ This orientation is for instructors. It summarizes the case, explains the three 
 
 AI coding agents can now write most of the code for a data website. That changes the analyst's job. In this case, students decide what to show and who it is for, direct an AI coding agent, and check that every number is right.
 
-Students work with the College-town home sales dataset (version 1.0): 35,529 completed home sales around 11 university campuses, in 18 cities across 11 states, collected in March 2026. They build a website with visualizations in plain HTML, CSS and JavaScript, keep the code in a public GitHub repository, and publish the site with GitHub Pages.
+Students work with the College-town home sales dataset (version 1.0): 35,442 completed home sales around 11 university campuses, in 18 cities across 11 states, collected in March 2026. They build a website with visualizations in plain HTML, CSS and JavaScript, keep the code in a public GitHub repository, and publish the site with GitHub Pages.
 
 Students may use any AI coding agent or assistant, and may edit code by hand. The case gives no tool-specific steps, because tools change quickly.
 
@@ -58,7 +58,7 @@ Every case document works for individuals or for teams of 2 to 3. Teams submit o
 
 ### Class time
 
-- **Kickoff (20 minutes).** Use an agent, live, to publish a one-chart page. Create a public repository, turn on GitHub Pages, ask the agent for a page that loads the CSV and shows the number of rows (35,529), then one chart. Push, and open the github.io address. Then check one number a second way, such as the row count in a spreadsheet. Rehearse once beforehand: the first publish takes a few minutes.
+- **Kickoff (20 minutes).** Use an agent, live, to publish a one-chart page. Create a public repository, turn on GitHub Pages, ask the agent for a page that loads the CSV and shows the number of rows (35,442), then one chart. Push, and open the github.io address. Then check one number a second way, such as the row count in a spreadsheet. Rehearse once beforehand: the first publish takes a few minutes.
 - **Mid-point check-in.** Open each site's URL and read the plan paragraph. Catch problems early: a site that does not load, a number that looks wrong, or a plan too large for the time left.
 - **Optional showcase.** Students show their sites for two minutes each. In Variation 1 and 3 sections, the range of topics is the point. In Variation 2 sections, compare how sites presented the same answers.
 
@@ -97,13 +97,13 @@ None of the pilots fell into the five data problems below. Each pilot read the d
 
 The case asks for at least one time the agent got something wrong. Every pilot found real mistakes to log, so students should too. Still, a student could invent one. Ask for prompts pasted verbatim, and compare the log's dates and claims with the repository's commit history.
 
-## The five data problems, and a sixth
+## The five data problems
 
 The data description sheet explains five problems under "Five things that will bite you." The dataset keeps them on purpose. Here is how each one shows up in student work, and how to spot it quickly. The reference figures that come with the dataset, and the answer key, give the correct values.
 
 ### 1. Days on market
 
-Days on market runs from `list_date` to `contract_date`, and needs both dates. 28,043 sales (78.9%) have both. The median is 11 days, and the median for each campus area runs from 7 to 27 days.
+Days on market runs from `list_date` to `contract_date`, and needs both dates. 28,042 sales (79.1%) have both. The median is 11 days, and the median for each campus area runs from 7 to 27 days.
 
 - **Measured to `sale_date`:** the overall median becomes 50 days, because it adds the time to close. Around Michigan, 39 days instead of 7.
 - **Blank dates treated as zero:** the overall median falls to 6 days, and many homes appear to sell instantly.
@@ -114,23 +114,23 @@ The missing dates are not random: off-market and new construction sales are the 
 
 ### 2. Repeated street addresses
 
-240 sales share a street address with another sale, at 103 addresses. The sheet says they are condo and apartment units with no unit number.
+66 sales share a street address with another sale, at 16 addresses, and none has a unit number. 60 of them are condo and apartment units in 13 State College buildings. The other 6 are two different sales at each of 3 newly built homes. The description sheet explains both.
 
-- **Deduplicated by address:** the row count drops by 137, from 35,529 to 35,392, and the condo units in State College disappear.
-- **Grouped by street name alone,** without city, state and ZIP code: 312 rows look repeated instead of 240, because the same street name appears in different towns.
+- **Deduplicated by address:** the row count drops by 50, from 35,442 to 35,392, and the condo units in State College disappear.
+- **Grouped by street name alone,** without city, state and ZIP code: 138 rows look repeated instead of 66, because the same street name appears in different towns.
 - **Spot it:** does the site's row count, or a city's total, fall short of the description sheet's?
 
 ### 3. Impossible prices
 
 Prices run from $0 to $81,510,000. 4 sales are under $1,000, including 1 at $0; 40 are under $10,000; 31 are over $5,000,000.
 
-- **A mean instead of a median:** the mean price is $510,289, against a median of $410,000.
+- **A mean instead of a median:** the mean price is $509,438, against a median of $410,000.
 - **No stated rule:** a minimum or maximum shown on the site is $0 or $81,510,000.
 - **Spot it:** a median far above the reference figures usually means a mean. Any rule is acceptable if the site states it and applies it consistently.
 
 ### 4. The home_type column
 
-35,350 of the 35,529 rows say `SINGLE_FAMILY`, including the condo units in State College. Any chart split by `home_type` is meaningless. Spot it by searching the site and its code for `home_type`.
+35,263 of the 35,442 rows say `SINGLE_FAMILY`, including the condo units in State College. Any chart split by `home_type` is meaningless. Spot it by searching the site and its code for `home_type`.
 
 ### 5. Values that are impossible on their face
 
@@ -138,14 +138,6 @@ Prices run from $0 to $81,510,000. 4 sales are under $1,000, including 1 at $0; 
 
 - **Divided anyway:** price per square foot comes out in the thousands, or as "Infinity". In JavaScript, a blank living area also divides to Infinity. Around Georgia, where 337 sales have no living area, the median becomes $209.30 instead of $196.82.
 - **Spot it:** any price per square foot in the thousands, or the word Infinity on the page.
-
-### 6. Repeated addresses that are one sale recorded twice (not in the student documents)
-
-The description sheet says all 240 repeated-address sales are separate units. That is true in State College, where 13 buildings hold separate units with their own parcel numbers. But 87 of the 103 addresses (174 rows) meet the dataset build notes' own test for one sale recorded twice: two rows, prices within 1% and sale dates within 90 days. 79 of them are around Virginia, mostly new homes. In most pairs, one row carries the listing dates and the other carries the county's parcel number and assessed value, so the build's parcel check missed them. Only 16 addresses (66 rows) look like real multi-unit buildings.
-
-The effect on most figures is small. With one copy of each pair removed, Virginia's median sale price would be $615,000 instead of $625,000. The effect is larger where the pairs dominate a figure: Variation 2's Question 6, and any share of new homes around Virginia.
-
-The case documents still tell students never to remove a sale just because its address repeats, which remains right for State College. Do not mark down a student who keeps every row. Give credit under Data handling to a student who spots the double records, explains them, and either keeps them with a note or removes one copy with a stated rule. One Variation 2 pilot found them on its own.
 
 ## Grading
 
@@ -179,7 +171,7 @@ The rubric has 100 points and is identical in all three variations.
 2. Where did the agent's output look right but turn out to be wrong? What made you check?
 3. What rule did you choose for implausible prices, and how much did it change your numbers? Is there one right rule?
 4. Who is missing from "days on market"? How should a site talk about a figure that covers only some of the sales?
-5. The description sheet says repeated addresses are condo units. Did you check? When should you trust a dataset's documentation, and how would you find out it is wrong?
+5. The description sheet makes claims about the data, such as which repeated addresses are condo units. Did you check any of them yourself? When should you trust a dataset's documentation, and how would you find out it is wrong?
 6. How would a visitor know whether to trust your site's numbers? What did you show them?
 7. If you started again with the same agent, what would you tell it first?
 
@@ -215,7 +207,7 @@ Each reference site is a plausible strong student submission that meets every re
 
 | Folder | Variation | What it demonstrates |
 |---|---|---|
-| `v1-old-homes-close-in` | 1. Open Brief | A free-form data story: housing age by distance from campus and price per square foot by decade built. It shows findings stated in words, a campus picker driving every chart, a dot plot for years, and data notes that handle the 192 homes recorded as built in exactly 1900 and Virginia's double records. |
+| `v1-old-homes-close-in` | 1. Open Brief | A free-form data story: housing age by distance from campus and price per square foot by decade built. It shows findings stated in words, a campus picker driving every chart, a dot plot for years, and data notes that handle the 192 homes recorded as built in exactly 1900. |
 | `v2-six-questions` | 2. Specific Questions | All six answers, each with figures, a chart and plain words. Every number on the page is filled in from the data file. It applies the small-group rule, states its rules for "falls" and "far from 1", and cites sources for Question 5. |
 | `v3-close-to-campus` | 3. General Instructions | One question for one user (new faculty on a budget): a campus picker, budget slider and distance buttons drive three headline numbers, a dot map, a campus comparison and a table. |
 

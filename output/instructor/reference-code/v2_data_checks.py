@@ -89,18 +89,13 @@ def check_q6(df):
 
     groups = v2.shared_address_groups(df)
     doubles = groups[groups["likely one sale recorded twice"]]
-    print(f"\n    Repeated addresses that meet the build notes' duplicate rule (2 rows, prices within 1%, "
-          f"sale dates within 90 days): {len(doubles)} of {len(groups)} addresses, {doubles['sales'].sum()} of {groups['sales'].sum()} rows")
+    print(f"\n    Addresses with two rows that look like one sale recorded twice (prices within 1%, sale dates "
+          f"within 90 days; the dataset build removes these): {len(doubles)} of {len(groups)}")
     print(groups.groupby("university").agg(
         addresses=("sales", "size"),
         rows=("sales", "sum"),
-        likely_double_records=("likely one sale recorded twice", "sum"),
+        distinct_parcel_numbers=("distinct parcel numbers", "sum"),
     ).to_string())
-    pairs = doubles[doubles["sales"] == 2]
-    split = ((pairs["rows with a list or contract date"] == 1) & (pairs["rows with an assessed value"] == 1)).sum()
-    print(f"    Of those pairs, {split} have one row with listing dates and the other with an assessed value, "
-          f"{(pairs['distinct prices'] == 1).sum()} have identical prices, "
-          f"and {(pairs['days between first and last sale'] == 0).sum()} close on the same day.")
 
 
 def main():

@@ -1,6 +1,6 @@
 # College Towns in Six Questions
 
-A site for the Campus Comps case, Variation 2 (Specific Questions). It answers the case's six questions about 35,529 home sales around 11 university campuses, each with the figures, a chart and a plain-language answer, for anyone thinking about moving to one of these towns.
+A site for the Campus Comps case, Variation 2 (Specific Questions). It answers the case's six questions about 35,442 home sales around 11 university campuses, each with the figures, a chart and a plain-language answer, for anyone thinking about moving to one of these towns.
 
 **Live site:** https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/ (replace with the address GitHub Pages gives you)
 
@@ -38,16 +38,16 @@ python scripts/build_data.py
 ## Data notes
 
 - **Campus area:** the `university` column (11 areas).
-- **Valid sale:** a sale price of $1,000 or more (35,525 of 35,529 sales). Questions 1, 3 and 5 use valid sales; the other questions use every sale, as the case says.
+- **Valid sale:** a sale price of $1,000 or more (35,438 of 35,442 sales). Questions 1, 3 and 5 use valid sales; the other questions use every sale, as the case says.
 - **Price per square foot:** computed for each valid sale with at least 100 sq ft of living area, then the median of those values.
-- **Days on market:** `contract_date` minus `list_date`, only for sales with both dates (28,043). Blanks are never treated as zero.
+- **Days on market:** `contract_date` minus `list_date`, only for sales with both dates (28,042). Blanks are never treated as zero.
 - **Distance bands:** under 1 mile, 1 to under 2, 2 to under 5, 5 to under 10, and 10 or more, from `miles_to_campus`.
 - **Falls with distance (Question 3):** "at every step" means each band with 20 or more sales is cheaper than the one before; "overall" means the farthest such band is cheaper than the nearest and no step rises by more than 5%. An area that meets neither does not fall.
 - **Listing window (Question 4):** homes listed from April 1, 2023 through March 31, 2025, all campus areas pooled, grouped by the month of `list_date`.
 - **Far from 1 (Question 5):** a median ratio below 0.5.
 - **Small groups:** a median or share based on fewer than 20 sales shows "fewer than 20 sales". Counts are always shown.
 - **Medians, not means.** Prices run up to $81.5 million, which would distort a mean.
-- **Repeated addresses** are never removed. In State College they are separate condo units with their own parcel numbers. Around Virginia, most look like one sale recorded twice (the same price and usually the same closing date, with one row from the listing and one from the county record); the site says so in Question 6 but counts every sale, as the question defines.
+- **Repeated addresses** are never removed. In State College they are separate condo units with their own parcel numbers.
 - `home_type` is not used, because it is unreliable.
 
 ## How we checked our numbers
@@ -59,7 +59,7 @@ Each of these was recomputed with a separate SQL query in DuckDB, run directly o
 | Illinois median sale price, $245,000 (Question 1) | `SELECT median(sale_price) FROM 'data/college_town_home_sales.csv' WHERE university = 'University of Illinois Urbana-Champaign' AND sale_price >= 1000` | 245000 |
 | Georgia median days on market, 27 (Question 2) | `SELECT median(date_diff('day', list_date, contract_date)) FROM 'data/college_town_home_sales.csv' WHERE university = 'University of Georgia' AND list_date IS NOT NULL AND contract_date IS NOT NULL` | 27 |
 | April listings, median 6 days on market (Question 4) | `SELECT median(date_diff('day', list_date, contract_date)), count(*) FROM 'data/college_town_home_sales.csv' WHERE contract_date IS NOT NULL AND list_date BETWEEN DATE '2023-04-01' AND DATE '2025-03-31' AND month(list_date) = 4` | 6, from 2,041 listings |
-| 103 addresses with more than one sale, covering 240 sales (Question 6) | `SELECT count(*), sum(n) FROM (SELECT count(*) AS n FROM 'data/college_town_home_sales.csv' GROUP BY address_street, city, state, zipcode HAVING count(*) > 1)` | 103, 240 |
+| 16 addresses with more than one sale, covering 66 sales (Question 6) | `SELECT count(*), sum(n) FROM (SELECT count(*) AS n FROM 'data/college_town_home_sales.csv' GROUP BY address_street, city, state, zipcode HAVING count(*) > 1)` | 16, 66 |
 
 The campus-level medians for price, price per square foot and days on market also match the instructor reference figures that come with the dataset. Those figures round Iowa's 23.5 days up to 24.
 

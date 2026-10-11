@@ -97,7 +97,7 @@ None of the pilots fell into the five data problems below. Each pilot read the d
 
 The case asks for at least one time the agent got something wrong. Every pilot found real mistakes to log, so students should too. Still, a student could invent one. Ask for prompts pasted verbatim, and compare the log's dates and claims with the repository's commit history.
 
-## The five data problems, and a sixth
+## The five data problems
 
 The data description sheet explains five problems under "Five things that will bite you." The dataset keeps them on purpose. Here is how each one shows up in student work, and how to spot it quickly. The reference figures that come with the dataset, and the answer key, give the correct values.
 
@@ -114,7 +114,7 @@ The missing dates are not random: off-market and new construction sales are the 
 
 ### 2. Repeated street addresses
 
-{{shared_rows}} sales share a street address with another sale, at {{shared_addresses}} addresses. The sheet says they are condo and apartment units with no unit number.
+{{shared_rows}} sales share a street address with another sale, at {{shared_addresses}} addresses, and none has a unit number. {{psu_rows}} of them are condo and apartment units in {{psu_addresses}} State College buildings. The other {{other_shared_rows}} are two different sales at each of {{other_shared_addresses}} newly built homes. The description sheet explains both.
 
 - **Deduplicated by address:** the row count drops by {{dedup_loss}}, from {{rows}} to {{after_dedup}}, and the condo units in State College disappear.
 - **Grouped by street name alone,** without city, state and ZIP code: {{street_rows}} rows look repeated instead of {{shared_rows}}, because the same street name appears in different towns.
@@ -138,14 +138,6 @@ Prices run from $0 to {{max_price}}. {{price_under_1000}} sales are under $1,000
 
 - **Divided anyway:** price per square foot comes out in the thousands, or as "Infinity". In JavaScript, a blank living area also divides to Infinity. Around Georgia, where {{ga_area_missing}} sales have no living area, the median becomes {{ga_pps_blank_zero}} instead of {{ga_pps}}.
 - **Spot it:** any price per square foot in the thousands, or the word Infinity on the page.
-
-### 6. Repeated addresses that are one sale recorded twice (not in the student documents)
-
-The description sheet says all {{shared_rows}} repeated-address sales are separate units. That is true in State College, where {{psu_addresses}} buildings hold separate units with their own parcel numbers. But {{double_addresses}} of the {{shared_addresses}} addresses ({{double_rows}} rows) meet the dataset build notes' own test for one sale recorded twice: two rows, prices within 1% and sale dates within 90 days. {{double_va}} of them are around Virginia, mostly new homes. In most pairs, one row carries the listing dates and the other carries the county's parcel number and assessed value, so the build's parcel check missed them. Only {{real_addresses}} addresses ({{real_rows}} rows) look like real multi-unit buildings.
-
-The effect on most figures is small. With one copy of each pair removed, Virginia's median sale price would be {{va_price_one_copy}} instead of {{va_price}}. The effect is larger where the pairs dominate a figure: Variation 2's Question 6, and any share of new homes around Virginia.
-
-The case documents still tell students never to remove a sale just because its address repeats, which remains right for State College. Do not mark down a student who keeps every row. Give credit under Data handling to a student who spots the double records, explains them, and either keeps them with a note or removes one copy with a stated rule. One Variation 2 pilot found them on its own.
 
 ## Grading
 
@@ -179,7 +171,7 @@ The rubric has 100 points and is identical in all three variations.
 2. Where did the agent's output look right but turn out to be wrong? What made you check?
 3. What rule did you choose for implausible prices, and how much did it change your numbers? Is there one right rule?
 4. Who is missing from "days on market"? How should a site talk about a figure that covers only some of the sales?
-5. The description sheet says repeated addresses are condo units. Did you check? When should you trust a dataset's documentation, and how would you find out it is wrong?
+5. The description sheet makes claims about the data, such as which repeated addresses are condo units. Did you check any of them yourself? When should you trust a dataset's documentation, and how would you find out it is wrong?
 6. How would a visitor know whether to trust your site's numbers? What did you show them?
 7. If you started again with the same agent, what would you tell it first?
 
@@ -215,7 +207,7 @@ Each reference site is a plausible strong student submission that meets every re
 
 | Folder | Variation | What it demonstrates |
 |---|---|---|
-| `v1-old-homes-close-in` | 1. Open Brief | A free-form data story: housing age by distance from campus and price per square foot by decade built. It shows findings stated in words, a campus picker driving every chart, a dot plot for years, and data notes that handle the {{built_1900}} homes recorded as built in exactly 1900 and Virginia's double records. |
+| `v1-old-homes-close-in` | 1. Open Brief | A free-form data story: housing age by distance from campus and price per square foot by decade built. It shows findings stated in words, a campus picker driving every chart, a dot plot for years, and data notes that handle the {{built_1900}} homes recorded as built in exactly 1900. |
 | `v2-six-questions` | 2. Specific Questions | All six answers, each with figures, a chart and plain words. Every number on the page is filled in from the data file. It applies the small-group rule, states its rules for "falls" and "far from 1", and cites sources for Question 5. |
 | `v3-close-to-campus` | 3. General Instructions | One question for one user (new faculty on a budget): a campus picker, budget slider and distance buttons drive three headline numbers, a dot map, a campus comparison and a table. |
 

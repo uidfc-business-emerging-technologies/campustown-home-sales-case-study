@@ -10,11 +10,11 @@ Every .docx opens cleanly: funding line, no comments, tracked changes, hidden te
 The case documents differ only in the variation label and "Your task" (diff: results/case_document_diff.txt)
   pass  outside "Your task" and the label, the three case documents are identical (108 paragraphs)
 No student file contains answers
-  pass  searched 6 student files for 206 answer-key values
+  pass  searched 6 student files for 203 answer-key values
         Case documents and setup guide: 0 matches.
-        Description sheet (both copies, unchanged from the dataset package): 20 matches: $342,000, $370,000, $430,000, $571,000, $625,000, $888,500, 1,351, 1,909, 103, 2,816, 2,854, 240, 3,018, 3,022, 3,664, 3.4, 4,616, 5,630, 5,707, 942
-        Each of these is a figure the dataset's own description sheet already prints (city medians that equal single-city campus areas, and the 240 sales at 103 addresses).
+        Description sheet (both copies, as in the dataset package): 19 matches: $342,000, $370,000, $430,000, $571,000, $615,000, $889,000, 1,351, 1,909, 127, 2,775, 2,814, 3,016, 3,021, 3,664, 3.4, 4,616, 5,629, 5,706, 941
+        Each of these is a figure the dataset's own description sheet already prints (rows per campus area, city medians that equal single-city campus areas, the median distance and the zero-area count).
 Words and characters that must not appear
-  pass  no peer review or auditing in 68 documents and text files
-  pass  no agent product or agent-specific file name in 68 documents and text files
-  pass  no em or en dash in 68 documents and text files
+  pass  no peer review or auditing in 78 documents and text files
+  pass  no agent product or agent-specific file name in 78 documents and text files
+  pass  no em or en dash in 78 documents and text files

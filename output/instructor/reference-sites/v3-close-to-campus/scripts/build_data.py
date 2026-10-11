@@ -21,7 +21,6 @@ OUT = ROOT / "data" / "sales.json"
 MIN_PRICE = 10_000      # sales under $10,000 are not ordinary market sales
 MIN_SQFT = 100          # living areas under 100 sq ft are treated as missing
 MONTHS = 12             # the most recent 12 months of sales in the data
-ADDRESS = ["address_street", "city", "state", "zipcode"]
 
 # Campus landmarks: the points miles_to_campus is measured to, from the dataset's build script.
 CAMPUSES = [
@@ -45,7 +44,7 @@ def build():
         df[c] = pd.to_numeric(df[c])
     for c in ["list_date", "contract_date", "sale_date"]:
         df[c] = pd.to_datetime(df[c], format="%Y-%m-%d")
-    assert len(df) == 35_529 and df["listing_id"].is_unique
+    assert len(df) == 35_442 and df["listing_id"].is_unique
 
     last = df["sale_date"].max()
     first = last - pd.DateOffset(months=MONTHS) + pd.Timedelta(days=1)
@@ -61,14 +60,6 @@ def build():
     full = [q for q in priced["quarter"].dropna().unique()
             if q.start_time >= df["sale_date"].min() and q.end_time.normalize() <= last]
     quarterly = priced[priced["quarter"].isin(full)].groupby("quarter")["sale_price"].median()
-
-    # Pairs at one address with prices within 1% and sale dates within 90 days: the build
-    # notes' own test for one sale recorded twice. We keep both rows but say how many there are.
-    pairs = 0
-    for _, g in recent.groupby(ADDRESS):
-        p, t = g["sale_price"], g["sale_date"]
-        if len(g) == 2 and p.max() - p.min() <= 0.01 * p.max() and (t.max() - t.min()).days <= 90:
-            pairs += 1
 
     index = {name: i for i, (name, *_rest) in enumerate(CAMPUSES)}
     recent["campus_index"] = recent["university"].map(index)
@@ -86,7 +77,6 @@ def build():
         "lowest_excluded_price": int(excluded["sale_price"].min()),
         "quarterly_median_range": [int(quarterly.min()), int(quarterly.max())],
         "full_quarters": len(quarterly),
-        "likely_double_records": pairs,
         "campuses": [{"name": n, "short": s, "town": t, "landmark": lm, "lat": la, "lon": lo}
                      for n, s, t, lm, la, lo in CAMPUSES],
         "sales": {

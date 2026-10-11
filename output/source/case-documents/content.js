@@ -27,7 +27,7 @@ const SHARED_BEFORE = [
   ] },
 
   { t: "h1", text: "The data" },
-  { t: "p", text: "You will work with the College-town home sales dataset (version 1.0). It holds 35,529 completed home sales around 11 university campuses, in 18 cities across 11 states, collected in March 2026." },
+  { t: "p", text: "You will work with the College-town home sales dataset (version 1.0). It holds 35,442 completed home sales around 11 university campuses, in 18 cities across 11 states, collected in March 2026." },
   { t: "p", text: "Each row is one sale. It records:" },
   { t: "ul", items: [
     "Where the home is",
@@ -41,7 +41,7 @@ const SHARED_BEFORE = [
   { t: "p", text: "**Read the data description sheet before you start, and give it to your agent before it writes any analysis code.** The sheet explains every column. It also explains, under \"Five things that will bite you,\" five problems in the data that will trip up any analysis that ignores them:" },
   { t: "ol", items: [
     "**Days on market** runs from [[list_date]] to [[contract_date]], not to [[sale_date]]. About one sale in five is missing one of those dates, and a blank date is not zero.",
-    "**Street addresses repeat.** Condo and apartment units can share an address, so never remove a sale just because its address repeats.",
+    "**Street addresses repeat** because condo and apartment units share an address. Never remove duplicates by address.",
     "**Some prices are impossible.** They range from $0 to $81.5 million. Choose a rule for which sales to include, and state it.",
     "**The [[home_type]] column is unreliable.** Don't build an analysis on it.",
     "**Some values are impossible on their face.** For example, some homes have 0 square feet of living area.",
@@ -196,7 +196,7 @@ const SHARED_AFTER = [
   { t: "ol", items: [
     "Create a public GitHub repository and turn on GitHub Pages.",
     "Add the data and the data description sheet to the repository, then give your agent its project instructions.",
-    "Ask the agent for a first page that loads the data and shows the number of rows (35,529). Then publish it.",
+    "Ask the agent for a first page that loads the data and shows the number of rows (35,442). Then publish it.",
     "Build in small steps, and check each number before you move on.",
   ] },
 
@@ -292,7 +292,7 @@ const SETUP = [
   { t: "h1", text: "Step 6. Build a first page and preview it" },
   { t: "p", text: "Ask your agent for something like this:" },
   { t: "quote", text: "Create index.html with a page title. Load data/college_town_home_sales.csv and display the number of rows in it. Then start a local web server and tell me the address to open." },
-  { t: "p", text: "The page should report **35,529 rows**. If it reports a different number, ask the agent why before you go any further." },
+  { t: "p", text: "The page should report **35,442 rows**. If it reports a different number, ask the agent why before you go any further." },
   { t: "p", text: "**Why a local web server?** A browser won't let a page opened straight from a file (an address starting with [[file://]]) load data files. A local web server serves your folder the way GitHub Pages will. If your agent can't run commands, ask it for the command to run yourself." },
 
   { t: "h1", text: "Step 7. Publish" },
@@ -330,7 +330,7 @@ const SETUP = [
   { t: "h1", text: "Charts, maps and data on a plain HTML site" },
   { t: "ul", items: [
     "**Charts:** load a charting library with a script tag, such as Chart.js, Plotly.js or Apache ECharts. Your agent can also draw charts directly in SVG.",
-    "**Maps:** a mapping library such as Leaflet can place sales on a map from their latitude and longitude. Drawing all 35,529 points at once can be slow, so show one town at a time or group nearby points.",
+    "**Maps:** a mapping library such as Leaflet can place sales on a map from their latitude and longitude. Drawing all 35,442 points at once can be slow, so show one town at a time or group nearby points.",
     "**Reading the CSV:** a parsing library such as Papa Parse handles quoted values correctly. Read [[zipcode]], [[county_fips]] and [[parcel_number]] as text, so leading zeros are kept.",
     "**Speed:** the full CSV file is about 9 MB. If your site needs only a few columns or summary figures, prepare a smaller file, such as a JSON summary, and commit the script that created it.",
   ] },

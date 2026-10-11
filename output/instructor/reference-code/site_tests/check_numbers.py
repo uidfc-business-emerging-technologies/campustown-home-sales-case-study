@@ -212,8 +212,6 @@ def check_v1(dump, df):
     c.close("new share", facts["newShare"], 100 * all_["new_share"], 0.05)
     c.close("new without listing", facts["newNoList"], 100 * s["listing"]["new_no_list_share"], 0.5)
     c.close("older without listing", facts["oldNoList"], 100 * s["listing"]["older_no_list_share"], 0.5)
-    c.close("Virginia pairs", facts["vaPairs"], s["virginia_double_records"]["new_pairs"], 0)
-    c.close("Virginia one copy", facts["vaOneCopy"], 100 * s["virginia_double_records"]["new_share_one_copy"], 0.05)
     return c.report()
 
 

@@ -95,7 +95,7 @@
       <li><b>Size</b> is the median finished living area of the homes within budget. Living areas under 100 square feet are treated as missing.</li>
       <li><b>Days on market</b> runs from the listing date to the contract date. Sales missing either date are left out of that figure, never counted as zero, and the share missing is shown.</li>
       <li><b>All home types are included,</b> because the data's <code>home_type</code> column is unreliable.</li>
-      <li><b>Repeated addresses are kept.</b> Condo units can share a street address, so no sale is removed because its address repeats. One caution: in these 12 months, <span data-fact="doubles"></span> pairs of sales at one address have prices within 1% and sale dates within 90 days, the test the dataset's builders used for one sale recorded twice. Most are new homes around Virginia. They are a small share of the sales, so they barely move any figure here.</li>
+      <li><b>Repeated addresses are kept.</b> Condo units can share a street address, so no sale is removed because its address repeats.</li>
       <li><b>Small groups:</b> a size or speed figure based on fewer than 20 sales is not shown.</li>
       <li>The site computes every figure in your browser from <code>data/sales.json</code>, which <code>scripts/build_data.py</code> makes from the full dataset.</li>
     </ul>

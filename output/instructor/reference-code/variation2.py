@@ -165,12 +165,12 @@ def q6_buildings(df):
 
 
 def shared_address_groups(df):
-    """Classify each repeated address with the build notes' own duplicate rule.
+    """Describe each repeated address, and flag any that looks like one sale recorded twice.
 
-    The build treated two rows as one sale recorded twice when the parcel number
-    matched, the prices were within 1% and the sale dates within 90 days. Here the
-    parcel condition is dropped: a pair at one address that meets the price and
-    date conditions is flagged as a likely double record.
+    The dataset build treats an address with exactly two rows, prices within 1% and
+    sale dates within 90 days as one sale recorded twice, whatever the parcel
+    numbers, and keeps one row (build notes, section 6). On version 1.0 no address
+    should be flagged; v2_data_checks.py prints the count.
     """
     shared = df[df["shared_address"]]
     groups = []

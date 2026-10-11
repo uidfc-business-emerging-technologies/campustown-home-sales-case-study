@@ -32,8 +32,8 @@ SITES = REPO_ROOT / "output" / "instructor" / "reference-sites"
 def input_checks(raw):
     """Handoff section 4: shape, unique key, and no raw build inputs in output/."""
     problems = []
-    if raw.shape != (35_529, 34):
-        problems.append(f"expected 35,529 rows and 34 columns, found {raw.shape[0]:,} and {raw.shape[1]}")
+    if raw.shape != (35_442, 34):
+        problems.append(f"expected 35,442 rows and 34 columns, found {raw.shape[0]:,} and {raw.shape[1]}")
     if not raw["listing_id"].is_unique:
         problems.append("listing_id is not unique")
     leaked = [p for p in (REPO_ROOT / "output").rglob("*") if p.name in FORBIDDEN_FILES]

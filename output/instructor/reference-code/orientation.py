@@ -50,27 +50,11 @@ def figures(df):
     street = df.groupby("address_street")["listing_id"].transform("size") > 1
     f["street_rows"] = f"{int(street.sum()):,}"
 
-    groups = v2.shared_address_groups(df)
-    doubles = groups[groups["likely one sale recorded twice"]]
-    real = groups[~groups["likely one sale recorded twice"]]
-    f["double_addresses"] = str(len(doubles))
-    f["double_rows"] = str(int(doubles["sales"].sum()))
-    f["double_va"] = str(int((doubles["university"] == "University of Virginia").sum()))
-    f["real_addresses"] = str(len(real))
-    f["real_rows"] = str(int(real["sales"].sum()))
-    psu = real[real["university"] == "The Pennsylvania State University"]
-    f["psu_addresses"] = str(len(psu))
-
-    # Virginia's median price with one copy of each likely double record removed.
-    va = df[df["university"] == "University of Virginia"]
-    drop = []
-    for _, g in va[va["shared_address"]].groupby(ADDRESS_KEY):
-        p, t = g["sale_price"].astype(float), g["sale_date"]
-        if len(g) == 2 and p.max() - p.min() <= 0.01 * p.max() and (t.max() - t.min()).days <= 90:
-            drop.append(g.sort_values("listing_id").index[-1])
-    va_one = va.drop(index=drop)
-    f["va_price"] = fmt(va[va["valid_price"]]["price"].median(), "money")
-    f["va_price_one_copy"] = fmt(va_one[va_one["valid_price"]]["price"].median(), "money")
+    in_psu = shared["university"] == "The Pennsylvania State University"
+    f["psu_rows"] = str(int(in_psu.sum()))
+    f["psu_addresses"] = str(shared[in_psu][ADDRESS_KEY].drop_duplicates().shape[0])
+    f["other_shared_rows"] = str(int((~in_psu).sum()))
+    f["other_shared_addresses"] = str(shared[~in_psu][ADDRESS_KEY].drop_duplicates().shape[0])
 
     price = df["sale_price"]
     f["price_under_1000"] = str(int((price < 1000).sum()))

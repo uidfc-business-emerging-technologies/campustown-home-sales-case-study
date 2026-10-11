@@ -196,8 +196,7 @@
       qHigh: money(D.quarterly_median_range[1]),
       excluded: int(D.excluded_under_min_price),
       minPrice: money(D.rules.min_price),
-      lowest: money(D.lowest_excluded_price),
-      doubles: int(D.likely_double_records)
+      lowest: money(D.lowest_excluded_price)
     };
     document.querySelectorAll("[data-fact]").forEach(function (el) {
       var v = f[el.getAttribute("data-fact")];

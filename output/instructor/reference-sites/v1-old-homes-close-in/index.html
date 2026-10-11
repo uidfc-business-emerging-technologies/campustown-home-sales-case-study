@@ -66,7 +66,6 @@
     <h2 id="c3-h">New homes, by campus area</h2>
     <p class="sub">Share of each area's sales that were new homes. Orange marks the area you chose; select a bar to choose that area.</p>
     <div class="chart" id="c3"><p class="loading">Loading chart...</p></div>
-    <p class="note">Virginia's share counts many new homes twice. With one copy of each likely double record, it would be <span data-fact="vaOneCopy"></span>; see the data notes.</p>
   </section>
 
   <section class="card" aria-labelledby="t-h">
@@ -83,7 +82,7 @@
       <li><b>Price per square foot</b> is sale price divided by living area, for each sale of $1,000 or more with at least 100 square feet of living area (<span data-fact="ppsSales"></span> sales). We take the median of those values. Sales under $1,000 and tiny or zero living areas are not real prices per square foot.</li>
       <li><b>New home:</b> built in the year it sold or the year before, or sold before it was finished (<span data-fact="presale"></span> homes have a year built later than their sale). Shares use the <span data-fact="datedSales"></span> sales with both a year built and a sale date.</li>
       <li><b>Sold without a listing</b> means the sale has no <code>list_date</code>. The data description sheet says these are off-market sales or new homes sold by the builder.</li>
-      <li><b>Repeated addresses:</b> we keep every sale, because condo units share street addresses. But around Virginia, <span data-fact="vaPairs"></span> pairs of new-home sales share an address and have prices within 1% and sale dates within 90 days, the test the dataset's builders used for one sale recorded twice. With one copy of each pair, Virginia's share of new homes would be <span data-fact="vaOneCopy"></span> instead of <span data-fact="vaShare"></span>.</li>
+      <li><b>Repeated addresses:</b> we keep every sale, because condo units share street addresses.</li>
       <li><b>Medians, not means,</b> because a few sales are far from typical.</li>
       <li><b>Small groups:</b> a median based on fewer than 20 sales is not shown.</li>
       <li><b>Not used:</b> the <code>home_type</code> column, which the description sheet says is unreliable.</li>

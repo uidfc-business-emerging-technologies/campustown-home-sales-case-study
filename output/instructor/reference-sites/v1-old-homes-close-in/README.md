@@ -38,13 +38,12 @@ python scripts/build_data.py
 
 ## Data notes
 
-- **Rows used:** all 35,529 sales. Nothing is removed as a duplicate, because condo units share street addresses.
+- **Rows used:** all 35,442 sales. Nothing is removed as a duplicate, because condo units share street addresses.
 - **Year built** is as reported. One sale has no year built and is left out of the year figures. 192 homes are recorded as built in exactly 1900 and 119 in 1901, against about 25 a year from 1902 to 1909, so many of these are probably a default for "very old, year unknown". They stay in, because they are old homes either way, and the site says so beside the decade chart.
 - **Distance** is `miles_to_campus`, the straight-line distance to a campus landmark. Bands: under 1 mile, 1 to under 2, 2 to under 5, 5 to under 10, and 10 or more.
-- **Price per square foot** is sale price divided by living area, for each sale of $1,000 or more with at least 100 sq ft of living area (35,021 sales). We take the median of those values, never a median price divided by a median area.
-- **New home:** built in the year it sold or the year before, or sold before it was finished (46 homes have a year built later than their sale year). Shares use the 35,522 sales with both a year built and a sale date.
+- **Price per square foot** is sale price divided by living area, for each sale of $1,000 or more with at least 100 sq ft of living area (34,934 sales). We take the median of those values, never a median price divided by a median area.
+- **New home:** built in the year it sold or the year before, or sold before it was finished (46 homes have a year built later than their sale year). Shares use the 35,435 sales with both a year built and a sale date.
 - **Sold without a listing:** the sale has no `list_date`.
-- **Repeated addresses:** around Virginia, 78 pairs of new-home sales share an address and have prices within 1% and sale dates within 90 days, the test the dataset's builders used for one sale recorded twice. We keep both rows. The site shows Virginia's share of new homes both ways (21.7% as recorded, 19.5% with one copy of each pair).
 - **Medians, not means,** and a median from fewer than 20 sales is not shown.
 - **Not used:** `home_type`, which the description sheet says is unreliable.
 
@@ -56,7 +55,7 @@ Each number below was recomputed with a separate SQL query in DuckDB, run direct
 |---|---|---|
 | Median year built within 1 mile of campus, all areas: 1939 | `SELECT median(year_built) FROM 'data/college_town_home_sales.csv' WHERE miles_to_campus < 1 AND year_built IS NOT NULL` | 1939 |
 | Homes built in the 1930s, median price per sq ft: $272 | `SELECT median(sale_price / living_area_sqft) FROM 'data/college_town_home_sales.csv' WHERE sale_price >= 1000 AND living_area_sqft >= 100 AND year_built BETWEEN 1930 AND 1939` | 272.30 |
-| New homes: 8.2% of sales | `SELECT count(*) FILTER (WHERE year(sale_date) - year_built <= 1), count(*) FROM 'data/college_town_home_sales.csv' WHERE year_built IS NOT NULL AND sale_date IS NOT NULL` | 2,912 of 35,522 (8.2%) |
+| New homes: 8.0% of sales | `SELECT count(*) FILTER (WHERE year(sale_date) - year_built <= 1), count(*) FROM 'data/college_town_home_sales.csv' WHERE year_built IS NOT NULL AND sale_date IS NOT NULL` | 2,833 of 35,435 (8.0%) |
 
 ## Tools
 

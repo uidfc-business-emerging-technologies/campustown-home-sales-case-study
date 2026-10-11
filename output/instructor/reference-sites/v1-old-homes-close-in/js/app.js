@@ -50,10 +50,7 @@
       built1900: int(D.counts.built_1900), built1901: int(D.counts.built_1901),
       perYear: String(Math.round(D.counts.built_1902_1909_per_year)),
       yearMissing: D.counts.year_built_missing === 1 ? "One" : int(D.counts.year_built_missing),
-      ppsSales: int(D.counts.pps_sales), presale: int(D.counts.sold_before_finished), datedSales: int(D.counts.dated_sales),
-      vaPairs: int(D.virginia_double_records.new_pairs),
-      vaOneCopy: pct1(D.virginia_double_records.new_share_one_copy),
-      vaShare: pct1(D.areas.Virginia.new_share)
+      ppsSales: int(D.counts.pps_sales), presale: int(D.counts.sold_before_finished), datedSales: int(D.counts.dated_sales)
     };
     document.querySelectorAll("[data-fact]").forEach(function (el) {
       var v = f[el.getAttribute("data-fact")];

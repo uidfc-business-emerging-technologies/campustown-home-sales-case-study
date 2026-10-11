@@ -23,7 +23,7 @@ Pick a campus area, a budget and a distance. The site shows:
 | `fonts/` | The two fonts the page uses, saved here so no font service is needed (SIL Open Font License, see the `OFL` files) |
 | `js/charts.js` | Small SVG chart helpers written for this site (no libraries) |
 | `js/app.js` | Filters the sales and draws the numbers, map, chart and table |
-| `data/sales.json` | The 12,254 sales the site uses, with only the columns it needs (492 KB) |
+| `data/sales.json` | The 12,230 sales the site uses, with only the columns it needs (491 KB) |
 | `data/college_town_home_sales.csv` | The full dataset (version 1.0), which the script reads |
 | `docs/data_description_sheet.md` | The dataset's description sheet |
 | `scripts/build_data.py` | Makes `data/sales.json` from the full dataset |
@@ -45,14 +45,14 @@ python scripts/build_data.py
 
 ## Data notes
 
-- **Sales used:** the 12,254 sales from March 26, 2025 to March 25, 2026, the most recent 12 months in the data. Prices were fairly steady across all three years (the median sale price in each of the 11 full calendar quarters was between $379,900 and $435,000), but a buyer cares about current prices.
+- **Sales used:** the 12,230 sales from March 26, 2025 to March 25, 2026, the most recent 12 months in the data. Prices were fairly steady across all three years (the median sale price in each of the 11 full calendar quarters was between $379,900 and $435,000), but a buyer cares about current prices.
 - **Left out:** 19 sales under $10,000 in those months, which are not ordinary market sales.
 - **Budget** is compared with the sale price only. It doesn't include closing costs, taxes or financing.
 - **Distance** is straight-line miles to one landmark per campus (`miles_to_campus`), not travel time.
 - **Size** is finished living area. Values under 100 sq ft are treated as missing.
 - **Days on market** runs from `list_date` to `contract_date`. Sales missing either date are left out of that figure, and the share missing is shown.
 - **Home types:** all are included, because `home_type` is unreliable.
-- **Repeated addresses:** no sale is removed because its address repeats, since condo units share addresses. In these 12 months, 24 pairs of sales at one address have prices within 1% and sale dates within 90 days, the test the dataset's builders used for one sale recorded twice; 22 are new homes around Virginia. They are under 0.4% of the sales used, so we keep them and say so on the site.
+- **Repeated addresses:** no sale is removed because its address repeats, since condo units share addresses.
 - **Small groups:** a median based on fewer than 20 sales is not shown.
 
 ## How we checked our numbers

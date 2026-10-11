@@ -13,19 +13,9 @@ import numpy as np
 import pandas as pd
 
 import variation2 as v2
-from definitions import ADDRESS_KEY, half_up
+from definitions import half_up
 
 MIN_GROUP = 20
-
-
-def likely_double_pairs(rows):
-    """Pairs at one address meeting the build notes' duplicate test (prices within 1%, dates within 90 days)."""
-    pairs = []
-    for _, g in rows.groupby(ADDRESS_KEY):
-        p, t = g["sale_price"].astype(float), g["sale_date"]
-        if len(g) == 2 and p.max() - p.min() <= 0.01 * p.max() and (t.max() - t.min()).days <= 90:
-            pairs.append(g)
-    return pairs
 
 
 # ---- Variation 1: Old Homes, Close In ---------------------------------------------------
@@ -69,11 +59,6 @@ def v1_summary(df):
         areas[v2.SHORT_NAMES[u]] = area_figures(d[d["university"] == u])
 
     old = dated[~dated["new"]]
-    pairs = likely_double_pairs(d)
-    va = "University of Virginia"
-    va_new_pairs = [g for g in pairs if g["university"].iloc[0] == va and g["new"].all()]
-    va_rows = dated[dated["university"] == va]
-    va_new = int(va_rows["new"].sum())
     return {
         "source": "College-town home sales dataset, version 1.0",
         "rows": int(len(d)),
@@ -94,11 +79,7 @@ def v1_summary(df):
         "listing": {
             "new_no_list_share": half_up(dated[dated["new"]]["list_date"].isna().mean(), 4),
             "older_no_list_share": half_up(old["list_date"].isna().mean(), 4),
-        },
-        "virginia_double_records": {
-            "new_pairs": len(va_new_pairs),
-            "new_share_one_copy": half_up((va_new - len(va_new_pairs)) / (len(va_rows) - len(va_new_pairs)), 4),
-        },
+        }
     }
 
 
@@ -153,7 +134,6 @@ def v3_sales(df):
         "lowest_excluded_price": int(excluded["sale_price"].min()),
         "quarterly_median_range": [int(quarterly.min()), int(quarterly.max())],
         "full_quarters": int(len(quarterly)),
-        "likely_double_records": len(likely_double_pairs(recent)),
         "campuses": [{"name": n, "short": s, "town": t, "landmark": lm, "lat": la, "lon": lo} for n, s, t, lm, la, lo in V3_CAMPUSES],
         "sales": {
             "campus": [int(i) for i in recent["ci"]],

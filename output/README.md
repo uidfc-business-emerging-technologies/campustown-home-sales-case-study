@@ -4,9 +4,10 @@ The finished case package for "Campus Comps: Building a Data Website with an AI 
 
 | Folder | For | What it holds |
 |---|---|---|
-| `students/` | Students | The three case documents, the setup guide, the data description sheet (Word and markdown) and the dataset in five formats, unchanged |
+| `students/` | Students | The three case documents, the setup guide, the data description sheet (Word and markdown) and the dataset in five formats |
 | `instructor/` | Instructors | The instructor orientation, the Variation 2 answer key (Word and Excel), the post-assignment survey, the reference code and one reference site per variation |
 | `source/` | The case author | The source and build scripts for every Word document |
+| `dataset/` | The case author | The corrected dataset package, version 1.0: the data, the description sheet, the build notes and the build scripts. It replaces the package in `inputs/`; see `REPORT.md`, section 6 |
 | `report-screenshots/` | The case author | The reference sites at 375 and 1280 pixels, light and dark, from the final browser test |
 
 Give each student only their variation's case document, plus the setup guide, the description sheet and the data.

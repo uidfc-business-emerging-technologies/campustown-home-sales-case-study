@@ -148,10 +148,10 @@ def check_no_answers(df, lines):
     for p, v in in_case_docs:
         lines.append(f"        {v!r} in {p.relative_to(OUTPUT)}")
     lines.append(f"        Case documents and setup guide: {len(in_case_docs)} matches.")
-    lines.append(f"        Description sheet (both copies, unchanged from the dataset package): {len(in_sheet)} matches: "
+    lines.append(f"        Description sheet (both copies, as in the dataset package): {len(in_sheet)} matches: "
                  + ", ".join(in_sheet))
-    lines.append("        Each of these is a figure the dataset's own description sheet already prints (city medians that "
-                 "equal single-city campus areas, and the 240 sales at 103 addresses).")
+    lines.append("        Each of these is a figure the dataset's own description sheet already prints (rows per campus "
+                 "area, city medians that equal single-city campus areas, the median distance and the zero-area count).")
     return ok, in_sheet, sheet_text
 
 

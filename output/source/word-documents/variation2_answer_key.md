@@ -20,14 +20,14 @@ To regenerate every number here, run `python run_all.py` in `instructor/referenc
 
 | Campus area | Valid sales | Median sale price | Rank | Sales with price per sq ft | Median price per sq ft | Rank |
 |---|---:|---:|---:|---:|---:|---:|
-| University of California, Davis | 942 | $888,500 | 1 | 942 | $492.58 | 1 |
-| The University of North Carolina at Chapel Hill | 3,018 | $725,000 | 2 | 3,007 | $280.25 | 2 |
-| University of Virginia | 2,853 | $625,000 | 3 | 2,851 | $272.35 | 3 |
-| University of Michigan | 3,021 | $571,000 | 4 | 3,011 | $259.07 | 4 |
-| University of Wisconsin-Madison | 5,707 | $434,020 | 5 | 5,706 | $249.16 | 5 |
+| University of California, Davis | 941 | $889,000 | 1 | 941 | $492.71 | 1 |
+| The University of North Carolina at Chapel Hill | 3,016 | $725,000 | 2 | 3,005 | $280.25 | 2 |
+| University of Virginia | 2,774 | $615,000 | 3 | 2,772 | $270.03 | 3 |
+| University of Michigan | 3,020 | $571,000 | 4 | 3,010 | $259.11 | 4 |
+| University of Wisconsin-Madison | 5,706 | $434,010 | 5 | 5,705 | $249.16 | 5 |
 | The Pennsylvania State University | 1,350 | $430,000 | 6 | 1,345 | $207.42 | 6 |
-| University of Georgia | 2,815 | $370,000 | 7 | 2,363 | $196.82 | 8 |
-| University of Florida | 5,630 | $355,000 | 8 | 5,624 | $203.24 | 7 |
+| University of Georgia | 2,813 | $370,000 | 7 | 2,361 | $196.82 | 8 |
+| University of Florida | 5,629 | $355,000 | 8 | 5,623 | $203.24 | 7 |
 | The University of Iowa | 1,909 | $342,000 | 9 | 1,907 | $175.91 | 9 |
 | Purdue University | 4,616 | $299,900 | 10 | 4,615 | $168.24 | 10 |
 | University of Illinois Urbana-Champaign | 3,664 | $245,000 | 11 | 3,650 | $150.30 | 11 |
@@ -38,7 +38,7 @@ To regenerate every number here, run `python run_all.py` in `instructor/referenc
 
 ### Model answer
 
-UC Davis is highest on both measures, with a median sale price of $888,500 and $492.58 per square foot. Illinois is lowest on both, at $245,000 and $150.30.
+UC Davis is highest on both measures, with a median sale price of $889,000 and $492.71 per square foot. Illinois is lowest on both, at $245,000 and $150.30.
 
 The ranking barely changes. Only Georgia and Florida trade places, at 7 and 8. Georgia homes sell for more ($370,000 against $355,000), but they are larger (median 1,902 sq ft against 1,756), so they cost less per square foot. Price per square foot adjusts for size; median price does not.
 
@@ -51,14 +51,14 @@ The ranking barely changes. Only Georgia and Florida trade places, at 7 and 8. G
 | Purdue University | $299,900 | $328,005 |
 | The Pennsylvania State University | $430,000 | $473,855 |
 | The University of Iowa | $342,000 | $389,734 |
-| The University of North Carolina at Chapel Hill | $725,000 | $825,203 |
-| University of California, Davis | $888,500 | $976,367 |
-| University of Florida | $355,000 | $405,906 |
-| University of Georgia | $370,000 | $491,409 |
+| The University of North Carolina at Chapel Hill | $725,000 | $825,205 |
+| University of California, Davis | $889,000 | $976,896 |
+| University of Florida | $355,000 | $405,889 |
+| University of Georgia | $370,000 | $491,552 |
 | University of Illinois Urbana-Champaign | $245,000 | $277,416 |
-| University of Michigan | $571,000 | $657,369 |
-| University of Virginia | $625,000 | $797,754 |
-| University of Wisconsin-Madison | $434,020 | $503,439 |
+| University of Michigan | $571,000 | $657,210 |
+| University of Virginia | $615,000 | $795,448 |
+| University of Wisconsin-Madison | $434,010 | $503,387 |
 
 **Ratio of medians, mean of ratios, or blank areas divided.** Price per square foot is a median of per-sale values. Dividing the median price by the median area, averaging, or letting a blank or 0 sq ft area divide (JavaScript returns Infinity) each gives a different figure.
 
@@ -67,14 +67,14 @@ The ranking barely changes. Only Georgia and Florida trade places, at 7 and 8. G
 | Purdue University | $168.24 | $164.42 | $166.68 | $168.25 |
 | The Pennsylvania State University | $207.42 | $202.45 | $217.25 | $208.15 |
 | The University of Iowa | $175.91 | $168.14 | $182.41 | $175.93 |
-| The University of North Carolina at Chapel Hill | $280.25 | $277.67 | $299.76 | $280.43 |
-| University of California, Davis | $492.58 | $482.75 | $500.31 | $492.58 |
-| University of Florida | $203.24 | $202.16 | $210.27 | $203.32 |
-| University of Georgia | $196.82 | $198.76 | $220.92 | $209.30 |
+| The University of North Carolina at Chapel Hill | $280.25 | $277.57 | $299.72 | $280.43 |
+| University of California, Davis | $492.71 | $482.63 | $500.44 | $492.71 |
+| University of Florida | $203.24 | $202.16 | $210.28 | $203.32 |
+| University of Georgia | $196.82 | $198.76 | $220.94 | $209.30 |
 | University of Illinois Urbana-Champaign | $150.30 | $147.59 | $151.44 | $150.55 |
-| University of Michigan | $259.07 | $256.98 | $281.39 | $259.22 |
-| University of Virginia | $272.35 | $260.53 | $300.23 | $272.37 |
-| University of Wisconsin-Madison | $249.16 | $243.28 | $267.47 | $249.16 |
+| University of Michigan | $259.11 | $257.09 | $281.41 | $259.28 |
+| University of Virginia | $270.03 | $257.54 | $298.89 | $270.06 |
+| University of Wisconsin-Madison | $249.16 | $243.28 | $267.46 | $249.16 |
 
 ### Tolerance
 
@@ -94,17 +94,17 @@ The ranking barely changes. Only Georgia and Florida trade places, at 7 and 8. G
 
 | Campus area | Sales | Sales with days on market | Median days on market | Share with no days on market |
 |---|---:|---:|---:|---:|
-| University of Wisconsin-Madison | 5,707 | 4,628 | 7 | 18.9% |
-| University of Michigan | 3,022 | 2,450 | 7 | 18.9% |
+| University of Wisconsin-Madison | 5,706 | 4,628 | 7 | 18.9% |
+| University of Michigan | 3,021 | 2,450 | 7 | 18.9% |
 | University of Illinois Urbana-Champaign | 3,664 | 2,868 | 7 | 21.7% |
-| University of Virginia | 2,854 | 2,056 | 7 | 28.0% |
+| University of Virginia | 2,775 | 2,056 | 7 | 25.9% |
 | The Pennsylvania State University | 1,351 | 908 | 8 | 32.8% |
 | Purdue University | 4,616 | 3,897 | 10 | 15.6% |
-| The University of North Carolina at Chapel Hill | 3,018 | 2,411 | 10 | 20.1% |
-| University of California, Davis | 942 | 792 | 11 | 15.9% |
+| The University of North Carolina at Chapel Hill | 3,016 | 2,411 | 10 | 20.1% |
+| University of California, Davis | 941 | 792 | 11 | 15.8% |
 | The University of Iowa | 1,909 | 1,248 | 23.5 | 34.6% |
-| University of Florida | 5,630 | 4,505 | 25 | 20.0% |
-| University of Georgia | 2,816 | 2,280 | 27 | 19.0% |
+| University of Florida | 5,629 | 4,505 | 25 | 20.0% |
+| University of Georgia | 2,814 | 2,279 | 27 | 19.0% |
 
 ### Chart
 
@@ -141,13 +141,13 @@ Between 15.6% (Purdue) and 34.6% (Iowa) of sales have no days on market. Those s
 | Purdue University | 15.6% | 6.2% |
 | The Pennsylvania State University | 32.8% | 31.8% |
 | The University of Iowa | 34.6% | 9.4% |
-| The University of North Carolina at Chapel Hill | 20.1% | 19.6% |
-| University of California, Davis | 15.9% | 15.4% |
+| The University of North Carolina at Chapel Hill | 20.1% | 19.5% |
+| University of California, Davis | 15.8% | 15.3% |
 | University of Florida | 20.0% | 18.6% |
-| University of Georgia | 19.0% | 16.2% |
+| University of Georgia | 19.0% | 16.1% |
 | University of Illinois Urbana-Champaign | 21.7% | 20.9% |
 | University of Michigan | 18.9% | 17.1% |
-| University of Virginia | 28.0% | 27.4% |
+| University of Virginia | 25.9% | 25.4% |
 | University of Wisconsin-Madison | 18.9% | 18.6% |
 
 ### Tolerance
@@ -168,33 +168,33 @@ Between 15.6% (Purdue) and 34.6% (Iowa) of sales have no days on market. Those s
 
 | Campus area | Under 1 mile | 1 to under 2 miles | 2 to under 5 miles | 5 to under 10 miles | 10 miles or more |
 |---|---:|---:|---:|---:|---:|
-| University of Wisconsin-Madison | $361.21 | $365.72 | $268.46 | $231.40 | fewer than 20 sales |
-| University of Florida | $243.72 | $212.90 | $191.27 | $213.03 | $193.37 |
+| University of Wisconsin-Madison | $361.21 | $365.72 | $268.44 | $231.40 | fewer than 20 sales |
+| University of Florida | $243.72 | $212.90 | $191.27 | $213.05 | $193.37 |
 | Purdue University | $192.34 | $156.25 | $167.76 | $169.70 | $167.77 |
 | University of Illinois Urbana-Champaign | $159.98 | $136.70 | $150.59 | $198.20 | no sales |
-| University of Michigan | $427.52 | $331.77 | $237.26 | $212.99 | fewer than 20 sales |
-| The University of North Carolina at Chapel Hill | $400.20 | $311.09 | $284.47 | $265.15 | $224.32 |
-| University of Virginia | $342.35 | $317.04 | $268.06 | $258.75 | $223.04 |
-| University of Georgia | $271.19 | $280.68 | $192.20 | $185.46 | no sales |
+| University of Michigan | $427.52 | $332.21 | $237.26 | $212.99 | fewer than 20 sales |
+| The University of North Carolina at Chapel Hill | $400.18 | $311.09 | $284.53 | $265.15 | $224.32 |
+| University of Virginia | $340.50 | $317.04 | $266.83 | $253.95 | $220.23 |
+| University of Georgia | $271.19 | $280.68 | $192.18 | $185.52 | no sales |
 | The University of Iowa | $205.59 | $175.98 | $171.94 | $177.70 | no sales |
 | The Pennsylvania State University | $268.06 | $204.25 | $200.60 | no sales | no sales |
-| University of California, Davis | $524.89 | $497.78 | $485.47 | fewer than 20 sales | no sales |
+| University of California, Davis | $524.89 | $497.78 | $485.69 | fewer than 20 sales | no sales |
 
 **Sales in each cell**
 
 | Campus area | Under 1 mile | 1 to under 2 miles | 2 to under 5 miles | 5 to under 10 miles | 10 miles or more |
 |---|---:|---:|---:|---:|---:|
-| University of Wisconsin-Madison | 85 | 286 | 2,589 | 2,744 | 2 |
-| University of Florida | 136 | 471 | 2,711 | 2,273 | 33 |
+| University of Wisconsin-Madison | 85 | 286 | 2,588 | 2,744 | 2 |
+| University of Florida | 136 | 471 | 2,711 | 2,272 | 33 |
 | Purdue University | 102 | 339 | 2,715 | 1,393 | 66 |
 | University of Illinois Urbana-Champaign | 132 | 751 | 2,554 | 213 | 0 |
-| University of Michigan | 179 | 791 | 1,624 | 414 | 3 |
-| The University of North Carolina at Chapel Hill | 128 | 420 | 1,413 | 959 | 87 |
-| University of Virginia | 154 | 466 | 1,262 | 912 | 57 |
-| University of Georgia | 84 | 354 | 1,350 | 575 | 0 |
+| University of Michigan | 179 | 790 | 1,624 | 414 | 3 |
+| The University of North Carolina at Chapel Hill | 127 | 420 | 1,412 | 959 | 87 |
+| University of Virginia | 153 | 466 | 1,234 | 865 | 54 |
+| University of Georgia | 84 | 354 | 1,349 | 574 | 0 |
 | The University of Iowa | 171 | 635 | 1,072 | 29 | 0 |
 | The Pennsylvania State University | 218 | 363 | 764 | 0 | 0 |
-| University of California, Davis | 76 | 358 | 500 | 8 | 0 |
+| University of California, Davis | 76 | 358 | 499 | 8 | 0 |
 
 **Pattern by area**
 
@@ -242,11 +242,11 @@ Nine of the 55 cells have fewer than 20 sales, all in the outer bands, and show 
 
 | Band | Sales | Median price per sq ft |
 |---|---:|---:|
-| Under 1 mile | 1,465 | $281.40 |
-| 1 to under 2 miles | 5,234 | $238.33 |
-| 2 to under 5 miles | 18,554 | $201.56 |
-| 5 to under 10 miles | 9,520 | $217.65 |
-| 10 miles or more | 248 | $207.65 |
+| Under 1 mile | 1,463 | $281.26 |
+| 1 to under 2 miles | 5,233 | $238.43 |
+| 2 to under 5 miles | 18,522 | $201.44 |
+| 5 to under 10 miles | 9,471 | $217.34 |
+| 10 miles or more | 245 | $207.28 |
 
 **Small cells shown.** These medians rest on fewer than 20 sales and must be replaced by "fewer than 20 sales".
 
@@ -283,7 +283,7 @@ Nine of the 55 cells have fewer than 20 sales, all in the outer bands, and show 
 | June | 1,992 | 8 |
 | July | 1,584 | 10 |
 | August | 1,489 | 16 |
-| September | 1,494 | 14 |
+| September | 1,493 | 14 |
 | October | 1,442 | 16 |
 | November | 1,035 | 19 |
 | December | 653 | 21 |
@@ -335,16 +335,16 @@ Spring listings sell fastest and late-year listings slowest, the usual pattern o
 | Campus area | State | Sales used | Median ratio |
 |---|---|---:|---:|
 | The Pennsylvania State University | PA | 1,339 | 0.18 |
-| University of Michigan | MI | 2,996 | 0.33 |
+| University of Michigan | MI | 2,995 | 0.33 |
 | Purdue University | IN | 4,360 | 0.78 |
 | University of Illinois Urbana-Champaign | IL | 3,581 | 0.82 |
-| University of Florida | FL | 5,498 | 0.83 |
-| University of Wisconsin-Madison | WI | 5,665 | 0.88 |
-| The University of North Carolina at Chapel Hill | NC | 2,858 | 0.90 |
-| University of Virginia | VA | 2,661 | 0.97 |
+| University of Florida | FL | 5,497 | 0.83 |
+| University of Wisconsin-Madison | WI | 5,664 | 0.88 |
+| The University of North Carolina at Chapel Hill | NC | 2,856 | 0.90 |
+| University of Virginia | VA | 2,583 | 0.97 |
 | The University of Iowa | IA | 1,884 | 0.97 |
-| University of Georgia | GA | 2,728 | 1.00 |
-| University of California, Davis | CA | 927 | 1.00 |
+| University of Georgia | GA | 2,726 | 1.00 |
+| University of California, Davis | CA | 926 | 1.00 |
 
 ### Chart
 
@@ -383,8 +383,8 @@ Sources, checked October 11, 2026:
 | University of Florida | 0.83 | 0.91 | 0.82 | 1.20 | 0.91 |
 | University of Georgia | 1.00 | 1.34 | 0.98 | 1.00 | 2.36 |
 | University of Illinois Urbana-Champaign | 0.82 | 0.84 | 0.79 | 1.21 | 0.84 |
-| University of Michigan | 0.33 | 0.80 | 0.35 | 3.01 | 135.74 |
-| University of Virginia | 0.97 | 0.99 | 0.95 | 1.03 | 0.99 |
+| University of Michigan | 0.33 | 0.80 | 0.35 | 3.01 | 135.79 |
+| University of Virginia | 0.97 | 0.99 | 0.94 | 1.03 | 0.99 |
 | University of Wisconsin-Madison | 0.88 | 0.86 | 0.87 | 1.14 | 0.86 |
 
 ### Tolerance
@@ -405,30 +405,30 @@ Sources, checked October 11, 2026:
 
 | Campus area | Addresses | Sales at those addresses | Median miles, those sales | Median miles, all other sales |
 |---|---:|---:|---:|---:|
-| University of Virginia | 80 | 160 | 6.7 | 3.3 |
 | The Pennsylvania State University | 13 | 60 | 0.5 | 2.2 |
-| The University of North Carolina at Chapel Hill | 3 | 6 | fewer than 20 sales | 3.8 |
-| University of Florida | 2 | 4 | fewer than 20 sales | 4.4 |
-| University of Georgia | 2 | 4 | fewer than 20 sales | 3.7 |
-| University of California, Davis | 1 | 2 | fewer than 20 sales | 2 |
-| University of Michigan | 1 | 2 | fewer than 20 sales | 2.7 |
-| University of Wisconsin-Madison | 1 | 2 | fewer than 20 sales | 4.8 |
+| The University of North Carolina at Chapel Hill | 1 | 2 | fewer than 20 sales | 3.75 |
+| University of Florida | 1 | 2 | fewer than 20 sales | 4.4 |
+| University of Virginia | 1 | 2 | fewer than 20 sales | 3.4 |
 | Purdue University | 0 | 0 | no sales | 3.8 |
 | The University of Iowa | 0 | 0 | no sales | 2.2 |
+| University of California, Davis | 0 | 0 | no sales | 2 |
+| University of Georgia | 0 | 0 | no sales | 3.7 |
 | University of Illinois Urbana-Champaign | 0 | 0 | no sales | 2.8 |
-| All campus areas | 103 | 240 | 4.1 | 3.4 |
+| University of Michigan | 0 | 0 | no sales | 2.7 |
+| University of Wisconsin-Madison | 0 | 0 | no sales | 4.8 |
+| All campus areas | 16 | 66 | 0.5 | 3.4 |
 
 ### Chart
 
-![Bar chart of sales at repeated addresses by campus area. Virginia (160.0) and Penn State (60.0) hold almost all of them.](charts/q6.png)
+![Bar chart of sales at repeated addresses by campus area. Penn State (60) holds almost all of them.](charts/q6.png)
 
 ### Model answer
 
-In all, 103 addresses have more than one sale, covering 240 sales. They are concentrated in two areas: Virginia (80 addresses, 160 sales) and Penn State (13 addresses, 60 sales). Purdue, Iowa and Illinois have none, and every other area has 3 or fewer such addresses.
+In all, 16 addresses have more than one sale, covering 66 sales. Almost all are around Penn State (13 addresses, 60 sales). UNC, Florida and Virginia have one such address each, and Purdue, Iowa, UC Davis, Georgia, Illinois, Michigan and UW-Madison have none.
 
-Across all areas, those sales sit a median 4.1 miles from campus, against 3.4 for all other sales. That overall figure mixes two opposite patterns. Around Penn State, the repeated addresses are close to campus (0.5 miles against 2.2). Around Virginia, they are farther out (6.7 against 3.3). The other areas have fewer than 20 such sales.
+Across all areas, those sales sit a median 0.5 miles from campus, against 3.4 for all other sales. Within an area, only Penn State has 20 or more such sales. There they sit much closer to campus than other sales, 0.5 miles against 2.2, which fits condo and apartment buildings near campus. The other areas have fewer than 20 such sales.
 
-**Instructor note: what the repeated addresses are.** The description sheet calls all 240 rows separate condo or apartment units. That holds in State College. But 87 of the 103 addresses (174 rows) meet the build notes' own test for one sale recorded twice: two rows, prices within 1% and sale dates within 90 days. Of these, 79 are in Virginia, and 78 of those are homes built in 2023 or later. In 79 of the 87 pairs, one row carries the listing dates and the other carries the county's parcel number and assessed value, so the build's parcel check missed them. Their coordinates differ too, which is why Virginia's repeated-address sales look far from campus. Do not mark down a student who spots this and explains it. The figures above follow the question's definition, which counts every row.
+**Instructor note: what the repeated addresses are.** The 60 sales around Penn State are condo and apartment units in 13 buildings, each unit with its own parcel number. The other 6 sales are pairs: two different sales, at different prices and about a year or more apart, at each of 3 homes built in 2023 or 2024. The description sheet explains both. A student who says the repeated addresses are mostly condo buildings close to campus is right.
 
 ### Common wrong answers
 
@@ -436,13 +436,13 @@ Across all areas, those sales sit a median 4.1 miles from campus, against 3.4 fo
 
 | Method | Addresses | Sales | Median miles of those sales |
 |---|---:|---:|---:|
-| correct | 103 | 240 | 4.1 |
-| grouped by street name only | 139 | 312 | 4.1 |
+| correct | 16 | 66 | 0.5 |
+| grouped by street name only | 52 | 138 | 2.1 |
 | after removing duplicate addresses | 0 | 0 | none |
-| extra sales only | 103 | 137 | 4.1 |
+| extra sales only | 16 | 50 | 0.5 |
 
 ### Tolerance
 
-- Counts: exact. 103 addresses and 240 sales in total, and each area's counts as in the table. Counts are always shown, even for small areas.
+- Counts: exact. 16 addresses and 66 sales in total, and each area's counts as in the table. Counts are always shown, even for small areas.
 - Median miles: within 0.05 miles. In areas with fewer than 20 such sales, the median must show "fewer than 20 sales".
-- The question asks for the comparison across all areas and within each area, so full credit needs both, and the observation that the two areas with enough sales point in opposite directions.
+- The question asks for the comparison across all areas and within each area, so full credit needs both: the overall comparison, Penn State's comparison, and "fewer than 20 sales" for each other area that has such sales.

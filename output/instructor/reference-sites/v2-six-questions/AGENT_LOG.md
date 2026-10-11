@@ -80,3 +80,11 @@ This log records how this site was actually built with an AI coding agent, as a 
 - **Asked:** "Test again at 375 and 1280 pixels, light and dark, served from a subfolder, using only the keyboard for the charts. Then compare every table cell with the answer key."
 - **Found and fixed:** on a phone, a chart tooltip closed as soon as it opened, because moving keyboard focus to a mark scrolled the page and the scroll closed the tooltip. A tooltip opened by the keyboard now follows its mark instead.
 - **Result:** no console errors or sideways scrolling, and every table cell and every number in the text matches the answer key.
+
+## 2026-10-11: The dataset was corrected before release
+
+- **What changed:** the dataset's publishers removed 87 sales that the source had recorded twice under two parcel numbers, including the pairs we had found in Question 6, and kept the version number 1.0. The file now has 35,442 rows, and the description sheet now says 66 sales at 16 addresses share an address.
+- **Asked:** "Replace the CSV and the description sheet with the corrected ones, rerun `scripts/build_data.py`, and tell me which answers changed."
+- **Agent produced:** the new `data/answers.json`. Question 6 changed the most: 16 addresses with 66 sales, 60 of them around Penn State, a median 0.5 miles from campus against 3.4 for all other sales. Penn State is now the only area with 20 or more such sales. In Questions 1 to 5, Virginia's figures moved the most (median sale price $615,000, from $625,000), and no ranking or named area changed.
+- **Caught:** the page's code still expected two areas with 20 or more sales at repeated addresses, and the answer still said they point in opposite directions. We rewrote the Question 6 answer around Penn State, and removed the caution about double records from the answer and the data notes.
+- **Checked:** the four DuckDB queries in the README again, and every table cell against the answer key.

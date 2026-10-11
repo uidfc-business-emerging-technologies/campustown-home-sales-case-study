@@ -1,8 +1,11 @@
-"""Reproduce every figure in Appendix A of the handoff and stop on any difference.
+"""Reproduce every Appendix A figure and stop on any difference.
 
 The expected values are copied from data_description_sheet.md and
-reference_figures.md (version 1.0). They are the only hand-typed numbers in the
-reference code, and they exist only to be checked against.
+reference_figures.md in output/dataset/ (version 1.0, after the sales recorded
+twice under two parcel numbers were removed). They replace the handoff's
+Appendix A, which was copied from the first build's documents (35,529 rows).
+They are the only hand-typed numbers in the reference code, and they exist only
+to be checked against.
 """
 
 import pandas as pd
@@ -10,7 +13,7 @@ import pandas as pd
 from definitions import ADDRESS_KEY, half_up
 
 EXPECTED_WHOLE = {
-    "rows": 35_529,
+    "rows": 35_442,
     "columns": 34,
     "listing_id unique": True,
     "cities": 18,
@@ -20,13 +23,13 @@ EXPECTED_WHOLE = {
     "median sale price": 410_000,
     "first sale date": "2023-03-27",
     "last sale date": "2026-03-25",
-    "rows with list and contract date": 28_043,
-    "rows with list and contract date (%)": 78.9,
+    "rows with list and contract date": 28_042,
+    "rows with list and contract date (%)": 79.1,
     "median days on market": 11,
-    "rows sharing a street address": 240,
-    "buildings with a shared address": 103,
+    "rows sharing a street address": 66,
+    "addresses shared by more than one row": 16,
     "living_area_sqft equal to 0": 127,
-    "home_type SINGLE_FAMILY": 35_350,
+    "home_type SINGLE_FAMILY": 35_263,
     "home_type HOME_TYPE_UNKNOWN": 177,
     "home_type CONDO": 2,
     "prices under $10,000": 40,
@@ -41,17 +44,17 @@ EXPECTED_WHOLE = {
 
 # University: rows, median price, median $/sq ft, median days on market, median miles.
 EXPECTED_BY_CAMPUS = {
-    "University of Wisconsin-Madison": (5_707, 434_020, 249.16, 7, 4.8),
-    "University of Florida": (5_630, 355_000, 203.24, 25, 4.4),
+    "University of Wisconsin-Madison": (5_706, 434_010, 249.16, 7, 4.8),
+    "University of Florida": (5_629, 355_000, 203.24, 25, 4.4),
     "Purdue University": (4_616, 299_900, 168.24, 10, 3.8),
     "University of Illinois Urbana-Champaign": (3_664, 245_000, 150.30, 7, 2.8),
-    "University of Michigan": (3_022, 571_000, 259.07, 7, 2.7),
-    "The University of North Carolina at Chapel Hill": (3_018, 725_000, 280.25, 10, 3.8),
-    "University of Virginia": (2_854, 625_000, 272.35, 7, 3.5),
-    "University of Georgia": (2_816, 370_000, 196.82, 27, 3.7),
+    "University of Michigan": (3_021, 571_000, 259.11, 7, 2.7),
+    "The University of North Carolina at Chapel Hill": (3_016, 725_000, 280.25, 10, 3.8),
+    "University of Georgia": (2_814, 370_000, 196.82, 27, 3.7),
+    "University of Virginia": (2_775, 615_000, 270.03, 7, 3.4),
     "The University of Iowa": (1_909, 342_000, 175.91, 24, 2.2),
     "The Pennsylvania State University": (1_351, 430_000, 207.42, 8, 2.1),
-    "University of California, Davis": (942, 888_500, 492.58, 11, 2.0),
+    "University of California, Davis": (941, 889_000, 492.71, 11, 2.0),
 }
 CAMPUS_FIELDS = ["rows", "median price", "median $/sq ft", "median days on market", "median miles to campus"]
 
@@ -77,7 +80,7 @@ def whole_dataset(raw, df):
         "rows with list and contract date (%)": half_up(100 * both_dates.mean(), 1),
         "median days on market": half_up(df["days_on_market"].median()),
         "rows sharing a street address": len(shared),
-        "buildings with a shared address": shared[ADDRESS_KEY].drop_duplicates().shape[0],
+        "addresses shared by more than one row": shared[ADDRESS_KEY].drop_duplicates().shape[0],
         "living_area_sqft equal to 0": int((df["living_area_sqft"] == 0).sum()),
         "home_type SINGLE_FAMILY": int(home_types.get("SINGLE_FAMILY", 0)),
         "home_type HOME_TYPE_UNKNOWN": int(home_types.get("HOME_TYPE_UNKNOWN", 0)),

@@ -1,6 +1,6 @@
 {
  "source": "College-town home sales dataset, version 1.0",
- "rows": 35529,
+ "rows": 35442,
  "rules": {
   "min_price": 1000,
   "min_sqft": 100,
@@ -12,14 +12,14 @@
    "short": "UW-Madison",
    "towns": "Madison and Middleton",
    "state": "WI",
-   "rows": 5707
+   "rows": 5706
   },
   {
    "name": "University of Florida",
    "short": "Florida",
    "towns": "Gainesville and Newberry",
    "state": "FL",
-   "rows": 5630
+   "rows": 5629
   },
   {
    "name": "Purdue University",
@@ -40,28 +40,28 @@
    "short": "Michigan",
    "towns": "Ann Arbor",
    "state": "MI",
-   "rows": 3022
+   "rows": 3021
   },
   {
    "name": "The University of North Carolina at Chapel Hill",
    "short": "UNC",
    "towns": "Chapel Hill, Carrboro and Pittsboro",
    "state": "NC",
-   "rows": 3018
+   "rows": 3016
   },
   {
    "name": "University of Virginia",
    "short": "Virginia",
    "towns": "Charlottesville",
    "state": "VA",
-   "rows": 2854
+   "rows": 2775
   },
   {
    "name": "University of Georgia",
    "short": "Georgia",
    "towns": "Athens",
    "state": "GA",
-   "rows": 2816
+   "rows": 2814
   },
   {
    "name": "The University of Iowa",
@@ -82,17 +82,17 @@
    "short": "UC Davis",
    "towns": "Davis",
    "state": "CA",
-   "rows": 942
+   "rows": 941
   }
  ],
  "counts": {
-  "valid_sales": 35525,
+  "valid_sales": 35438,
   "invalid_sales": 4,
   "zero_price_sales": 1,
   "max_price": 81510000,
-  "pps_sales": 35021,
-  "dom_sales": 28043,
-  "assessed_sales": 34497
+  "pps_sales": 34934,
+  "dom_sales": 28042,
+  "assessed_sales": 34411
  },
  "sale_dates": [
   "2023-03-27",
@@ -101,49 +101,49 @@
  "q1": [
   {
    "campus": "UC Davis",
-   "valid_sales": 942,
-   "median_price": 888500,
-   "pps_sales": 942,
-   "median_pps": 492.58,
-   "median_sqft": 1841,
+   "valid_sales": 941,
+   "median_price": 889000,
+   "pps_sales": 941,
+   "median_pps": 492.71,
+   "median_sqft": 1842,
    "rank_price": 1,
    "rank_pps": 1
   },
   {
    "campus": "UNC",
-   "valid_sales": 3018,
+   "valid_sales": 3016,
    "median_price": 725000,
-   "pps_sales": 3007,
+   "pps_sales": 3005,
    "median_pps": 280.25,
-   "median_sqft": 2613,
+   "median_sqft": 2614,
    "rank_price": 2,
    "rank_pps": 2
   },
   {
    "campus": "Virginia",
-   "valid_sales": 2853,
-   "median_price": 625000,
-   "pps_sales": 2851,
-   "median_pps": 272.35,
-   "median_sqft": 2400,
+   "valid_sales": 2774,
+   "median_price": 615000,
+   "pps_sales": 2772,
+   "median_pps": 270.03,
+   "median_sqft": 2389,
    "rank_price": 3,
    "rank_pps": 3
   },
   {
    "campus": "Michigan",
-   "valid_sales": 3021,
+   "valid_sales": 3020,
    "median_price": 571000,
-   "pps_sales": 3011,
-   "median_pps": 259.07,
-   "median_sqft": 2222,
+   "pps_sales": 3010,
+   "median_pps": 259.11,
+   "median_sqft": 2221,
    "rank_price": 4,
    "rank_pps": 4
   },
   {
    "campus": "UW-Madison",
-   "valid_sales": 5707,
-   "median_price": 434020,
-   "pps_sales": 5706,
+   "valid_sales": 5706,
+   "median_price": 434010,
+   "pps_sales": 5705,
    "median_pps": 249.16,
    "median_sqft": 1784,
    "rank_price": 5,
@@ -161,9 +161,9 @@
   },
   {
    "campus": "Georgia",
-   "valid_sales": 2815,
+   "valid_sales": 2813,
    "median_price": 370000,
-   "pps_sales": 2363,
+   "pps_sales": 2361,
    "median_pps": 196.82,
    "median_sqft": 1902,
    "rank_price": 7,
@@ -171,9 +171,9 @@
   },
   {
    "campus": "Florida",
-   "valid_sales": 5630,
+   "valid_sales": 5629,
    "median_price": 355000,
-   "pps_sales": 5624,
+   "pps_sales": 5623,
    "median_pps": 203.24,
    "median_sqft": 1756,
    "rank_price": 8,
@@ -213,17 +213,17 @@
  "q2": [
   {
    "campus": "UW-Madison",
-   "rows": 5707,
+   "rows": 5706,
    "dom_sales": 4628,
    "median_dom": 7.0,
-   "missing_share": 0.1891
+   "missing_share": 0.1889
   },
   {
    "campus": "Michigan",
-   "rows": 3022,
+   "rows": 3021,
    "dom_sales": 2450,
    "median_dom": 7.0,
-   "missing_share": 0.1893
+   "missing_share": 0.189
   },
   {
    "campus": "Illinois",
@@ -234,10 +234,10 @@
   },
   {
    "campus": "Virginia",
-   "rows": 2854,
+   "rows": 2775,
    "dom_sales": 2056,
    "median_dom": 7.0,
-   "missing_share": 0.2796
+   "missing_share": 0.2591
   },
   {
    "campus": "Penn State",
@@ -255,17 +255,17 @@
   },
   {
    "campus": "UNC",
-   "rows": 3018,
+   "rows": 3016,
    "dom_sales": 2411,
    "median_dom": 10.0,
-   "missing_share": 0.2011
+   "missing_share": 0.2006
   },
   {
    "campus": "UC Davis",
-   "rows": 942,
+   "rows": 941,
    "dom_sales": 792,
    "median_dom": 11.0,
-   "missing_share": 0.1592
+   "missing_share": 0.1583
   },
   {
    "campus": "Iowa",
@@ -276,17 +276,17 @@
   },
   {
    "campus": "Florida",
-   "rows": 5630,
+   "rows": 5629,
    "dom_sales": 4505,
    "median_dom": 25.0,
-   "missing_share": 0.1998
+   "missing_share": 0.1997
   },
   {
    "campus": "Georgia",
-   "rows": 2816,
-   "dom_sales": 2280,
+   "rows": 2814,
+   "dom_sales": 2279,
    "median_dom": 27.0,
-   "missing_share": 0.1903
+   "missing_share": 0.1901
   }
  ],
  "q3": {
@@ -313,8 +313,8 @@
       "median_pps": 365.72
      },
      {
-      "n": 2589,
-      "median_pps": 268.46
+      "n": 2588,
+      "median_pps": 268.44
      },
      {
       "n": 2744,
@@ -344,8 +344,8 @@
       "median_pps": 191.27
      },
      {
-      "n": 2273,
-      "median_pps": 213.03
+      "n": 2272,
+      "median_pps": 213.05
      },
      {
       "n": 33,
@@ -417,8 +417,8 @@
       "median_pps": 427.52
      },
      {
-      "n": 791,
-      "median_pps": 331.77
+      "n": 790,
+      "median_pps": 332.21
      },
      {
       "n": 1624,
@@ -440,16 +440,16 @@
     "highest_band": "Under 1 mile",
     "cells": [
      {
-      "n": 128,
-      "median_pps": 400.2
+      "n": 127,
+      "median_pps": 400.18
      },
      {
       "n": 420,
       "median_pps": 311.09
      },
      {
-      "n": 1413,
-      "median_pps": 284.47
+      "n": 1412,
+      "median_pps": 284.53
      },
      {
       "n": 959,
@@ -467,24 +467,24 @@
     "highest_band": "Under 1 mile",
     "cells": [
      {
-      "n": 154,
-      "median_pps": 342.35
+      "n": 153,
+      "median_pps": 340.5
      },
      {
       "n": 466,
       "median_pps": 317.04
      },
      {
-      "n": 1262,
-      "median_pps": 268.06
+      "n": 1234,
+      "median_pps": 266.83
      },
      {
-      "n": 912,
-      "median_pps": 258.75
+      "n": 865,
+      "median_pps": 253.95
      },
      {
-      "n": 57,
-      "median_pps": 223.04
+      "n": 54,
+      "median_pps": 220.23
      }
     ]
    },
@@ -502,12 +502,12 @@
       "median_pps": 280.68
      },
      {
-      "n": 1350,
-      "median_pps": 192.2
+      "n": 1349,
+      "median_pps": 192.18
      },
      {
-      "n": 575,
-      "median_pps": 185.46
+      "n": 574,
+      "median_pps": 185.52
      },
      {
       "n": 0,
@@ -583,8 +583,8 @@
       "median_pps": 497.78
      },
      {
-      "n": 500,
-      "median_pps": 485.47
+      "n": 499,
+      "median_pps": 485.69
      },
      {
       "n": 8,
@@ -655,7 +655,7 @@
    {
     "month": 9,
     "name": "September",
-    "n": 1494,
+    "n": 1493,
     "median_dom": 14.0
    },
    {
@@ -688,7 +688,7 @@
   {
    "campus": "Michigan",
    "state": "MI",
-   "n": 2996,
+   "n": 2995,
    "median_ratio": 0.333
   },
   {
@@ -706,26 +706,26 @@
   {
    "campus": "Florida",
    "state": "FL",
-   "n": 5498,
+   "n": 5497,
    "median_ratio": 0.833
   },
   {
    "campus": "UW-Madison",
    "state": "WI",
-   "n": 5665,
+   "n": 5664,
    "median_ratio": 0.877
   },
   {
    "campus": "UNC",
    "state": "NC",
-   "n": 2858,
+   "n": 2856,
    "median_ratio": 0.898
   },
   {
    "campus": "Virginia",
    "state": "VA",
-   "n": 2661,
-   "median_ratio": 0.969
+   "n": 2583,
+   "median_ratio": 0.97
   },
   {
    "campus": "Iowa",
@@ -736,25 +736,18 @@
   {
    "campus": "Georgia",
    "state": "GA",
-   "n": 2728,
+   "n": 2726,
    "median_ratio": 0.999
   },
   {
    "campus": "UC Davis",
    "state": "CA",
-   "n": 927,
+   "n": 926,
    "median_ratio": 1.0
   }
  ],
  "q6": {
   "rows": [
-   {
-    "campus": "Virginia",
-    "addresses": 80,
-    "sales": 160,
-    "median_miles_multi": 6.7,
-    "median_miles_other": 3.3
-   },
    {
     "campus": "Penn State",
     "addresses": 13,
@@ -764,45 +757,24 @@
    },
    {
     "campus": "UNC",
-    "addresses": 3,
-    "sales": 6,
+    "addresses": 1,
+    "sales": 2,
     "median_miles_multi": null,
-    "median_miles_other": 3.8
+    "median_miles_other": 3.75
    },
    {
     "campus": "Florida",
-    "addresses": 2,
-    "sales": 4,
+    "addresses": 1,
+    "sales": 2,
     "median_miles_multi": null,
     "median_miles_other": 4.4
    },
    {
-    "campus": "Georgia",
-    "addresses": 2,
-    "sales": 4,
-    "median_miles_multi": null,
-    "median_miles_other": 3.7
-   },
-   {
-    "campus": "UC Davis",
+    "campus": "Virginia",
     "addresses": 1,
     "sales": 2,
     "median_miles_multi": null,
-    "median_miles_other": 2.0
-   },
-   {
-    "campus": "Michigan",
-    "addresses": 1,
-    "sales": 2,
-    "median_miles_multi": null,
-    "median_miles_other": 2.7
-   },
-   {
-    "campus": "UW-Madison",
-    "addresses": 1,
-    "sales": 2,
-    "median_miles_multi": null,
-    "median_miles_other": 4.8
+    "median_miles_other": 3.4
    },
    {
     "campus": "Purdue",
@@ -819,32 +791,46 @@
     "median_miles_other": 2.2
    },
    {
+    "campus": "UC Davis",
+    "addresses": 0,
+    "sales": 0,
+    "median_miles_multi": null,
+    "median_miles_other": 2.0
+   },
+   {
+    "campus": "Georgia",
+    "addresses": 0,
+    "sales": 0,
+    "median_miles_multi": null,
+    "median_miles_other": 3.7
+   },
+   {
     "campus": "Illinois",
     "addresses": 0,
     "sales": 0,
     "median_miles_multi": null,
     "median_miles_other": 2.8
+   },
+   {
+    "campus": "Michigan",
+    "addresses": 0,
+    "sales": 0,
+    "median_miles_multi": null,
+    "median_miles_other": 2.7
+   },
+   {
+    "campus": "UW-Madison",
+    "addresses": 0,
+    "sales": 0,
+    "median_miles_multi": null,
+    "median_miles_other": 4.8
    }
   ],
   "total": {
-   "addresses": 103,
-   "sales": 240,
-   "median_miles_multi": 4.1,
+   "addresses": 16,
+   "sales": 66,
+   "median_miles_multi": 0.5,
    "median_miles_other": 3.4
-  },
-  "likely_double_records": {
-   "addresses": 87,
-   "rows": 174,
-   "same_price": 85,
-   "by_campus": {
-    "UNC": 2,
-    "UC Davis": 1,
-    "Florida": 1,
-    "Georgia": 2,
-    "Michigan": 1,
-    "Virginia": 79,
-    "UW-Madison": 1
-   }
   }
  }
 }

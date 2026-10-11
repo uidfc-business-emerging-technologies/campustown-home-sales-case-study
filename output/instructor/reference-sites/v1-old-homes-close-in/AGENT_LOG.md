@@ -51,3 +51,11 @@ This log records how this site was actually built with an AI coding agent, as a 
 
 - **Asked:** "Recompute three headline numbers with SQL in DuckDB, straight from the CSV, without using `build_data.py`."
 - **Result:** 1939, $272 and 8.2% all match. See the README.
+
+## 2026-10-11: The dataset was corrected before release
+
+- **What changed:** the dataset's publishers removed 87 sales that the source had recorded twice under two parcel numbers, including the 78 Virginia pairs we had found, and kept the version number 1.0. The file now has 35,442 rows.
+- **Asked:** "Replace the CSV and the description sheet with the corrected ones, rerun `scripts/build_data.py`, and show me every number on the page that changed."
+- **Agent produced:** the new `data/age.json`. New homes are now 8.0% of sales, down from 8.2%, and Virginia's share is 19.5%, the figure we had shown "with one copy of each pair". Virginia is still the highest. The median years by distance and the 1930s price per square foot did not change.
+- **Decided:** remove the Virginia note under the new-homes chart and its data note, since the double records are gone. Every sale is still kept, because condo units share street addresses.
+- **Checked:** the three numbers in the README again with DuckDB: 1939, $272 and 8.0% match.

@@ -28,7 +28,7 @@ Q3. 9 of 55 area-band cells have fewer than 20 sales:
     University of Virginia: falls at every step (highest in Under 1 mile)
     University of Wisconsin-Madison: falls overall (highest in 1 to under 2 miles)
 
-Q4. Listings with days on market, by year listed: {2021: 1, 2022: 335, 2023: 8540, 2024: 9177, 2025: 9424, 2026: 566}
+Q4. Listings with days on market, by year listed: {2021: 1, 2022: 335, 2023: 8540, 2024: 9176, 2025: 9424, 2026: 566}
     Listed before the first sale date (2023-03-27): 1722 listings, median 14 days
     Median days on market by year and month listed:
 list_date     1      2      3      4      5      6      7      8      9      10     11    12
@@ -54,12 +54,12 @@ May                               3302                   7.0                    
 June                              2980                  10.0                         1992                   8.0
 July                              2460                  13.0                         1584                  10.0
 August                            2279                  18.0                         1489                  16.0
-September                         2257                  17.0                         1494                  14.0
+September                         2256                  17.0                         1493                  14.0
 October                           2200                  17.0                         1442                  16.0
 November                          1490                  20.0                         1035                  19.0
 December                           928                  25.0                          653                  21.0
 
-Q5. Median assessed value / sale price (34,497 sales):
+Q5. Median assessed value / sale price (34,411 sales):
     The Pennsylvania State University (PA): 0.18
     University of Michigan (MI): 0.33
     Purdue University (IN): 0.78
@@ -72,27 +72,18 @@ Q5. Median assessed value / sale price (34,497 sales):
     University of Georgia (GA): 1.00
     University of California, Davis (CA): 1.00
 
-Q6. 240 sales at 103 addresses; median miles 4.1 against 3.4 for all other sales
+Q6. 66 sales at 16 addresses; median miles 0.5 against 3.4 for all other sales
                                                  addresses with more than one sale  sales at those addresses  median miles, sales at those addresses  median miles, all other sales
 university                                                                                                                                                                         
-University of Virginia                                                          80                       160                                    6.70                            3.3
-The Pennsylvania State University                                               13                        60                                    0.50                            2.2
-The University of North Carolina at Chapel Hill                                  3                         6                                    2.85                            3.8
-University of Florida                                                            2                         4                                    6.35                            4.4
-University of Georgia                                                            2                         4                                    4.95                            3.7
-University of California, Davis                                                  1                         2                                    2.60                            2.0
-University of Michigan                                                           1                         2                                    1.25                            2.7
-University of Wisconsin-Madison                                                  1                         2                                    3.30                            4.8
+The Pennsylvania State University                                               13                        60                                    0.50                           2.20
+The University of North Carolina at Chapel Hill                                  1                         2                                    5.90                           3.75
+University of Florida                                                            1                         2                                    4.25                           4.40
+University of Virginia                                                           1                         2                                    7.65                           3.40
 
-    Repeated addresses that meet the build notes' duplicate rule (2 rows, prices within 1%, sale dates within 90 days): 87 of 103 addresses, 174 of 240 rows
-                                                 addresses  rows  likely_double_records
-university                                                                             
-The Pennsylvania State University                       13    60                      0
-The University of North Carolina at Chapel Hill          3     6                      2
-University of California, Davis                          1     2                      1
-University of Florida                                    2     4                      1
-University of Georgia                                    2     4                      2
-University of Michigan                                   1     2                      1
-University of Virginia                                  80   160                     79
-University of Wisconsin-Madison                          1     2                      1
-    Of those pairs, 79 have one row with listing dates and the other with an assessed value, 85 have identical prices, and 65 close on the same day.
+    Addresses with two rows that look like one sale recorded twice (prices within 1%, sale dates within 90 days; the dataset build removes these): 0 of 16
+                                                 addresses  rows  distinct_parcel_numbers
+university                                                                               
+The Pennsylvania State University                       13    60                       60
+The University of North Carolina at Chapel Hill          1     2                        2
+University of Florida                                    1     2                        2
+University of Virginia                                   1     2                        2

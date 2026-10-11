@@ -64,3 +64,11 @@ This log records how this site was actually built with an AI coding agent, as a 
 - **Found:** the page loaded its two fonts from a font service, so it depended on another site staying up. We saved the fonts, with their licenses, in `fonts/`.
 - **Asked:** "Test again at 375 and 1280 pixels, light and dark, served from a subfolder. Try five combinations of campus, budget and distance, and compare the three headline numbers with a separate calculation from the full dataset."
 - **Result:** no console errors, no sideways scrolling, every control works, and all five settings match.
+
+## 2026-10-11: The dataset was corrected before release
+
+- **What changed:** the dataset's publishers removed 87 sales that the source had recorded twice under two parcel numbers, including the 24 pairs we had found in our 12 months, and kept the version number 1.0.
+- **Asked:** "Replace the CSV and the description sheet with the corrected ones, rerun `scripts/build_data.py`, and check which numbers changed."
+- **Agent produced:** a new `data/sales.json` with 12,230 sales in the same 12 months, 24 fewer. The smallest campus area now has 314 sales within 3 miles. At the default settings, the three numbers in the README did not change.
+- **Decided:** remove the caution about double records from the data notes, since the pairs are gone, and keep the rule that no sale is removed because its address repeats.
+- **Checked:** the three DuckDB queries in the README again: 636 of 685, 1,400 sq ft and 7 days.

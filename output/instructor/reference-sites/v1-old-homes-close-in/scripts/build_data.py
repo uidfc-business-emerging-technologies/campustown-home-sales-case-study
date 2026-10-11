@@ -23,7 +23,6 @@ MIN_GROUP = 20         # a median from fewer than 20 sales is not shown
 BANDS = [(0, 1, "Under 1 mile"), (1, 2, "1 to under 2 miles"), (2, 5, "2 to under 5 miles"),
          (5, 10, "5 to under 10 miles"), (10, float("inf"), "10 miles or more")]
 DECADES = range(1900, 2030, 10)
-ADDRESS = ["address_street", "city", "state", "zipcode"]
 
 SHORT = {
     "University of Wisconsin-Madison": "UW-Madison",
@@ -52,7 +51,7 @@ def load():
         df[c] = pd.to_numeric(df[c])
     for c in ["list_date", "sale_date"]:
         df[c] = pd.to_datetime(df[c], format="%Y-%m-%d")
-    assert len(df) == 35_529 and df["listing_id"].is_unique
+    assert len(df) == 35_442 and df["listing_id"].is_unique
     valid = (df["sale_price"] >= MIN_PRICE) & (df["living_area_sqft"] >= MIN_SQFT)
     df["pps"] = (df["sale_price"] / df["living_area_sqft"]).where(valid)
     # A new home: built in the year it sold or the year before, or sold before it was finished.
@@ -93,16 +92,6 @@ def build():
     for full, short in SHORT.items():
         areas[short] = figures(df[df["university"] == full])
 
-    # Around Virginia, many new homes appear twice: two rows at one address with prices within
-    # 1% and sale dates within 90 days (the build notes' test for one sale recorded twice).
-    # We keep every row, but work out Virginia's share of new homes with one copy of each pair.
-    va = dated[dated["university"] == "University of Virginia"]
-    pairs = 0
-    for _, g in df[df["university"] == "University of Virginia"].groupby(ADDRESS):
-        p, t = g["sale_price"], g["sale_date"]
-        if len(g) == 2 and p.max() - p.min() <= 0.01 * p.max() and (t.max() - t.min()).days <= 90 and g["new"].all():
-            pairs += 1
-
     return {
         "source": "College-town home sales dataset, version 1.0",
         "rows": len(df),
@@ -123,11 +112,7 @@ def build():
         "listing": {
             "new_no_list_share": rnd(dated[dated["new"]]["list_date"].isna().mean(), 4),
             "older_no_list_share": rnd(dated[~dated["new"]]["list_date"].isna().mean(), 4),
-        },
-        "virginia_double_records": {
-            "new_pairs": pairs,
-            "new_share_one_copy": rnd((int(va["new"].sum()) - pairs) / (len(va) - pairs), 4),
-        },
+        }
     }
 
 

@@ -126,20 +126,14 @@
     f["q5.illinois"] = find("Illinois").median_ratio.toFixed(2);
 
     // Question 6 (rows sorted by sales, most first)
-    var q6 = d.q6, big = q6.rows.filter(function (r) { return r.sales >= d.rules.min_group; });
-    var near = big[0].median_miles_multi < big[1].median_miles_multi ? big[0] : big[1];
-    var farA = near === big[0] ? big[1] : big[0];
+    var q6 = d.q6, big = q6.rows.filter(function (r) { return r.sales >= d.rules.min_group; })[0];
     f["q6.addresses"] = int(q6.total.addresses); f["q6.sales"] = int(q6.total.sales);
-    f["q6.big0"] = big[0].campus + " (" + big[0].addresses + " addresses, " + big[0].sales + " sales)";
-    f["q6.big1"] = big[1].campus + " (" + big[1].addresses + " addresses, " + big[1].sales + " sales)";
-    f["q6.big0Sales"] = int(big[0].sales); f["q6.big0Name"] = big[0].campus;
+    f["q6.big0"] = big.campus + " (" + big.addresses + " addresses, " + big.sales + " sales)";
+    f["q6.big0Sales"] = int(big.sales); f["q6.big0Name"] = big.campus;
     f["q6.multi"] = mi(q6.total.median_miles_multi); f["q6.other"] = mi(q6.total.median_miles_other);
-    f["q6.nearName"] = near.campus; f["q6.nearMulti"] = mi(near.median_miles_multi); f["q6.nearOther"] = mi(near.median_miles_other);
-    f["q6.farName"] = farA.campus; f["q6.farMulti"] = mi(farA.median_miles_multi); f["q6.farOther"] = mi(farA.median_miles_other);
+    f["q6.nearMulti"] = mi(big.median_miles_multi); f["q6.nearOther"] = mi(big.median_miles_other);
+    f["q6.few"] = list(q6.rows.filter(function (r) { return r.sales > 0 && r.sales < d.rules.min_group; }).map(function (r) { return r.campus; }).sort());
     f["q6.none"] = list(q6.rows.filter(function (r) { return r.sales === 0; }).map(function (r) { return r.campus; }).sort());
-    var dbl = q6.likely_double_records, topName = Object.keys(dbl.by_campus).sort(function (a, b) { return dbl.by_campus[b] - dbl.by_campus[a]; })[0];
-    f["q6.doubleAddresses"] = int(dbl.addresses);
-    f["q6.doubleTop"] = int(dbl.by_campus[topName]); f["q6.doubleTopName"] = topName;
     return f;
   }
 
@@ -291,7 +285,7 @@
     var maxMi = Math.ceil(Math.max.apply(null, dots.map(function (r) { return Math.max(r.median_miles_multi, r.median_miles_other); })) / 2) * 2;
     var miTicks = []; for (var m = 0; m <= maxMi; m += 2) miTicks.push(m);
     C.dumbbell(byId("q6-chart"), {
-      aria: "Dot chart comparing median distance from campus for repeated addresses and other sales: all areas " + f["q6.multi"] + " against " + f["q6.other"] + " miles; " + f["q6.nearName"] + " " + f["q6.nearMulti"] + " against " + f["q6.nearOther"] + "; " + f["q6.farName"] + " " + f["q6.farMulti"] + " against " + f["q6.farOther"] + ".",
+      aria: "Dot chart comparing median distance from campus for repeated addresses and other sales: all areas " + f["q6.multi"] + " against " + f["q6.other"] + " miles; " + f["q6.big0Name"] + " " + f["q6.nearMulti"] + " against " + f["q6.nearOther"] + ".",
       max: maxMi, ticks: miTicks, aName: "other sales", bName: "repeated addresses",
       rows: dots.map(function (r) {
         return { label: r.campus, a: r.median_miles_other, b: r.median_miles_multi, adisp: mi(r.median_miles_other) + " mi", bdisp: mi(r.median_miles_multi) + " mi",
