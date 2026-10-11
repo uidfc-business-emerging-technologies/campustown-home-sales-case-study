@@ -15,7 +15,7 @@ python run_all.py
 
 `run_all.py` reads `output/students/data/college_town_home_sales.csv` (pass `--data PATH` to use another copy; the Parquet file works too). In one command it:
 
-1. Checks the inputs: 35,442 rows, 34 columns, a unique `listing_id`, and no raw build files anywhere in `output/`. It stops if any check fails.
+1. Checks the inputs: 35,442 rows, 34 columns, a unique `listing_id`, and no raw build files in `output/` outside the dataset package. It stops if any check fails.
 2. Reproduces all 82 Appendix A figures, as the corrected dataset's description sheet and `reference_figures.md` give them (the handoff's Appendix A predates the correction), and stops if any figure differs. Results: `results/appendix_a_check.csv`.
 3. Computes every Variation 2 figure and the common wrong answers.
 4. Writes the answer key workbook (`instructor/Variation 2 Answer Key.xlsx`), one chart per question, and the markdown source of the Word answer key (`source/word-documents/variation2_answer_key.md`).

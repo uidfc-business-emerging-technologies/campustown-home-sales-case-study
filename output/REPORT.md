@@ -20,7 +20,7 @@ Date: October 11, 2026. This report covers the work in `HANDOFF.md`, sections 1 
 
 **What you need to do next:**
 
-1. Rebuild the dataset from the raw files with the updated `build/build_dataset.py` and confirm it writes the same 35,442 rows (section 6). The raw files are not in the package, so I applied the same rule to the published CSV instead. The rebuild also prints the reasons behind each blank date, which the corrected documents can then give exactly.
+1. In `output/dataset/college-town-dataset/`, run `python build/export_raw.py --verify` with your database login. It should report PASS: the build, with the new step, rebuilds the corrected CSV byte for byte. I checked everything the correction depends on against the source database (section 6), but not a full rebuild, because the connector returns query results to me, not files.
 2. Publish `output/dataset/college-town-dataset/` in place of the original package, and decide the open decisions in section 7.
 3. Replace "[Author name]" in `source/case-documents/content.js` and `source/word-documents/build.js`, then rebuild (`output/README.md` gives the commands).
 4. Confirm the license (CC BY-NC-SA 4.0).
@@ -37,6 +37,7 @@ Date: October 11, 2026. This report covers the work in `HANDOFF.md`, sections 1 
 - `dataset/college-town-dataset/README.md`: The dataset package's README, with the corrected figures
 - `dataset/college-town-dataset/build/build_dataset.py`: The dataset build, with the new two-parcel step (section 6)
 - `dataset/college-town-dataset/build/drop_double_records.py`: Applies the two-parcel step to the published CSV and rewrites the five files (section 6)
+- `dataset/college-town-dataset/build/export_raw.py`: Exports the raw build inputs from the source database and checks they rebuild `data/`, as on main
 - `dataset/college-town-dataset/build/extract_query.sql`: The two source queries, unchanged
 - `dataset/college-town-dataset/build/make_parquet.py`: CSV to Parquet and DuckDB, checked value by value, unchanged
 - `dataset/college-town-dataset/build/reference_figures.py`: Writes the reference figures and the campus map, unchanged
@@ -192,9 +193,9 @@ No student file contains answers
         Description sheet (both copies, as in the dataset package): 19 matches: $342,000, $370,000, $430,000, $571,000, $615,000, $889,000, 1,351, 1,909, 127, 2,775, 2,814, 3,016, 3,021, 3,664, 3.4, 4,616, 5,629, 5,706, 941
         Each of these is a figure the dataset's own description sheet already prints (rows per campus area, city medians that equal single-city campus areas, the median distance and the zero-area count).
 Words and characters that must not appear
-  pass  no peer review or auditing in 78 documents and text files
-  pass  no agent product or agent-specific file name in 78 documents and text files
-  pass  no em or en dash in 78 documents and text files
+  pass  no peer review or auditing in 79 documents and text files
+  pass  no agent product or agent-specific file name in 79 documents and text files
+  pass  no em or en dash in 79 documents and text files
 ```
 
 **The Word files open** (LibreOffice, converted to PDF): Case Document - Variation 1 (Open Brief) (5 pages); Case Document - Variation 2 (Specific Questions) (6 pages); Case Document - Variation 3 (General Instructions) (5 pages); Data Description Sheet (8 pages); Instructor Orientation (9 pages); Post-Assignment Survey (2 pages); Setup Guide - GitHub Pages (5 pages); Variation 2 Answer Key (20 pages).
@@ -441,10 +442,25 @@ Each pilot was a fresh agent session given only that variation's student files (
 
 **The result.** 35,442 rows. 66 rows at 16 addresses share an address: 60 are condo and apartment units in 13 State College buildings, and the other 6 are pairs of two different sales, about a year or more apart, at three homes built in 2023 or 2024. The description sheet explains both.
 
-**What I could not confirm without the raw files:**
+**Checked against the source database.** These read-only queries ran through the PlanetScale connector on October 11, 2026:
 
-- **That a full rebuild writes the same rows.** It should. No pair ties on completeness and date, so the tiebreak (source id in a rebuild, `listing_id` in the script) is never reached. All 103 two-parcel addresses are in the 18 cities that remain, so the city floor still removes the same 255 rows.
-- **The reasons behind the blank dates.** 86 of the 87 removed rows had neither a list date nor a contract date, and why each was blank is recorded only in the raw event history. The published file has 6,180 blank list dates and 6,528 blank contract dates (each 86 fewer), but the split by reason can be off by up to 86 in any one reason. The description sheet now gives exact totals and bounds ("over 5,000 sold with no listing on record"), and the build notes give the original counts and say why. Likewise, the count of homes whose clock kept running after a failed contract is 2,020 or 2,021; the sheet says "about 2,000".
+- **The source has not changed in size.** The extract filter still gives 35,822 rows. The event history still holds 284,955 events across 35,816 properties, as the build notes say.
+- **The 87 removed rows are the right records.** Each matches exactly one source record by address, parcel number and price, and that record's latest sale date equals the row's `sale_date`.
+- **Why their dates are blank.** For 86 of the 87, the history has no listing, pending or contingent event between the previous sale and this one. In the build's rule, that means "no listing on record" and "no contract status recorded". The 87th (130 Brickleberry Rdg, Athens) has one listing and one contract, with the same dates as the row kept for its sale, and no failed contract. So the exact counts on the corrected file are:
+
+  | Blank | Reason | Before | After |
+  |---|---|---:|---:|
+  | `list_date` | No listing on record | 5,281 | 5,195 |
+  | | Withdrawn before a contract | 857 | 857 |
+  | | Lapsed (silent more than a year) | 122 | 122 |
+  | `contract_date` | No contract status recorded | 6,411 | 6,325 |
+  | | Contract more than a year before closing | 147 | 147 |
+  | | Fell through | 50 | 50 |
+  | All three | No history at all | 6 | 6 |
+
+  The count of homes whose clock kept running after a failed contract stays at 2,021. The description sheet and the build notes now give these exact figures, in the same table layout as the original sheet. The "Before" column is the first build's own count, from its build notes.
+- **The city floor is unaffected.** The extract's 141 repeated addresses cover 316 rows, and none is in one of the 57 places with fewer than 90 sales. So the new step removes nothing from those places, and the floor still removes the same 255 rows.
+- **A full rebuild should keep the same row of each pair.** No pair ties on completeness and date, so the tiebreak never applies: the rebuild breaks ties by source id, the script by `listing_id`. Item 1 under "What you need to do next" confirms this end to end.
 
 **Appendix A.** These 20 of the 82 figures changed; the other 62 are the same:
 
@@ -480,7 +496,7 @@ Each pilot was a fresh agent session given only that variation's student files (
 | License | CC BY-NC-SA 4.0, stated in each case document | Unchanged |
 | "Suggested starting questions" | Removed from the students' copy only | The dataset's own copy keeps it |
 | Variation label visible to students | Shown in each case document's subtitle and header | Replace with a neutral code if students should not know the other variations exist |
-| **Parcel number of the 87 kept rows** (new) | Each kept row is the more complete record, unchanged, as the build already does for same-parcel duplicates. In 66 of them the parcel number is the listing's placeholder (`0`, a lot or homesite number, or a parcel number several new homes share). | Alternatively, take the parcel number and assessed value from the county's record, which `build/removed_double_records.csv` holds. That would be the dataset's first merged row, so I left it to you. |
+| **Parcel number of the 87 kept rows** (decided) | Keep each kept row unchanged, the more complete record, as the build already does for same-parcel duplicates. In 66 of them the parcel number is the listing's placeholder (`0`, a lot or homesite number, or a parcel number several new homes share). | You chose this on October 11. The alternative was to take the parcel number and assessed value from the county's record, which would have made the dataset's first merged row. The county's values stay available in `build/removed_double_records.csv`. |
 | **Description sheet SQL examples compute means** (new) | Unchanged, as section 5 of the handoff instructs | The sheet is open for the correction anyway, so this could be fixed in 1.0 too. I changed only the repeated-address material. |
 | **Question 4 listing window** (new) | Applied in `content.js`, the key and the V2 site | Confirm the wording |
 | **Public repository** (new) | Kept public, as you accepted | Students can find the answer key and the reference sites. The orientation tells instructors so. |

@@ -16,8 +16,9 @@ published files, so the dataset can be rebuilt, checked or revised later.
 | `build/drop_double_records.py` | Applies the section 6 two-parcel rule to the published CSV and rewrites all five files, for use without the raw files |
 | `build/removed_double_records.csv` | The 87 rows that rule removed, each beside the row kept for the same sale |
 | `build/reference_figures.py` | Instructor figures and the city to campus map |
-| `build/raw_extract.csv` | Query 1 output, unmodified. **Not for publication**, see section 13 |
-| `build/raw_events.csv` | Query 2 output, unmodified. **Not for publication**, see section 13 |
+| `build/export_raw.py` | Exports the two raw files from the source database and checks that they rebuild `data/` exactly, see section 14 |
+| `build/raw_extract.csv` | Query 1 output, unmodified. Contains source property ids, see section 13 |
+| `build/raw_events.csv` | Query 2 output, unmodified. Contains source property ids, see section 13 |
 | `data/college_town_home_sales.{csv,sqlite,xlsx,duckdb,parquet}` | The published dataset |
 
 ---
@@ -163,21 +164,22 @@ before it.
 | `list_date` only | 1,220 |
 | `contract_date` only | 872 |
 | Neither | 5,308 |
-| Clock kept running after a failed contract | 2,020 or 2,021, see below |
+| Clock kept running after a failed contract | 2,021 |
 | Listed and under contract the same day | 384 |
 | Under contract on the closing day | 68 |
 
-Blank dates, as the build counted them on its 35,529 rows before the section 6 two-parcel step:
-`list_date` 6,266, of which no listing on record 5,281, withdrawn before a contract 857, lapsed
-122 and no history 6; `contract_date` 6,614, of which no contract status recorded 6,411, contract
-over a year before closing 147, fell through 50 and no history 6.
+Blank `list_date` (6,180): no listing on record 5,195; withdrawn before a contract 857; lapsed
+122; no history 6. Blank `contract_date` (6,528): no contract status recorded 6,325; contract over
+a year before closing 147; fell through 50; no history 6.
 
-That step removed 87 rows. 86 had neither date, so the published file has 6,180 blank list dates
-and 6,528 blank contract dates. Which reason each of the 86 had is not recorded in the published
-files, so the split above can be off by up to 86 in any one reason; the remaining row had the same
-list and contract dates as the row kept for its sale (130 Brickleberry Rdg, Athens), which is why
-the clock-kept-running count is one of two values. A rebuild from the raw files prints the exact
-split (section 14).
+These are the first build's counts, on its 35,529 rows, less the 87 rows the section 6 two-parcel
+step removed. Each removed row's history was read from the source database on 2026-10-11: every
+one matches exactly one source record by address, parcel number and price, with the same sale
+date. 86 have no listing, pending or contingent event between the previous sale and this one, so
+their reasons were no listing on record and no contract status recorded. The 87th, 130
+Brickleberry Rdg in Athens, has one listing and one contract, the same dates as the row kept for
+its sale, and no failed contract. So the removal took 86 from each of those two reasons and
+nothing from the others, and the clock-kept-running count is unchanged.
 
 Days on market: median 11, quartiles 4 and 41, 90th percentile 95, maximum 677 days; 67 rows over
 a year, all listings with recorded activity throughout.
@@ -272,9 +274,9 @@ between 1 and 39 sales each, together 255 rows. They were too thin to analyse an
 the dataset's bad city labels, including "Denver, PA" for a property in North Carolina and
 "Blackshear" for one inside Athens. Cities with fewer than 90 sales were dropped
 (`--min-city-rows`, 0 keeps every city). That leaves 18 cities, the smallest Pittsboro NC with 92.
-All 103 two-parcel addresses are in the 18 cities that remain (the first build's output
-held all 240 of their rows), so the two-parcel step removes nothing from a dropped place and the
-floor still removes 255 rows.
+None of the 141 repeated addresses in the extract is in one of the dropped places (checked
+against the source database on 2026-10-11), so the two-parcel step removes nothing from them and
+the floor still removes 255 rows.
 
 35,697 - 255 = **35,442 rows**.
 
@@ -354,6 +356,7 @@ timestamps are pinned to 2026-03-26 so that rebuilds are byte-identical.
 | SQLite storage classes | Integers stored as INTEGER (an early build stored numpy integers as BLOBs, which broke every aggregate), reals as REAL, dates and text as TEXT |
 | Excel readback | Header matches the CSV; all three date columns are real dates |
 | Deduplication | 456 E Beaver Ave keeps all ten units; every repeated address now has distinct parcel numbers; Barbaro Ave keeps the later sale; no address with exactly two rows holds one sale twice, and `drop_double_records.py` run on the published CSV removes nothing |
+| Two-parcel step against the database | Each of the 87 removed rows matches exactly one source record by address, parcel number and price, with the same latest sale date. The extract's 141 repeated addresses cover 316 rows, and none is in a place with fewer than 90 sales |
 | Parquet and DuckDB | `make_parquet.py` reads both back and compares every value, every type, the primary key and the indexes with the CSV, and refuses a CSV whose columns do not match the build |
 
 ## 11. Known issues, deliberately left in the data
@@ -395,19 +398,23 @@ with an error if any value, type, key or index differs from the CSV.
 
 ## 13. Note on the raw files
 
-`raw_extract.csv` and `raw_events.csv` are the unmodified query results. Both contain
-`property_id`, the source platform's identifier, which is excluded from every published file.
-Keep them as build artifacts and do not include them in a public release.
+`raw_extract.csv` and `raw_events.csv` are the unmodified query results, written by
+`build/export_raw.py`. Both contain `property_id`, the source platform's identifier, which is
+excluded from every data file. They are published with the build so that anyone can rebuild the
+dataset, but neither they nor any property id belong in teaching materials built from it.
 
 ## 14. Reproducing this build
 
 ```bash
-# 1. Run both queries in build/extract_query.sql against the source database and export each
-#    as CSV with a header row, to build/raw_extract.csv and build/raw_events.csv.
-#    (psql:  \copy (<query>) TO 'raw_extract.csv' CSV HEADER)
+# 1. Export the raw files and check them, from the package root. This runs the two queries in
+#    build/extract_query.sql, writes build/raw_extract.csv and build/raw_events.csv, rebuilds the
+#    dataset in a temporary folder and reports PASS if the rebuilt CSV is byte-identical to
+#    data/college_town_home_sales.csv. It needs a database login (see the top of the script).
+pip install "psycopg[binary]" pandas openpyxl pyarrow duckdb
+export DATABASE_URL='postgresql://...'
+python build/export_raw.py --verify
 
 # 2. Build, from the package root
-pip install pandas openpyxl duckdb pyarrow
 python build/build_dataset.py
 python build/reference_figures.py
 ```

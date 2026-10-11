@@ -119,7 +119,7 @@ market to the contract, so a site built on `sale_date - list_date` will disagree
 
 - **A deal fell through and the home came back on the market.** The clock does not restart.
   `list_date` stays at the original listing, the way Zillow and most listing services count it.
-  This applies to about 2,000 rows.
+  This applies to 2,021 rows.
 - **The listing was withdrawn, then the home was listed again later.** That is a new listing,
   and `list_date` is the second one.
 - **Listed and under contract the same day.** Days on market is 0, on 384 rows. This is common
@@ -129,10 +129,14 @@ market to the contract, so a site built on `sale_date - list_date` will disagree
 
 **Why a date can be blank:**
 
-| Blank | Rows | Why, most common reason first |
+| Blank | Rows | Why |
 |---|---:|---|
-| `list_date` | 6,174 | Over 5,000 sold with no listing on record: an off-market sale, or a new home sold by the builder. In several hundred the listing was withdrawn, or switched to a rental, before any contract, and the home sold later. In the rest the listing had gone silent for more than a year before the contract |
-| `contract_date` | 6,522 | Over 6,000 had no pending or contingent status recorded for the sale. In the rest, either the last recorded contract was more than a year before closing, so it was not this sale's, or the deal fell through: the listing was withdrawn more than 90 days before closing |
+| `list_date` | 5,195 | Sold with no listing on record: an off-market sale, or a new home sold by the builder |
+| | 857 | The listing was withdrawn, or switched to a rental, before any contract, and the home sold later |
+| | 122 | The listing had gone silent for more than a year before the contract |
+| `contract_date` | 6,325 | No pending or contingent status was recorded for the sale |
+| | 147 | The last recorded contract was more than a year before closing, so it was not this sale's |
+| | 50 | The deal fell through: the listing was withdrawn more than 90 days before closing |
 | all three | 6 | The source has no listing or sale history for the property at all |
 
 Days on market can be computed on 28,042 rows (79.1%), the rows with both a list and a contract

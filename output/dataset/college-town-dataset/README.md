@@ -25,6 +25,7 @@ college-town-dataset/
     city_campus_map.csv              the same, machine readable
   build/
     extract_query.sql                the two queries run against the source database
+    export_raw.py                    exports the raw build inputs and checks they rebuild data/
     build_dataset.py                 dates, cleaning, deduplication, ids, file writing
     make_parquet.py                  CSV to Parquet and DuckDB, checked value by value
     drop_double_records.py           removes sales recorded twice under two parcel numbers
@@ -32,8 +33,9 @@ college-town-dataset/
     reference_figures.py             instructor figures and the campus map
 ```
 
-The build inputs, `raw_extract.csv` and `raw_events.csv`, contain the source platform's
-property ids and are not distributed.
+The build inputs, `raw_extract.csv` and `raw_events.csv`, are exported from the source database
+by `build/export_raw.py`, which needs a database login. They contain the source platform's
+property ids, which no data file includes.
 
 ## Formats
 
