@@ -10,7 +10,7 @@ The finished case package for "Campus Comps: Building a Data Website with an AI 
 | `dataset/` | The case author | The corrected dataset package, version 1.0: the data, the description sheet, the build notes and the build scripts. It replaces the package in `inputs/`; see `REPORT.md`, section 6 |
 | `report-screenshots/` | The case author | The reference sites at 375 and 1280 pixels, light and dark, from the final browser test |
 
-Give each student only their variation's case document, plus the setup guide, the description sheet and the data.
+Give each student only their variation's case document and the setup guide. Students create their repositories from the starter template, [campus-comparables-template](https://github.com/uidfc-business-emerging-technologies/campus-comparables-template), which gives them the data and the description sheet.
 
 ## Rebuild everything
 

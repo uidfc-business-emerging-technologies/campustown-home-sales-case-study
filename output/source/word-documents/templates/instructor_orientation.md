@@ -42,6 +42,17 @@ None. Students need no coding experience. Each student needs:
 
 Check what agent access your institution provides before the case starts.
 
+### The starter template
+
+Students create their repositories from the starter template, [github.com/uidfc-business-emerging-technologies/campus-comparables-template](https://github.com/uidfc-business-emerging-technologies/campus-comparables-template), with **Use this template** rather than a fork. Each repository then starts with a clean history, and nothing a student does reaches the template. It holds:
+
+- The dataset in all five formats, and the data description sheet
+- `AGENTS.md`, with the project instructions the setup guide shows
+- Outlines of the README and agent log the case asks for, with a section for each required README item
+- A placeholder `index.html`, and a workflow that publishes the site with GitHub Pages on every push to main
+
+Before the case starts, create a repository from the template yourself, turn on Pages, run the workflow and open the github.io address in a private window.
+
 ### Timelines
 
 The case documents give a two-week schedule and tell students to compress it for one week. Give students exact dates.
@@ -58,7 +69,7 @@ Every case document works for individuals or for teams of 2 to 3. Teams submit o
 
 ### Class time
 
-- **Kickoff (20 minutes).** Use an agent, live, to publish a one-chart page. Create a public repository, turn on GitHub Pages, ask the agent for a page that loads the CSV and shows the number of rows ({{rows}}), then one chart. Push, and open the github.io address. Then check one number a second way, such as the row count in a spreadsheet. Rehearse once beforehand: the first publish takes a few minutes.
+- **Kickoff (20 minutes).** Use an agent, live, to publish a one-chart page. Create a public repository from the starter template, set GitHub Pages to publish with GitHub Actions, and run the workflow once. Then ask the agent for a page that loads the CSV and shows the number of rows ({{rows}}), then one chart. Push, wait for the green check in the Actions tab, and open the github.io address. Then check one number a second way, such as the row count in a spreadsheet. Rehearse once beforehand: the first publish takes a few minutes.
 - **Mid-point check-in.** Open each site's URL and read the plan paragraph. Catch problems early: a site that does not load, a number that looks wrong, or a plan too large for the time left.
 - **Optional showcase.** Students show their sites for two minutes each. In Variation 1 and 3 sections, the range of topics is the point. In Variation 2 sections, compare how sites presented the same answers.
 
@@ -83,9 +94,9 @@ The setup guide's "Common problems" table covers the usual ones. Expect these:
 
 - **Paths.** A path that starts with `/`, or a file name whose capitalization differs, works on a student's computer but not on GitHub Pages.
 - **Opening the page from the file.** Data will not load from a page opened as `file://`. Students need a local web server.
-- **Pages not turned on,** or the wrong branch or folder selected.
+- **Pages not turned on,** or its source not set to GitHub Actions. If a workflow run started when the repository was created from the template, it failed for this reason. Students need only turn Pages on and run the workflow again.
 - **An old copy in the browser** after a push. A reload without the cache fixes it.
-- **The project instructions file.** Its name depends on the agent. Students should check their agent's documentation; the setup guide gives the text to put in it.
+- **The project instructions file.** The template's instructions are in `AGENTS.md`, a name many agents read. Students whose agent expects a different name copy it to that name, as the setup guide explains.
 
 When a student is stuck, ask for the exact error from the browser's Console tab. Most problems are visible there.
 
@@ -229,4 +240,4 @@ The repository is public, so students can find these sites and the answer key. D
 | `instructor/` | Instructors | This orientation, the Variation 2 answer key (Word and Excel), the post-assignment survey, the reference code and the reference sites |
 | `source/` | Case author | The source and build scripts for every Word document |
 
-Give each student only their variation's case document, plus the setup guide, the description sheet and the data.
+Give each student only their variation's case document and the setup guide. The starter template gives them the data and the description sheet.
